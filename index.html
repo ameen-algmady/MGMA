@@ -7,6 +7,27 @@
     <title>مجمع شهداء التربية النموذجي - الرئيسية</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center; /* توسيط النصوص داخل الجدول */
+            vertical-align: middle; /* توسيط النص عموديًا */
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
 <body>
     <header>
         <div class="logo">
@@ -67,7 +88,7 @@
     </section>
 
     <footer>
-        <p>&copy; 2023 مجمع شهداء التربية النموذجي. جميع الحقوق محفوظة.</p>
+        <p>&copy; 2025 مجمع شهداء التربية النموذجي. جميع الحقوق محفوظة.</p>
     </footer>
 
     <script>
@@ -96,7 +117,8 @@
                     let resultHTML = `<h3>نتائج الطالب</h3><table border="1"><tr><th>المجال</th><th>القيمة</th></tr>`;
                     for (const [key, value] of Object.entries(data)) {
                         if (key !== "status") {
-                            resultHTML += `<tr><td><strong>${key}</strong></td><td>${value}</td></tr>`;
+                            let roundedValue = isNaN(value) ? value : Math.round(value); // تقريب الأرقام فقط
+                            resultHTML += `<tr><td><strong>${key}</strong></td><td>${roundedValue}</td></tr>`;
                         }
                     }
                     resultHTML += `</table>`;

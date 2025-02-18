@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+
+    <meta charset="UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="موقع مجمع شهداء التربية النموذجي - تقديم  نتائج الطلاب الصف الاول الثانوي، .">
+    <title>مجمع شهداء التربية النموذجي - الرئيسية</title>
+    <link rel="stylesheet" href="styles.css">
+    
+</head>
+
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        header {
+    background-color: #4CAF50;
+    color: black;
+    padding: 10px 0;
+    text-align: center;
+}
+
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center; /* توسيط النصوص داخل الجدول */
+            vertical-align: middle; /* توسيط النص عموديًا */
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        ooter {
+    background-color: #333;
+    color:black;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    </style>
+     <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center; /* توسيط النصوص داخل الجدول */
+            vertical-align: middle; /* توسيط النص عموديًا */
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: right;
+    text-decoration: none;
+    
+    </style>
+</head>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+<body>
+    <header>
+        <div class="logo">
+            <img src="school-logo.png" alt="شعار مجمع شهداء التربية النموذجي">
+        </div>
+        <h1>مجمع شهداء التربية النموذجي</h1>
+         <h1>نتائج اخر العام للصف الاول الثانوي</h1>
+        <nav>
+           
+<section id="results">
+        <h2>نتائج الطلاب</h2>
+        <form id="resultsForm">
+            <label for="studentCode">أدخل كود الطالب:</label>
+            <input type="text" id="studentCode" name="studentCode" required>
+            <button type="submit">عرض النتائج</button>
+        </form>
+        <div id="resultsOutput"></div>
+    </section>
+    <section id="location">
+       
+
+    <footer>
+        <p>&copy; 2025 مجمع شهداء التربية النموذجي. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <script>
+        document.getElementById('resultsForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const studentCode = document.getElementById('studentCode').value.trim();
+            const apiUrl = 'https://script.google.com/macros/s/AKfycbyMLLMrfCi2KGrPb3NHpXm_wVhF988wVDf3IuJixNg5dZd8xH6qmCXLCSsm8ZFRDiyosw/exec';
+
+            if (!studentCode) {
+                alert("يرجى إدخال كود الطالب!");
+                return;
+            }
+
+            fetch(`${apiUrl}?code=${studentCode}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    const output = document.getElementById('resultsOutput');
+                    output.innerHTML = "";
+
+                    if (data.status === "error") {
+                        output.innerHTML = `<p style="color: red;">${data.message}</p>`;
+                        return;
+                    }
+
+                    let resultHTML = `<h3>نتائج الطالب</h3><table border="1"><tr><th>المجال</th><th>القيمة</th></tr>`;
+                    for (const [key, value] of Object.entries(data)) {
+                        if (key !== "status") {
+                            let roundedValue = isNaN(value) ? value : Math.round(value); // تقريب الأرقام فقط
+                            resultHTML += `<tr><td><strong>${key}</strong></td><td>${roundedValue}</td></tr>`;
+                        }
+                    }
+                    resultHTML += `</table>`;
+                    output.innerHTML = resultHTML;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert("حدث خطأ أثناء جلب البيانات.");
+                });
+        });
+    </script>
+</body>
+</html>

@@ -1,186 +1,243 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-
     <meta charset="UTF-8">
-    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="موقع مجمع شهداء التربية النموذجي - تقديم خدمات تعليمية، نتائج الطلاب، الأنظمة المدرسية، والمزيد.">
+    <meta name="description" content="موقع مجمع شهداء التربية النموذجي - تقديم خدمات تعليمية، نتائج الطلاب، الأنظمة المدرسية، والمزيد">
     <title>مجمع شهداء التربية النموذجي - الرئيسية</title>
     <link rel="stylesheet" href="styles.css">
-    
-</head>
-
     <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            direction: rtl;
         }
-
-        th, td {
-            border: 1px solid black;
+        header {
+            background-color: #4CAF50;
+            color: black;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .logo img {
+            width: 200px;
+            height: auto;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline-block;
+            margin: 0 15px;
+            position: relative;
+        }
+        .announcement-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 15s linear infinite;
+        }
+        @keyframes marquee {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(100%); }
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
             padding: 10px;
-            text-align: center; /* توسيط النصوص داخل الجدول */
-            vertical-align: middle; /* توسيط النص عموديًا */
+            display: block;
         }
-
-        th {
-            background-color: #f2f2f2;
+        nav ul li a:hover {
+            background-color: #367c39;
+            border-radius: 5px;
+        }
+        .dropdown {
+            display: none;
+            position: absolute;
+            background-color: white;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            min-width: 180px;
+        }
+        .dropdown a {
+            color: black;
+            padding: 10px;
+            display: block;
+            text-align: right;
+            text-decoration: none;
+        }
+        .dropdown a:hover {
+            background-color: #f4f4f4;
+        }
+        nav ul li:hover .dropdown {
+            display: block;
+        }
+        .announcement-bar {
+            width: 100%;
+            background: linear-gradient(90deg, #ff5733, #ffbd69);
+            color: white;
+            font-size: 18px;
             font-weight: bold;
+            text-align: center;
+            padding: 10px 0;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        #home {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px 10px;
+            background-color: #f8f8f8;
+            flex-wrap: wrap;
+        }
+        .section-box {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+            max-width: 300px;
+        }
+        .section-box img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+            border: 3px solid #333;
+        }
+        .main-image {
+            flex: 2; /* زيادة المساحة للصورة الرئيسية */
+            max-width: 60%; /* زيادة عرض الصورة الرئيسية */
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* لجعل الصورة تملأ المساحة مع الحفاظ على النسبة */
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .main-image::before {
+            content: "";
+            display: block;
+            padding-top: 56.25%; /* نسبة 16:9 (يمكن تغييرها إلى 4:3 أو أي نسبة أخرى) */
+        }
+        h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        @media (max-width: 768px) {
+            #home {
+                flex-direction: column;
+                text-align: center;
+            }
+            .section-box {
+                max-width: 100%;
+                margin-bottom: 20px;
+            }
+            .main-image {
+                max-width: 100%; /* التأكد من أن الصورة الرئيسية تأخذ المساحة الكاملة على الأجهزة الصغيرة */
+            }
         }
     </style>
 </head>
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الخريطة</title>
 <body>
     <header>
         <div class="logo">
-            <img src="school-logo.png" alt="شعار مجمع شهداء التربية النموذجي">
+            <img src="school-logo.png" alt="شعار المجمع">
         </div>
         <h1>مجمع شهداء التربية النموذجي</h1>
         <nav>
             <ul>
                 <li><a href="#home">الرئيسية</a></li>
-                <li><a href="#results">نتائج الطلاب</a></li>
+                <li>
+                    <a href="#results">نتائج الطلاب</a>
+                    <div class="dropdown">
+                        <a href="results_grade1.html">نتائج الصف الأول الثانوي</a>
+                        <a href="results_grade2.html">نتائج الصف الثاني الثانوي</a>
+                    </div>
+                </li>
+                <li>
+                    <a href="#curriculum">المناهج اليمنية</a>
+                    <div class="dropdown">
+                        <a href="https://e-learning-moe.edu.ye/ClassTwelve.php" target="_blank">مناهج الصف الثالث الثانوي</a>
+                        <a href="https://e-learning-moe.edu.ye/ClassEleven.php?id=11" target="_blank">مناهج الصف الثاني الثانوي</a>
+                        <a href="https://e-learning-moe.edu.ye/ClassTen.php?id=10" target="_blank">مناهج الصف الأول الثانوي</a>
+                    </div>
+                </li>
+                <li>
+                    <a href="#videos">فيديوهات تعليمية</a>
+                    <div class="dropdown">
+                        <a href="https://meyon.com.ye/a/yaman.elearin.edu/videos?s=1" target="_blank">دروس الصف الثالث الثانوي</a>
+                    </div>
+                </li>
                 <li><a href="#location">موقع المجمع</a></li>
                 <li><a href="#services">خدمات طلابية</a></li>
                 <li><a href="#rules">الأنظمة والقوانين</a></li>
-                 <li><a href="#vido">الفيديوهات</a></li>
             </ul>
         </nav>
     </header>
-
+    <div class="announcement-bar">
+        <div class="announcement-content">
+            📢 إعلان هام: سيتم الإعلان عن نتائج الامتحانات يوم الأحد القادم عبر الموقع الإلكتروني! 🌟📅
+        </div>
+    </div>
     <section id="home">
-        <h2>الرئيسية</h2>
-        <p>مرحبًا بكم في الموقع الرسمي لمجمع شهداء التربية النموذجي. هنا يمكنكم العثور على نتيجة اخر العام للصف الاول الثانوي والثاني الثانوي ة.</p>
-        <img src="school-image.jpg" alt="صورة مجمع شهداء التربية النموذجي">
-    </section>
-<section id="results">
-        <h2>نتائج الطلاب</h2>
-        <form id="resultsForm">
-            <label for="studentCode">أدخل كود الطالب:</label>
-            <input type="text" id="studentCode" name="studentCode" required>
-            <button type="submit">عرض النتائج</button>
-        </form>
-        <div id="resultsOutput"></div>
+        <div class="section-box">
+            <h3>مدير مكتب التربية م/ عمران</h3>
+            <img src="مدير المكتب.jpg" alt="مدير مكتب التربية">
+            <p>✍️ بقلم: الأستاذ زيد مقبل رطاس
+            
+
+الحمد لله الذي جعل العلم نورًا وهداية، وأمرنا بطلبه والسعي في دروبه، والصلاة والسلام على معلم البشرية الأول، سيدنا محمد وعلى آله وصحبه أجمعين.
+
+إن التعليم هو الركيزة الأساسية التي تُبنى عليها المجتمعات، وهو مفتاح التقدم والرقي لأي أمة تسعى للنهوض. فبالعلم تنهض الأوطان، وتتقدم الحضارات، ويتحقق المستقبل المشرق للأجيال القادمة. إننا في مكتب التربية والتعليم نؤمن بأن الاستثمار في التعليم هو أعظم استثمار، لأنه يصنع العقول، ويؤسس لمجتمعٍ واعٍ قادر على البناء والعطاء.
+
+وفي هذا السياق، يبرز مجمع شهداء التربية النموذجي كواحد من الصروح التعليمية الرائدة، حيث يسهم بفاعلية في تقديم تعليم نوعي يرتقي بمستوى الطلاب علميًا وتربويًا. إن هذا المجمع ليس مجرد مؤسسة تعليمية، بل هو منارة علمية تسعى لغرس القيم النبيلة، وتعزيز الإبداع والابتكار، وبناء جيلٍ واعٍ قادر على خدمة وطنه ومجتمعه.
+
+نشكر القائمين على هذا الصرح التعليمي المتميز، ونؤكد دعمنا المستمر لكل الجهود التي تسهم في الارتقاء بالعملية التعليمية، سائلين الله التوفيق والسداد للجميع.
+
+والسلام عليكم ورحمة الله وبركاته..</p>
+        </div>
+        <div class="main-image">
+            <img src="school-image.jpg" alt="صورة مجمع شهداء التربية النموذجي">
+        </div>
+        <div class="section-box">
+            <h3>مدير مجمع شهداء التربية النموذجي</h3>
+            <img src="مدير المجمع.jpg" alt="مدير المجمع">
+            <p>✍️ بقلم: الأستاذ حمود عبدالله حمدين
+            
+
+الحمد لله الذي علَّم بالقلم، علَّم الإنسان ما لم يعلم، والصلاة والسلام على خير من تعلم وعلَّم، سيدنا محمد وعلى آله وصحبه أجمعين.
+
+يهدف مجمعنا التعليمي إلى تحقيق بيئة تعليمية متميزة، تُمكّن أبناءنا من امتلاك المعرفة والمهارات التي تؤهلهم لمستقبل واعد. رؤيتنا تنطلق من إيماننا بأن التعليم هو الركيزة الأساسية لبناء جيل واعٍ ومسؤول، قادر على الإبداع والمنافسة في مختلف مجالات الحياة.
+
+إننا نسعى من خلال برامجنا ومناهجنا إلى ترسيخ القيم النبيلة، وتعزيز روح البحث والتفكير الناقد، وتنمية مهارات الطلاب بما يتماشى مع متطلبات العصر. كما نؤمن بأن الشراكة بين المدرسة والمجتمع ركن أساسي في تحقيق أهدافنا التربوية، فبتكاتف الجميع يمكننا صناعة مستقبل مشرق لأبنائنا وبناتنا.
+
+نسأل الله أن يوفقنا جميعًا في مسيرتنا التعليمية، وأن يكون هذا المجمع صرحًا ينهل منه طلابنا العلم النافع، ويخرج منه قادة يحملون لواء التقدم والازدهار.
+
+والسلام عليكم ورحمة الله وبركاته.</p>
+        </div>
     </section>
     <section id="location">
         <h2>موقع المجمع</h2>
         <p>عنوان المجمع: [عمران - مديرية عمران - شارع البشيري]</p>
-         <iframe 
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3841.6503134635336!2d43.9391179!3d15.663598799999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1601514cc4cb74b7%3A0x536417049c60c3ca!2z2YXYrNmF2Lkg2LTZh9iv2KfYoSDYp9mE2KrYsdio2YrYqSDYp9mE2YbZhdmI2LDYrNmK!5e0!3m2!1sar!2s!4v1739222376794!5m2!1sar!2s" 
-        width="600" 
-        height="450" 
-        style="border:0;" 
-        allowfullscreen="" 
-        loading="lazy" 
-        referrerpolicy="no-referrer-when-downgrade">
-    </iframe>
-        
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3841.6503134635336!2d43.9391179!3d15.663598799999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1601514cc4cb74b7%3A0x536417049c60c3ca!2z2YXYrNmF2Lkg2LTZh9iv2KfYoSDYp9mE2KrYsdio2YrYqSDYp9mE2YbZhdmI2LDYrNmK!5e0!3m2!1sar!2s!4v1739222376794!5m2!1sar!2s" 
+            width="600" 
+            height="450" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy">
+        </iframe>
     </section>
-
-    <section id="services">
-        <h2>خدمات طلابية</h2>
-        <ul>
-            <li>تسجيل الطلاب الجدد</li>
-            <li>خدمات المكتبة</li>
-            <li>النشاطات اللامنهجية</li>
-            <li>الدعم الأكاديمي</li>
-        </ul>
-    </section>
-
-    
-
-    <section id="rules">
-        <h2>الأنظمة والقوانين</h2>
-        <p>قوانين المدرسة تشمل:</p>
-        <ul>
-            <li>الالتزام بالزي المدرسي</li>
-            <li>الالتزام بالحضور اليومي</li>
-            <li>احترام المعلمين والزملاء</li>
-            <li>المحافظة على الممتلكات العامة</li>
-        </ul>
-    </section>
-
-    <footer>
-        <p>&copy; 2025 مجمع شهداء التربية النموذجي. جميع الحقوق محفوظة.</p>
-    </footer>
-
-    <script>
-        document.getElementById('resultsForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const studentCode = document.getElementById('studentCode').value.trim();
-            const apiUrl = 'https://script.google.com/macros/s/AKfycbyMLLMrfCi2KGrPb3NHpXm_wVhF988wVDf3IuJixNg5dZd8xH6qmCXLCSsm8ZFRDiyosw/exec';
-
-            if (!studentCode) {
-                alert("يرجى إدخال كود الطالب!");
-                return;
-            }
-
-            fetch(`${apiUrl}?code=${studentCode}`)
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                    const output = document.getElementById('resultsOutput');
-                    output.innerHTML = "";
-
-                    if (data.status === "error") {
-                        output.innerHTML = `<p style="color: red;">${data.message}</p>`;
-                        return;
-                    }
-
-                    let resultHTML = `<h3>نتائج الطالب</h3><table border="1"><tr><th>المجال</th><th>القيمة</th></tr>`;
-                    for (const [key, value] of Object.entries(data)) {
-                        if (key !== "status") {
-                            let roundedValue = isNaN(value) ? value : Math.round(value); // تقريب الأرقام فقط
-                            resultHTML += `<tr><td><strong>${key}</strong></td><td>${roundedValue}</td></tr>`;
-                        }
-                    }
-                    resultHTML += `</table>`;
-                    output.innerHTML = resultHTML;
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert("حدث خطأ أثناء جلب البيانات.");
-                });
-        });
-    </script>
 </body>
 </html>
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>معرض الفيديو</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
- </header>
-
-    <section id="vido">
-    <h1>معرض الفيديو</h1>
-
-   
-        <p>معرض-المجمع</p>
-    </div>
-
-    <div class="video-container">
-        <video controls>
-            <source src="معرض-المجمع.mp4" type="video/mp4">
-            متصفحك لا يدعم تشغيل الفيديو.
-        </video>
-        <p>الطابور-الصباحي</p>
-    </div>
-
-    <div class="video-container">
-        <video controls>
-            <source src="الطابور-الصباحي.mp4" type="video/mp4">
-            متصفحك لا يدعم تشغيل الفيديو.
-        </video>
-        <p>الفيديو الثالث</p>
-    </div>
-
-</body>
-</html>
-

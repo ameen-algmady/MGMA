@@ -13,35 +13,34 @@
         th { background-color: #f2f2f2; font-weight: bold; }
         header { background-color: #4CAF50; color: black; padding: 10px 0; }
         footer { background-color: #333; color: white; text-align: center; padding: 10px 0; position: fixed; width: 100%; bottom: 0; }
-   .home-button {
-    display: inline-flex;
-    align-items: center;
-    padding: 10px 15px;
-    background-color: #4CAF50;
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-    border-radius: 5px;
-}
-
-.home-button i {
-    margin-right: 5px;
-}
-
-.home-button:hover {
-    background-color: #45a049;
-}
-
+        .home-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+        .home-button i {
+            margin-right: 5px;
+        }
+        .home-button:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
     <header>
-     <div class="logo">
+        <div class="logo">
             <img src="school-logo.png" alt="شعار مجمع شهداء التربية النموذجي">
-        <h1>مجمع شهداء التربية النموذجي</h1>
-        <h2>نتائج آخر العام للصف الثاني الثانوي</h2>
+            <h1>مجمع شهداء التربية النموذجي</h1>
+            <h2>نتائج آخر العام للصف الثاني الثانوي</h2>
+        </div>
+        <a href="index.html" class="home-button">🏠 الرئيسية</a>
     </header>
-<a href="index.html" class="home-button">🏠 الرئيسية</a>
+
     <section id="results">
         <h2>نتائج الطلاب</h2>
         <form id="resultsForm">
@@ -56,12 +55,11 @@
         <p>&copy; 2025 مجمع شهداء التربية النموذجي. جميع الحقوق محفوظة.</p>
     </footer>
 
-
     <script>
         document.getElementById('resultsForm').addEventListener('submit', function(event) {
             event.preventDefault();
             const studentCode = document.getElementById('studentCode').value.trim();
-            const apiUrl = 'https://script.google.com/macros/s/AKfycbyAW0Djo1Pn-FRmkhHECylPxLHfy0WA9MUhzcDXsHa2fvhURKsukfbFH1uwZxDS9Bob/exec';
+            const apiUrl = 'https://script.google.com/macros/s/AKfycbznyLPU74pH6evGWjxeRZ6MennOq4DjN8Y6Jds99utfUpIAvqea-_i-qJi9I4KFogVNvQ/exec';
 
             if (!studentCode) {
                 alert("يرجى إدخال كود الطالب!");
@@ -71,7 +69,7 @@
             fetch(`${apiUrl}?code=${studentCode}`)
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data);
+                    console.log(data); // تحقق من البيانات في الكونسول
                     const output = document.getElementById('resultsOutput');
                     output.innerHTML = "";
 
@@ -80,23 +78,31 @@
                         return;
                     }
 
+                    // عرض معلومات الطالب
                     let studentInfo = `<h3>معلومات الطالب</h3><table><tr><th>المجال</th><th>القيمة</th></tr>`;
                     for (const [key, value] of Object.entries(data.بيانات_الطالب)) {
-                        studentInfo += `<tr><td><strong>${key}</strong></td><td>${value}</td></tr>`;
+                        studentInfo += `<tr><td><strong>${key}</strong></td><td>${value || 'غير متوفر'}</td></tr>`;
                     }
                     studentInfo += `</table>`;
 
+                    // عرض المواد الدراسية
                     let subjectsTable = `<h3>المواد الدراسية</h3><table><tr><th>المادة</th><th>محصلة أولى</th><th>نصف العام</th><th>محصلة ثانية</th><th>آخر العام</th><th>المجموع</th></tr>`;
                     for (const [subject, grades] of Object.entries(data.المواد_الدراسية)) {
-                        subjectsTable += `<tr><td>${subject}</td><td>${grades.محصلة_أولى}</td><td>${grades.نصف_العام}</td><td>${grades.محصلة_ثانية}</td><td>${grades.آخر_العام}</td><td>${grades.المجموع}</td></tr>`;
+                        subjectsTable += `<tr><td>${subject}</td>
+                            <td>${grades.محصلة_أولى || 'غير متوفر'}</td>
+                            <td>${grades.نصف_العام || 'غير متوفر'}</td>
+                            <td>${grades.محصلة_ثانية || 'غير متوفر'}</td>
+                            <td>${grades.آخر_العام || 'غير متوفر'}</td>
+                            <td>${grades.المجموع || 'غير متوفر'}</td></tr>`;
                     }
                     subjectsTable += `</table>`;
 
+                    // عرض النتائج النهائية
                     let finalResults = `<h3>النتائج النهائية</h3><table><tr><th>المجال</th><th>القيمة</th></tr>`;
-                    finalResults += `<tr><td>المجموع العام</td><td>${data.المجموع_العام}</td></tr>`;
-                    finalResults += `<tr><td>النسبة</td><td>${data.النسبة}%</td></tr>`;
-                    finalResults += `<tr><td>التقدير العام</td><td>${data.التقدير_العام}</td></tr>`;
-                    finalResults += `<tr><td>أيام الغياب</td><td>${data.أيام_الغياب}</td></tr>`;
+                    finalResults += `<tr><td>المجموع الكلي</td><td>${data.النتيجة_النهائية?.المجموع_الكلي || 'غير متوفر'}</td></tr>`;
+                    finalResults += `<tr><td>النتيجة</td><td>${data.النتيجة_النهائية?.النتيجة || 'غير متوفر'}</td></tr>`;
+                    finalResults += `<tr><td>النسبة</td><td>${data.النتيجة_النهائية?.النسبة || 'غير متوفر'}%</td></tr>`;
+                    finalResults += `<tr><td>الترتيب</td><td>${data.النتيجة_النهائية?.الترتيب || 'غير متوفر'}</td></tr>`;
                     finalResults += `</table>`;
 
                     output.innerHTML = studentInfo + subjectsTable + finalResults;

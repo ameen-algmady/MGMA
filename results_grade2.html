@@ -51,15 +51,13 @@
         <div id="resultsOutput"></div>
     </section>
 
-    <footer>
-        <p>&copy; 2025 مجمع شهداء التربية النموذجي. جميع الحقوق محفوظة.</p>
-    </footer>
+    
 
     <script>
         document.getElementById('resultsForm').addEventListener('submit', function(event) {
             event.preventDefault();
             const studentCode = document.getElementById('studentCode').value.trim();
-            const apiUrl = 'https://script.google.com/macros/s/AKfycbznyLPU74pH6evGWjxeRZ6MennOq4DjN8Y6Jds99utfUpIAvqea-_i-qJi9I4KFogVNvQ/exec';
+            const apiUrl = 'https://script.google.com/macros/s/AKfycbwJ8eBLQ71uYHNM0vNQTSloDxdVMs75yEFJUvw7tKGE14KSi-nOePMG5xegKqrrlRH8bA/exec';
 
             if (!studentCode) {
                 alert("يرجى إدخال كود الطالب!");

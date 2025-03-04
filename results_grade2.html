@@ -16,8 +16,9 @@
 th, td {
     border: 1px solid black;
     padding: 5px; /* تقليل التباعد الداخلي */
-    height: 25px; /* تقليل ارتفاع الصف */
-    text-align: center;
+    height: 20px; /* تعيين ارتفاع الصف */
+    text-align: center; /* توسيط النص أفقيًا */
+    vertical-align: middle; /* توسيط النص عموديًا */
 }
 
 th {
@@ -29,6 +30,7 @@ header {
     background-color: #4CAF50;
     color: black;
     padding: 10px 0;
+    text-align: center; /* توسيط النص داخل الهيدر */
 }
 
 footer {
@@ -44,11 +46,12 @@ footer {
 .home-button {
     display: inline-flex;
     align-items: center;
-    padding: 8px 12px; /* تقليل التباعد الداخلي للزر */
+    justify-content: center; /* توسيط النص أفقيًا */
+    padding: 8px 12px;
     background-color: #4CAF50;
     color: white;
     text-decoration: none;
-    font-size: 16px; /* تصغير الخط قليلاً */
+    font-size: 16px;
     border-radius: 5px;
 }
 

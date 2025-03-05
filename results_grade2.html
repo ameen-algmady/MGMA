@@ -28,9 +28,9 @@ th {
     
 }
 h4 {
-    font-size: 14px; /* تصغير حجم الخط */
-    margin: 5px 0; /* تقليل المسافة العلوية والسفلية */
-    line-height: 1.2; /* تقليل ارتفاع السطر */
+    font-size: 4px; /* تصغير حجم الخط */
+    margin: 3px 0; /* تقليل المسافة العلوية والسفلية */
+    line-height: 0.2; /* تقليل ارتفاع السطر */
 }
 
 header {
@@ -118,14 +118,14 @@ footer {
                     }
 
                     // عرض معلومات الطالب
-                    let studentInfo = `<h4>معلومات الطالب</h4><table><tr><th>المجال</th><th>القيمة</th></tr>`;
+                    let studentInfo = `<h4> </h4><table><tr><th>المجال</th><th>القيمة</th></tr>`;
                     for (const [key, value] of Object.entries(data.بيانات_الطالب)) {
                         studentInfo += `<tr><td><strong>${key}</strong></td><td>${value || 'غير متوفر'}</td></tr>`;
                     }
                     studentInfo += `</table>`;
 
                     // عرض المواد الدراسية
-                    let subjectsTable = `<h4>المواد الدراسية</h4><table><tr><th>المادة</th><th>محصلة أولى</th><th>نصف العام</th><th>محصلة ثانية</th><th>آخر العام</th><th>المجموع</th></tr>`;
+                    let subjectsTable = `<h4> </h4><table><tr><th>المادة</th><th>محصلة أولى</th><th>نصف العام</th><th>محصلة ثانية</th><th>آخر العام</th><th>المجموع</th></tr>`;
                     for (const [subject, grades] of Object.entries(data.المواد_الدراسية)) {
                         subjectsTable += `<tr><td>${subject}</td>
                             <td>${grades.محصلة_أولى || 'غير متوفر'}</td>
@@ -137,7 +137,7 @@ footer {
                     subjectsTable += `</table>`;
 
                     // عرض النتائج النهائية
-                    let finalResults = `<h4>النتائج النهائية</h4><table><tr><th>المجال</th><th>القيمة</th></tr>`;
+                    let finalResults = `<h4> </h4><table><tr><th>المجال</th><th>القيمة</th></tr>`;
                     finalResults += `<tr><td>المجموع الكلي</td><td>${data.النتيجة_النهائية?.المجموع_الكلي || 'غير متوفر'}</td></tr>`;
                     finalResults += `<tr><td>النتيجة</td><td>${data.النتيجة_النهائية?.النتيجة || 'غير متوفر'}</td></tr>`;
                     finalResults += `<tr><td>النسبة</td><td>${data.النتيجة_النهائية?.النسبة || 'غير متوفر'}%</td></tr>`;

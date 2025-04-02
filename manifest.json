@@ -1,10 +1,11 @@
 {
-  "name": "MGMA",
-  "short_name": "MGMA",
+  "name": "„Ã„⁄ ‘Âœ«¡ «· —»Ì… «·‰„Ê–ÃÌ",
+  "short_name": "‘Âœ«¡ «· —»Ì…",
   "start_url": "/MGMA/index.html",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "background_color": "#4CAF50",
+  "theme_color": "#4CAF50",
+  "description": "„Êﬁ⁄ „Ã„⁄ ‘Âœ«¡ «· —»Ì… «·‰„Ê–ÃÌ «·—”„Ì",
   "icons": [
     {
       "src": "/MGMA/icons/icon-192x192.png",

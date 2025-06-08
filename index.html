@@ -1,109 +1,344 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#007bff" />
-  <meta name="description" content="موقع مجمع شهداء التربية النموذجي - خدمات تعليمية، نتائج، مناهج، ألبومات، فيديوهات، أنظمة وخدمات." />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="موقع مجمع شهداء التربية النموذجي - تقديم خدمات تعليمية، نتائج الطلاب، الأنظمة المدرسية، والمزيد">
+    
+    <!-- PWA Required Meta Tags -->
+    <meta name="theme-color" content="#4CAF50">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <title>مجمع شهداء التربية النموذجي - الرئيسية</title>
+    
+    <!-- Manifest -->
+    <link rel="manifest" href="/MGMA/manifest.json">
+    
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="/MGMA/icons/icon-192x192.png">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/MGMA/styles.css">
+    <link rel="icon" href="/MGMA/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
 
-  <title>مجمع شهداء التربية النموذجي</title>
-
-  <link rel="icon" href="MGMA/icon.png" type="image/png" />
-  <link rel="apple-touch-icon" href="MGMA/icon.png" />
-  <link rel="manifest" href="/MGMA/manifest.json" />
-  <link rel="stylesheet" href="MGMA/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
-
-  <style>
-    body {
-      font-family: 'Amiri', serif;
-      background-color: #f2f2f2;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
-    header {
-      background-color: #007bff;
-      color: white;
-      padding: 20px;
-    }
-    section {
-      padding: 30px;
-    }
-    button {
-      background-color: #007bff;
-      color: white;
-      padding: 10px 20px;
-      font-size: 18px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #0056b3;
-    }
-    footer {
-      background-color: #007bff;
-      color: white;
-      padding: 10px;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-    }
-    #install-button {
-      display: none;
-      margin-top: 20px;
-    }
-  </style>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            direction: rtl;
+        }
+       body {
+    text-rendering: optimizeLegibility;
+}
+        header {
+            background-color: #4CAF50;
+            color: black;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .logo img {
+            width: 200px;
+            height: auto;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline-block;
+            margin: 0 15px;
+            position: relative;
+        }
+        .announcement-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 15s linear infinite;
+        }
+        @keyframes marquee {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(100%); }
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            display: block;
+        }
+        nav ul li a:hover {
+            background-color: #367c39;
+            border-radius: 5px;
+        }
+        .dropdown {
+            display: none;
+            position: absolute;
+            background-color: white;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            min-width: 180px;
+            right: 0;
+        }
+        .dropdown a {
+            color: black;
+            padding: 10px;
+            display: block;
+            text-align: right;
+            text-decoration: none;
+        }
+        .dropdown a:hover {
+            background-color: #f4f4f4;
+        }
+        nav ul li:hover .dropdown {
+            display: block;
+        }
+        .announcement-bar {
+            width: 100%;
+            background: linear-gradient(90deg, #ff5733, #ffbd69);
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px 0;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        #home {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px 10px;
+            background-color: #f8f8f8;
+            flex-wrap: wrap;
+        }
+        .section-box {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+            max-width: 300px;
+            margin: 10px;
+        }
+        .section-box img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+            border: 3px solid #333;
+        }
+        .main-image {
+            flex: 2;
+            max-width: 100%;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 20px 0;
+        }
+        .main-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            display: block;
+        }
+        h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        /* Install Button Style */
+        #install-button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none;
+            z-index: 1000;
+        }
+        
+        @media (max-width: 768px) {
+            #home {
+                flex-direction: column;
+                text-align: center;
+            }
+            .section-box {
+                max-width: 100%;
+                margin-bottom: 20px;
+            }
+            .main-image {
+                max-width: 100%;
+                margin: 10px 0;
+            }
+            
+            /* Adjust dropdown for mobile */
+            .dropdown {
+                position: static;
+                width: 100%;
+                box-shadow: none;
+            }
+            @font-face {
+  font-family: 'Roboto';
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/...') format('woff2');
+}
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>مجمع شهداء التربية النموذجي</h1>
-    <p>مرحبا بكم في موقع المجمع الرسمي</p>
-  </header>
-  <section>
-    <h2>مرحبا بكم</h2>
-    <p>هنا تجدون نتائج الطلاب، المناهج، الألبومات، الفيديوهات التعليمية، والأنظمة والخدمات.</p>
+
+    <!-- Install Button -->
     <button id="install-button">تثبيت التطبيق</button>
-  </section>
-  <footer>
-    <p>&copy; 2025 مجمع شهداء التربية النموذجي</p>
-  </footer>
-
-  <script>
-    let deferredPrompt;
-    const installBtn = document.getElementById('install-button');
-
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      installBtn.style.display = 'inline-block';
-    });
-
-    installBtn.addEventListener('click', () => {
-      installBtn.style.display = 'none';
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice.then((choiceResult) => {
-        if (choiceResult.outcome === 'accepted') {
-          console.log('تم تثبيت التطبيق');
-        } else {
-          console.log('تم رفض التثبيت');
+    
+    <header>
+        <div class="logo">
+            <img src="/MGMA/school-logo.png" alt="شعار المجمع">
+        </div>
+        <h1>مجمع شهداء التربية النموذجي</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">الرئيسية</a></li>
+                <li>
+                    <a href="#results">نتائج الطلاب</a>
+                    <div class="dropdown">
+                        <a href="/MGMA/results_grade1.html">نتائج الصف الأول الثانوي</a>
+                        <a href="/MGMA/results_grade2.html">نتائج الصف الثاني الثانوي</a>
+                    </div>
+                </li>
+                <li>
+                    <a href="#curriculum">المناهج اليمنية</a>
+                    <div class="dropdown">
+                        <a href="https://e-learning-moe.edu.ye/ClassTwelve.php" target="_blank">مناهج الصف الثالث الثانوي</a>
+                        <a href="https://e-learning-moe.edu.ye/ClassEleven.php?id=11" target="_blank">مناهج الصف الثاني الثانوي</a>
+                        <a href="https://e-learning-moe.edu.ye/ClassTen.php?id=10" target="_blank">مناهج الصف الأول الثانوي</a>
+                    </div>
+                </li>
+                <li>
+                    <a href="#videos">فيديوهات تعليمية</a>
+                    <div class="dropdown">
+                        <a href="https://meyon.com.ye/a/yaman.elearin.edu/videos?s=1" target="_blank">دروس الصف الثالث الثانوي</a>
+                    </div>
+                </li>
+                <li>
+                    <a href="#album">الصور</a>
+                    <div class="dropdown">
+                        <a href="/MGMA/album.html">عرض ألبوم الصور</a>
+                    </div>
+                </li>
+                <li><a href="#location">موقع المجمع</a></li>
+                <li><a href="#services">خدمات طلابية</a></li>
+                <li><a href="#rules">الأنظمة والقوانين</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="announcement-bar">
+        <div class="announcement-content">
+            📢 بشرى سارة يعلن مجمع شهداء التربية النموذجي لطلابه الأعزاء عن نتائج نهاية العام 1446هـ - 2024/2025: ادخل الكود واحصل على النتيجة يمكنك الحصول على الكود من المجمع بعد الظهر! 🌟📅
+        </div>
+    </div>
+    
+    <section id="home">
+        <div class="section-box">
+            <h3>مدير مجمع شهداء التربية النموذجي</h3>
+            <img src="/MGMA/rdfhj.jpg" alt="مدير مجمع شهداء التربية النموذجي">
+            <p>✍️ بقلم: الأستاذ حمود عبدالله حمدين<br><br>
+            الحمد لله الذي علَّم بالقلم، علَّم الإنسان ما لم يعلم، والصلاة والسلام على خير من تعلم وعلَّم، سيدنا محمد وعلى آله الأطهار ورضي الله عن أصحابه المنتجبين.<br><br>
+            يهدف مجمع شهداء التربية النموذجي إلى تحقيق بيئة تعليمية متميزة، تُمكّن أبناءنا الطلاب من امتلاك المعرفة والمهارات التي تؤهلهم لمستقبل واعد...</p>
+        </div>
+        
+        <div class="main-image">
+            <img src="/MGMA/school-image.jpg" alt="صورة مجمع شهداء التربية النموذجي">
+        </div>
+        
+        <div class="section-box">
+            <h3>شخصية لا تنسى</h3>
+            <img src="/MGMA/fhjkk.jpg" alt="رياض الجودة">
+            <p>الأستاذ رياض الجودة<br><br>
+            في مسيرة الحياة، هناك أشخاص يتركون بصمة لا تُمحى في قلوب طلابهم، ويبقون قدوة يُحتذى بها. ومن هؤلاء الأستاذ رياض الجودة، مدرس مادة الأحياء، الذي لم يكن مجرد معلم يشرح الدروس، بل كان مصدر إلهام وعطاء لا محدود...</p>
+        </div>
+    </section>
+    
+    <section id="location">
+        <h2>موقع المجمع</h2>
+        <p>عنوان المجمع: [عمران - مديرية عمران - شارع المجمع]</p>
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3841.6503134635336!2d43.9391179!3d15.663598799999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1601514cc4cb74b7%3A0x536417049c60c3ca!2z2YXYrNmF2Lkg2LTZh9iv2KfYoSDYp9mE2KrYsdio2YrYqSDYp9mE2YbZhdmI2LDYrNmK!5e0!3m2!1sar!2s!4v1739222376794!5m2!1sar!2s" 
+            width="100%" 
+            height="450" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy"
+            title="خريطة موقع المجمع">
+        </iframe>
+    </section>
+    
+    <!-- Visit Counter -->
+    <div class="visit-counter">عدد الزيارات: <span id="visitCount">0</span></div>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        // Visit Counter
+        let visitCount = localStorage.getItem('visitCount') || 0;
+        visitCount++;
+        localStorage.setItem('visitCount', visitCount);
+        document.getElementById('visitCount').textContent = visitCount;
+        
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/MGMA/sw.js', { scope: '/MGMA/' })
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                    })
+                    .catch(error => {
+                        console.log('ServiceWorker registration failed: ', error);
+                    });
+            });
         }
-        deferredPrompt = null;
-      });
-    });
-
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/MGMA/service-worker.js')
-          .then(reg => {
-            console.log('Service Worker تم تسجيله:', reg);
-          })
-          .catch(err => {
-            console.error('فشل تسجيل Service Worker:', err);
-          });
-      });
-    }
-  </script>
+        
+        // PWA Install Prompt
+        let deferredPrompt;
+        const installButton = document.getElementById('install-button');
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installButton.style.display = 'block';
+            
+            installButton.addEventListener('click', () => {
+                installButton.style.display = 'none';
+                deferredPrompt.prompt();
+                
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the install prompt');
+                    } else {
+                        console.log('User dismissed the install prompt');
+                    }
+                    deferredPrompt = null;
+                });
+            });
+        });
+        
+        window.addEventListener('appinstalled', () => {
+            console.log('PWA was installed');
+            installButton.style.display = 'none';
+            deferredPrompt = null;
+        });
+    </script>
 </body>
 </html>

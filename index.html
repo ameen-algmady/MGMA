@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>مجمع شهداءالتربية النموذجي</title>
+  <title>مجمع شهداء التربية النموذجي</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
@@ -26,6 +26,24 @@
       height: auto;
       border: 2px solid #004080;
     }
+
+    /* زر الإشعارات العائم */
+    #notifyBtn {
+  position: fixed;
+  top: 10px;       /* ↓ تحريكه للأسفل */
+  left: 60px;      /* ← تحريكه لليمين قليلاً */
+  z-index: 9999;
+  background-color: #ffc107;
+  color: black;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  cursor: pointer;
+}
+
   </style>
 </head>
 <body>
@@ -44,13 +62,14 @@
           <li class="nav-item"><a class="nav-link" href="#books">المناهج والكتب</a></li>
           <li class="nav-item"><a class="nav-link" href="#activities">الأنشطة الدراسية</a></li>
           <li class="nav-item"><a class="nav-link" href="#rules">الأنظمة والقوانين</a></li>
-          <li class="nav-item"><a class="nav-link" href="#location">موقع المجمع</a></li>
+          <li class="nav-item"><a class="nav-link" href="#activities">موقع المجمع</a></li>
         </ul>
-        <!-- زر الإشعارات -->
-        <button id="notifyBtn" class="btn btn-warning ms-3">🔔 إشعارات</button>
       </div>
     </div>
   </nav>
+
+  <!-- زر الإشعارات العائم -->
+  <button id="notifyBtn" title="تفعيل الإشعارات">🔔</button>
 
   <!-- العنوان واللوقو -->
   <header class="bg-light text-center p-4 d-flex justify-content-between align-items-center">
@@ -58,7 +77,7 @@
     <img src="logo.png" alt="شعار المدرسة">
   </header>
 
-  <!-- صورة متحركة -->
+  <!-- صورة متحركة للمدرسة -->
   <section class="section-img text-center">
     <img src="school.gif" alt="صورة المدرسة المتحركة">
   </section>
@@ -67,80 +86,84 @@
   <section id="results">
     <h2>المحصلات والنتائج</h2>
     <p>يمكنك الاطلاع على نتائج الطلاب والمحصلة الدراسية من خلال هذا القسم.</p>
-    <a href="/MGMA/results_grade1.html" class="btn btn-primary">الأول الثانوي</a>
+    <a href="/MGMA/results_grade1.html" class="btn btn-primary">الاول الثانوي</a>
     <a href="/MGMA/results_grade2.html" class="btn btn-primary">الثاني الثانوي</a>
     <a href="#" class="btn btn-primary">الثالث الثانوي</a>
   </section>
 
   <!-- غياب الطلاب -->
-  <section>
+  <section id="results">
     <h2>غياب الطلاب</h2>
-    <p>يمكنك الاطلاع على عدد أيام الغياب وتاريخ الغياب للطالب.</p>
+    <p>يمكنك الاطلاع على عدد ايام الغياب وتاريخ الغياب للطالب من خلال هذا القسم.</p>
     <a href="#" class="btn btn-primary">متابعة الغياب</a>
   </section>
 
-  <!-- المناهج -->
+  <!-- المناهج والكتب الدراسية -->
   <section id="books">
     <h2>المناهج والكتب الدراسية</h2>
-    <p>تصفح المناهج التعليمية وتحميل الكتب الدراسية.</p>
-    <a href="#" class="btn btn-success">منهج أول ثانوي</a>
+    <p>تصفح المناهج التعليمية وتحميل الكتب الدراسية لجميع المراحل الدراسية.</p>
+    <a href="#" class="btn btn-success">منهج اول ثانوي</a>
     <a href="#" class="btn btn-success">منهج ثاني ثانوي</a>
     <a href="#" class="btn btn-success">منهج ثالث ثانوي</a>
   </section>
 
-  <!-- الأنشطة -->
+  <!-- الأنشطة الدراسية -->
   <section id="activities">
     <h2>الأنشطة الدراسية</h2>
-    <p>تعرف على الأنشطة والمسابقات المدرسية.</p>
+    <p>تعرف على الأنشطة والمسابقات التي تقيمها المدرسة لتعزيز مهارات الطلاب.</p>
     <a href="#" class="btn btn-warning">عرض الأنشطة</a>
   </section>
 
-  <!-- الأنظمة -->
+  <!-- الأنظمة والقوانين -->
   <section id="rules">
     <h2>الأنظمة والقوانين</h2>
-    <p>راجع لوائح المدرسة التنظيمية.</p>
+    <p>راجع لوائح المدرسة والقوانين التنظيمية التي تضمن بيئة تعليمية سليمة.</p>
     <a href="#" class="btn btn-danger">قراءة اللوائح</a>
   </section>
 
   <!-- موقع المجمع -->
-  <section id="location">
+  <section id="rules">
     <h2>موقع المجمع</h2>
-    <p>موقع المدرسة على خريطة Google.</p>
+    <p>في هذا القسم تحديد الموقع الجغرافي للمجمع من خلال خرائط قوقل.</p>
     <a href="#" class="btn btn-danger">عرض الخريطة</a>
   </section>
 
-  <!-- Bootstrap JS -->
+  <!-- Bootstrap JavaScript -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- إشعارات + Service Worker -->
+  <!-- PWA Service Worker -->
   <script>
-    // تسجيل الخدمة
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js')
-        .then(reg => console.log('✅ Service Worker Registered'))
-        .catch(err => console.error('❌ Service Worker Error:', err));
+        .then(reg => console.log('Service Worker Registered'))
+        .catch(err => console.error('Service Worker Registration Failed', err));
     }
+  </script>
 
-    // زر الإشعارات
-    document.getElementById('notifyBtn').addEventListener('click', function () {
+  <!-- طلب الإذن للإشعارات -->
+  <script>
+    const notifyBtn = document.getElementById('notifyBtn');
+
+    notifyBtn.addEventListener('click', () => {
       Notification.requestPermission().then(permission => {
-        if (permission === "granted") {
-          navigator.serviceWorker.getRegistration().then(reg => {
-            if (reg) {
-              reg.showNotification("📣 إشعار من مجمع الشهداء", {
-                body: "تم تفعيل الإشعارات بنجاح.",
-                icon: "logo.png",
-                vibrate: [200, 100, 200],
-                tag: "basic-notification"
-              });
-            }
+        if (permission === 'granted') {
+          new Notification('📢 إشعار من المجمع', {
+            body: 'شكرًا لتفعيلك الإشعارات! سيتم إعلامك بكل جديد.',
+            icon: 'logo.png'
           });
         } else {
-          alert("لم يتم منح إذن الإشعارات.");
+          alert('تم رفض الإذن للإشعارات.');
         }
       });
     });
   </script>
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/MGMA/service-worker.js?v=3')
+      .then(reg => console.log('✅ Service Worker Registered'))
+      .catch(err => console.error('❌ Service Worker Failed', err));
+  }
+</script>
 
 </body>
 </html>

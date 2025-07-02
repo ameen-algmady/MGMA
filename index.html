@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>مجمع شهداءالتربية النموذجي </title>
+  <title>مجمع شهداءالتربية النموذجي</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
@@ -45,78 +44,103 @@
           <li class="nav-item"><a class="nav-link" href="#books">المناهج والكتب</a></li>
           <li class="nav-item"><a class="nav-link" href="#activities">الأنشطة الدراسية</a></li>
           <li class="nav-item"><a class="nav-link" href="#rules">الأنظمة والقوانين</a></li>
-           <li class="nav-item"><a class="nav-link" href="#activities">موقع المجمع</a></li>
+          <li class="nav-item"><a class="nav-link" href="#location">موقع المجمع</a></li>
         </ul>
+        <!-- زر الإشعارات -->
+        <button id="notifyBtn" class="btn btn-warning ms-3">🔔 إشعارات</button>
       </div>
     </div>
   </nav>
 
-  <!-- القسم الأول: العنوان واللوقو -->
+  <!-- العنوان واللوقو -->
   <header class="bg-light text-center p-4 d-flex justify-content-between align-items-center">
     <h1 class="m-0">مجمع شهداء التربية النموذجي</h1>
     <img src="logo.png" alt="شعار المدرسة">
   </header>
 
-  <!-- القسم الثاني: صورة متحركة للمدرسة -->
+  <!-- صورة متحركة -->
   <section class="section-img text-center">
     <img src="school.gif" alt="صورة المدرسة المتحركة">
   </section>
 
-  <!-- القسم الثالث: المحصلات والنتائج -->
+  <!-- المحصلات والنتائج -->
   <section id="results">
     <h2>المحصلات والنتائج</h2>
     <p>يمكنك الاطلاع على نتائج الطلاب والمحصلة الدراسية من خلال هذا القسم.</p>
-    <a href="/MGMA/results_grade1.html" class="btn btn-primary">الاول الثانوي</a>
-     <a href="/MGMA/results_grade2.html" class="btn btn-primary">الثاني الثانوي</a>
+    <a href="/MGMA/results_grade1.html" class="btn btn-primary">الأول الثانوي</a>
+    <a href="/MGMA/results_grade2.html" class="btn btn-primary">الثاني الثانوي</a>
+    <a href="#" class="btn btn-primary">الثالث الثانوي</a>
+  </section>
 
-      <a href="#" class="btn btn-primary">الثالث الثانوي</a>
-  </section>
-    <section id="results">
+  <!-- غياب الطلاب -->
+  <section>
     <h2>غياب الطلاب</h2>
-    <p>يمكنك الاطلاع على عدد ايام الغياب وتاريخ الغياب للطالب من خلال هذا القسم.</p>
+    <p>يمكنك الاطلاع على عدد أيام الغياب وتاريخ الغياب للطالب.</p>
     <a href="#" class="btn btn-primary">متابعة الغياب</a>
-    
   </section>
-  <!-- القسم الرابع: المناهج والكتب الدراسية -->
+
+  <!-- المناهج -->
   <section id="books">
     <h2>المناهج والكتب الدراسية</h2>
-    <p>تصفح المناهج التعليمية وتحميل الكتب الدراسية لجميع المراحل الدراسية.</p>
-    <a href="#" class="btn btn-success">منهج اول ثانوي</a>
-     
-     <a href="#" class="btn btn-success">منهج ثاني ثانوي</a>
-     
-      <a href="#" class="btn btn-success">منهج ثالث ثانوي</a>
+    <p>تصفح المناهج التعليمية وتحميل الكتب الدراسية.</p>
+    <a href="#" class="btn btn-success">منهج أول ثانوي</a>
+    <a href="#" class="btn btn-success">منهج ثاني ثانوي</a>
+    <a href="#" class="btn btn-success">منهج ثالث ثانوي</a>
   </section>
 
-  <!-- القسم الخامس: الأنشطة الدراسية -->
+  <!-- الأنشطة -->
   <section id="activities">
     <h2>الأنشطة الدراسية</h2>
-    <p>تعرف على الأنشطة والمسابقات التي تقيمها المدرسة لتعزيز مهارات الطلاب.</p>
+    <p>تعرف على الأنشطة والمسابقات المدرسية.</p>
     <a href="#" class="btn btn-warning">عرض الأنشطة</a>
   </section>
 
-  <!-- القسم السادس: الأنظمة والقوانين -->
+  <!-- الأنظمة -->
   <section id="rules">
     <h2>الأنظمة والقوانين</h2>
-    <p>راجع لوائح المدرسة والقوانين التنظيمية التي تضمن بيئة تعليمية سليمة.</p>
+    <p>راجع لوائح المدرسة التنظيمية.</p>
     <a href="#" class="btn btn-danger">قراءة اللوائح</a>
   </section>
-    <!-- القسم السادس: الأنظمة والقوانين -->
-  <section id="rules">
+
+  <!-- موقع المجمع -->
+  <section id="location">
     <h2>موقع المجمع</h2>
-    <p>في هذا القسم تحديد الموقع االجغرفي للمجمع من خلال خرائط قوقل.</p>
+    <p>موقع المدرسة على خريطة Google.</p>
     <a href="#" class="btn btn-danger">عرض الخريطة</a>
   </section>
-  <!-- Bootstrap JavaScript -->
+
+  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- PWA Service Worker -->
+  <!-- إشعارات + Service Worker -->
   <script>
+    // تسجيل الخدمة
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js')
-        .then(reg => console.log('Service Worker Registered'))
-        .catch(err => console.error('Service Worker Registration Failed', err));
+        .then(reg => console.log('✅ Service Worker Registered'))
+        .catch(err => console.error('❌ Service Worker Error:', err));
     }
+
+    // زر الإشعارات
+    document.getElementById('notifyBtn').addEventListener('click', function () {
+      Notification.requestPermission().then(permission => {
+        if (permission === "granted") {
+          navigator.serviceWorker.getRegistration().then(reg => {
+            if (reg) {
+              reg.showNotification("📣 إشعار من مجمع الشهداء", {
+                body: "تم تفعيل الإشعارات بنجاح.",
+                icon: "logo.png",
+                vibrate: [200, 100, 200],
+                tag: "basic-notification"
+              });
+            }
+          });
+        } else {
+          alert("لم يتم منح إذن الإشعارات.");
+        }
+      });
+    });
   </script>
+
 </body>
 </html>

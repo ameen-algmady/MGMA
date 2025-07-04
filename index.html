@@ -6,6 +6,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+
+  <!-- OneSignal Scripts -->
+  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+  <script src="/MGMA/OneSignalSDKWorker.js" defer></script>
+  <script src="/MGMA/OneSignalSDKUpdaterWorker.js" defer></script>
+  <script>
+    window.OneSignalDeferred = window.OneSignalDeferred || [];
+    OneSignalDeferred.push(async function(OneSignal) {
+      await OneSignal.init({
+        appId: "adbcf77b-5fb0-4c24-b23c-25f052b00853",
+        serviceWorkerPath: '/MGMA/OneSignalSDKWorker.js',
+        serviceWorkerUpdaterPath: '/MGMA/OneSignalSDKUpdaterWorker.js'
+      });
+    });
+  </script>
+
   <style>
     body {
       font-family: 'Tahoma', sans-serif;
@@ -26,29 +42,28 @@
       height: auto;
       border: 2px solid #004080;
     }
-
-    /* زر الإشعارات العائم */
     #notifyBtn {
-  position: fixed;
-  top: 10px;       /* ↓ تحريكه للأسفل */
-  left: 60px;      /* ← تحريكه لليمين قليلاً */
-  z-index: 9999;
-  background-color: #ffc107;
-  color: black;
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  font-size: 24px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-  cursor: pointer;
-}
-
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 9999;
+      background-color: #ffc107;
+      color: black;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      cursor: pointer;
+    }
+    #notifyBtn:hover {
+      background-color: #e0a800;
+    }
   </style>
 </head>
 <body>
 
-  <!-- شريط التنقل -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">مجمع شهداء التربية النموذجي</a>
@@ -68,21 +83,17 @@
     </div>
   </nav>
 
-  <!-- زر الإشعارات العائم -->
   <button id="notifyBtn" title="تفعيل الإشعارات">🔔</button>
 
-  <!-- العنوان واللوقو -->
   <header class="bg-light text-center p-4 d-flex justify-content-between align-items-center">
     <h1 class="m-0">مجمع شهداء التربية النموذجي</h1>
     <img src="logo.png" alt="شعار المدرسة">
   </header>
 
-  <!-- صورة متحركة للمدرسة -->
   <section class="section-img text-center">
     <img src="school.gif" alt="صورة المدرسة المتحركة">
   </section>
 
-  <!-- المحصلات والنتائج -->
   <section id="results">
     <h2>المحصلات والنتائج</h2>
     <p>يمكنك الاطلاع على نتائج الطلاب والمحصلة الدراسية من خلال هذا القسم.</p>
@@ -91,14 +102,12 @@
     <a href="#" class="btn btn-primary">الثالث الثانوي</a>
   </section>
 
-  <!-- غياب الطلاب -->
   <section id="results">
     <h2>غياب الطلاب</h2>
     <p>يمكنك الاطلاع على عدد ايام الغياب وتاريخ الغياب للطالب من خلال هذا القسم.</p>
     <a href="#" class="btn btn-primary">متابعة الغياب</a>
   </section>
 
-  <!-- المناهج والكتب الدراسية -->
   <section id="books">
     <h2>المناهج والكتب الدراسية</h2>
     <p>تصفح المناهج التعليمية وتحميل الكتب الدراسية لجميع المراحل الدراسية.</p>
@@ -107,31 +116,26 @@
     <a href="#" class="btn btn-success">منهج ثالث ثانوي</a>
   </section>
 
-  <!-- الأنشطة الدراسية -->
   <section id="activities">
     <h2>الأنشطة الدراسية</h2>
     <p>تعرف على الأنشطة والمسابقات التي تقيمها المدرسة لتعزيز مهارات الطلاب.</p>
     <a href="#" class="btn btn-warning">عرض الأنشطة</a>
   </section>
 
-  <!-- الأنظمة والقوانين -->
   <section id="rules">
     <h2>الأنظمة والقوانين</h2>
     <p>راجع لوائح المدرسة والقوانين التنظيمية التي تضمن بيئة تعليمية سليمة.</p>
     <a href="#" class="btn btn-danger">قراءة اللوائح</a>
   </section>
 
-  <!-- موقع المجمع -->
   <section id="rules">
     <h2>موقع المجمع</h2>
     <p>في هذا القسم تحديد الموقع الجغرافي للمجمع من خلال خرائط قوقل.</p>
     <a href="#" class="btn btn-danger">عرض الخريطة</a>
   </section>
 
-  <!-- Bootstrap JavaScript -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- PWA Service Worker -->
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js')
@@ -140,10 +144,8 @@
     }
   </script>
 
-  <!-- طلب الإذن للإشعارات -->
   <script>
     const notifyBtn = document.getElementById('notifyBtn');
-
     notifyBtn.addEventListener('click', () => {
       Notification.requestPermission().then(permission => {
         if (permission === 'granted') {
@@ -157,13 +159,5 @@
       });
     });
   </script>
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/MGMA/service-worker.js?v=3')
-      .then(reg => console.log('✅ Service Worker Registered'))
-      .catch(err => console.error('❌ Service Worker Failed', err));
-  }
-</script>
-
 </body>
 </html>

@@ -6,6 +6,7 @@
   "background_color": "#4CAF50",
   "theme_color": "#4CAF50",
   "description": "مجمع شهداء التربية النموذجي نتائج الطلاب خدمات طلابية",
+  "gcm_sender_id": "482941778795",
   "icons": [
     {
       "src": "icon-192x192.png",
@@ -17,6 +18,5 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ],
-  "id": "مجمع شهداء التربية النموذجي"
+  ]
 }

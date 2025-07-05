@@ -44,8 +44,8 @@
     }
     #notifyBtn {
       position: fixed;
-      top: 20px;
-      left: 60px;
+      top: 15px;
+      left: 70px;
       z-index: 9999;
       background-color: #ffc107;
       color: black;
@@ -66,6 +66,7 @@
 
   <!-- زر تفعيل الإشعارات -->
   <button id="notifyBtn" title="تفعيل الإشعارات">🔔</button>
+<button id="installBtn" hidden>📲 تثبيت التطبيق</button>
 
   <!-- شريط التنقل -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -153,6 +154,36 @@
       }
     });
   </script>
+<script>
+  let deferredPrompt;
+  const installBtn = document.getElementById('installBtn');
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    // منع المتصفح من إظهار التثبيت التلقائي
+    e.preventDefault();
+    deferredPrompt = e;
+    installBtn.hidden = false; // إظهار الزر
+
+    installBtn.addEventListener('click', async () => {
+      installBtn.hidden = true;
+      deferredPrompt.prompt(); // عرض نافذة التثبيت
+
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        console.log('تم تثبيت التطبيق ✅');
+      } else {
+        console.log('تم إلغاء التثبيت ❌');
+      }
+      deferredPrompt = null;
+    });
+  });
+
+  // إخفاء الزر بعد التثبيت
+  window.addEventListener('appinstalled', () => {
+    console.log('تم التثبيت بالفعل');
+    installBtn.hidden = true;
+  });
+</script>
 
 </body>
 </html>

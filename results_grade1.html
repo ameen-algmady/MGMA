@@ -1,148 +1,228 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="موقع مجمع شهداء التربية النموذجي - تقديم نتائج الطلاب الصف الأول الثانوي.">
-    <title>مجمع شهداء التربية النموذجي - الرئيسية</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; }
-        table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="موقع مجمع شهداء التربية النموذجي - تقديم نتائج الطلاب الصف الأول الثانوي.">
+  <title>مجمع شهداء التربية النموذجي - الرئيسية</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
 
-th, td {
-    border: 1px solid black;
-    padding: 3px; /* تقليل التباعد الداخلي */
-    height: 15px; /* تعيين ارتفاع الصف */
-    text-align: center; /* توسيط النص أفقيًا */
-    vertical-align: middle; /* توسيط النص عموديًا */
-}
-h4 {
-    font-size: 1px; /* تصغير حجم الخط */
-    margin: 0px 0; /* تقليل المسافة العلوية والسفلية */
-    line-height: 0.1; /* تقليل ارتفاع السطر */
-    vertical-align: middle; /* توسيط النص عموديًا */
-}
+    header {
+      background-color: #4CAF50;
+      color: black;
+      padding: 10px;
+    }
 
-th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-}
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
 
-header {
-    background-color: #4CAF50;
-    color: black;
-    padding: 10px 0;
-    text-align: center; /* توسيط النص داخل الهيدر */
-}
+    .header-left {
+      text-align: right;
+      font-size: 12px;
+      line-height: 1.4;
+      max-width: 30%;
+    }
 
-footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
-}
+    .header-center {
+      flex-grow: 1;
+      text-align: center;
+    }
 
-.home-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center; /* توسيط النص أفقيًا */
-    padding: 8px 12px;
-    background-color: #4CAF50;
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
-    border-radius: 5px;
-}
+    .header-center h1 {
+      margin: 5px 0;
+      font-size: 20px;
+    }
 
-.home-button i {
-    margin-right: 5px;
-}
+    .header-center h2 {
+      margin: 0;
+      font-size: 16px;
+    }
 
-.home-button:hover {
-    background-color: #45a049;
-}
+    .header-right img {
+      height: 60px;
+    }
 
-    </style>
+    .home-button, .print-button {
+      display: inline-block;
+      margin: 10px;
+      padding: 8px 12px;
+      background-color: #4CAF50;
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      border-radius: 5px;
+    }
+
+    .print-button {
+      background-color: #2196F3;
+    }
+
+    .home-button:hover {
+      background-color: #45a049;
+    }
+
+    .print-button:hover {
+      background-color: #1976D2;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 3px;
+      height: 15px;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    h4 {
+      font-size: 1px;
+      margin: 0;
+      line-height: 0.1;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+      .header-container {
+        flex-direction: column-reverse;
+        text-align: center;
+      }
+
+      .header-left,
+      .header-center,
+      .header-right {
+        max-width: 100%;
+        margin-top: 10px;
+      }
+
+      .header-left {
+        font-size: 11px;
+      }
+
+      .header-right img {
+        height: 50px;
+        margin-bottom: 10px;
+      }
+
+      .header-center h1 {
+        font-size: 18px;
+      }
+
+      .header-center h2 {
+        font-size: 14px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <header>
-     <div class="logo">
-            <img src="school-logo.png" alt="شعار مجمع شهداء التربية النموذجي">
+
+  <!-- ✅ رأس الصفحة -->
+  <header>
+    <div class="header-container">
+      <!-- ✅ معلومات الدولة -->
+      <div class="header-left">
+        <p>الجمهورية اليمنية</p>
+        <p>وزارة التربية والتعليم</p>
+        <p>مكتب التربية والتعليم - محافظة عمران</p>
+        <p>مكتب التربية والتعليم - مديرية عمران</p>
+      </div>
+
+      <!-- ✅ العنوان -->
+      <div class="header-center">
         <h1>مجمع شهداء التربية النموذجي</h1>
-        <h2>نتائج آخر العام للصف الاول الثانوي</h2>
-    </header>
-<a href="index.html" class="home-button">🏠 الرئيسية</a>
-    <section id="results">
-        <h2>نتائج الطلاب</h2>
-        <form id="resultsForm">
-            <label for="studentCode">أدخل كود الطالب:</label>
-            <input type="text" id="studentCode" name="studentCode" required>
-            <button type="submit">عرض النتائج</button>
-        </form>
-        <div id="resultsOutput"></div>
-    </section>
+        <h2>نتائج آخر العام للصف الأول الثانوي</h2>
+      </div>
 
-   
+      <!-- ✅ الشعار -->
+      <div class="header-right">
+        <img src="school-logo.png" alt="شعار المدرسة">
+      </div>
+    </div>
+  </header>
 
+  <!-- ✅ أزرار التنقل والطباعة -->
+  <div style="text-align:center;">
+    <a href="index.html" class="home-button">🏠 الرئيسية</a>
+    <a href="#" class="print-button" onclick="window.print()">🖨️ طباعة الصفحة</a>
+  </div>
 
-    <script>
-        document.getElementById('resultsForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const studentCode = document.getElementById('studentCode').value.trim();
-            const apiUrl = 'https://script.google.com/macros/s/AKfycbxgiRWbbli3VQ-9K_7Z0YSXhd09vtCsNhWNi0DgwQF5yHWc3m80rUrR92Wf85_rub2R/exec';
+  <!-- ✅ نموذج البحث عن النتائج -->
+  <section id="results" style="text-align:center;">
+  
+    <form id="resultsForm">
+      <label for="studentCode">أدخل كود الطالب:</label>
+      <input type="text" id="studentCode" name="studentCode" required>
+      <button type="submit">عرض النتائج</button>
+    </form>
+    <div id="resultsOutput"></div>
+  </section>
 
-            if (!studentCode) {
-                alert("يرجى إدخال كود الطالب!");
-                return;
-            }
+  <!-- ✅ السكربت لجلب البيانات -->
+  <script>
+    document.getElementById('resultsForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const studentCode = document.getElementById('studentCode').value.trim();
+      const apiUrl = 'https://script.google.com/macros/s/AKfycbxgiRWbbli3VQ-9K_7Z0YSXhd09vtCsNhWNi0DgwQF5yHWc3m80rUrR92Wf85_rub2R/exec';
 
-            fetch(`${apiUrl}?code=${studentCode}`)
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                    const output = document.getElementById('resultsOutput');
-                    output.innerHTML = "";
+      if (!studentCode) {
+        alert("يرجى إدخال كود الطالب!");
+        return;
+      }
 
-                    if (data.status !== "نجاح") {
-                        output.innerHTML = `<p style="color: red;">${data.message}</p>`;
-                        return;
-                    }
+      fetch(`${apiUrl}?code=${studentCode}`)
+        .then(response => response.json())
+        .then(data => {
+          const output = document.getElementById('resultsOutput');
+          output.innerHTML = "";
 
-                     // عرض معلومات الطالب
-                    let studentInfo = `<h4></h4><table><tr><th>المجال</th><th>القيمة</th></tr>`;
-                    for (const [key, value] of Object.entries(data.بيانات_الطالب)) {
-                        studentInfo += `<tr><td><strong>${key}</strong></td><td>${value || 'غير متوفر'}</td></tr>`;
-                    }
-                    studentInfo += `</table>`;
-                    let subjectsTable = `<h4></h4><table><tr><th>المادة</th><th>محصلة أولى</th><th>نصف العام</th><th>محصلة ثانية</th><th>آخر العام</th><th>المجموع</th></tr>`;
-                    for (const [subject, grades] of Object.entries(data.المواد_الدراسية)) {
-                        subjectsTable += `<tr><td>${subject}</td><td>${grades.محصلة_أولى}</td><td>${grades.نصف_العام}</td><td>${grades.محصلة_ثانية}</td><td>${grades.آخر_العام}</td><td>${grades.المجموع}</td></tr>`;
-                    }
-                    subjectsTable += `</table>`;
+          if (data.status !== "نجاح") {
+            output.innerHTML = `<p style="color: red;">${data.message}</p>`;
+            return;
+          }
 
-                     // عرض النتائج النهائية
-                    let finalResults = `<h4></h4><table><tr><th>المجال</th><th>القيمة</th></tr>`;
-                    finalResults += `<tr><td>المجموع الكلي</td><td>${data.النتيجة_النهائية?.المجموع_الكلي || 'غير متوفر'}</td></tr>`;
-                    finalResults += `<tr><td>النتيجة</td><td>${data.النتيجة_النهائية?.النتيجة || 'غير متوفر'}</td></tr>`;
-                    finalResults += `<tr><td>النسبة</td><td>${data.النتيجة_النهائية?.النسبة || 'غير متوفر'}%</td></tr>`;
-                    finalResults += `<tr><td>الترتيب</td><td>${data.النتيجة_النهائية?.الترتيب || 'غير متوفر'}</td></tr>`;
-                    finalResults += `</table>`;
+          let studentInfo = `<h4></h4><table><tr><th>المجال</th><th>القيمة</th></tr>`;
+          for (const [key, value] of Object.entries(data.بيانات_الطالب)) {
+            studentInfo += `<tr><td><strong>${key}</strong></td><td>${value || 'غير متوفر'}</td></tr>`;
+          }
+          studentInfo += `</table>`;
 
-                    output.innerHTML = studentInfo + subjectsTable + finalResults;
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert("حدث خطأ أثناء جلب البيانات.");
-                });
+          let subjectsTable = `<h4></h4><table><tr><th>المادة</th><th>محصلة أولى</th><th>نصف العام</th><th>محصلة ثانية</th><th>آخر العام</th><th>المجموع</th></tr>`;
+          for (const [subject, grades] of Object.entries(data.المواد_الدراسية)) {
+            subjectsTable += `<tr><td>${subject}</td><td>${grades.محصلة_أولى}</td><td>${grades.نصف_العام}</td><td>${grades.محصلة_ثانية}</td><td>${grades.آخر_العام}</td><td>${grades.المجموع}</td></tr>`;
+          }
+          subjectsTable += `</table>`;
+
+          let finalResults = `<h4></h4><table><tr><th>المجال</th><th>القيمة</th></tr>`;
+          finalResults += `<tr><td>المجموع الكلي</td><td>${data.النتيجة_النهائية?.المجموع_الكلي || 'غير متوفر'}</td></tr>`;
+          finalResults += `<tr><td>النتيجة</td><td>${data.النتيجة_النهائية?.النتيجة || 'غير متوفر'}</td></tr>`;
+          finalResults += `<tr><td>النسبة</td><td>${data.النتيجة_النهائية?.النسبة || 'غير متوفر'}%</td></tr>`;
+          finalResults += `<tr><td>الترتيب</td><td>${data.النتيجة_النهائية?.الترتيب || 'غير متوفر'}</td></tr>`;
+          finalResults += `</table>`;
+
+          output.innerHTML = studentInfo + subjectsTable + finalResults;
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert("حدث خطأ أثناء جلب البيانات.");
         });
-    </script>
+    });
+  </script>
 </body>
 </html>

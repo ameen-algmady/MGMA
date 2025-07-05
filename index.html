@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -6,20 +5,21 @@
   <title>مجمع شهداء التربية النموذجي</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="favicon.ico">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
 
   <!-- OneSignal Scripts -->
   <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
   <script>
-    // تهيئة OneSignal عند تحميل الصفحة
-    window.OneSignalDeferred = window.OneSignalDeferred || [];
-    OneSignalDeferred.push(function(OneSignal) {
-      OneSignal.init({
-        appId: "adbcf77b-5fb0-4c24-b23c-25f052b00853",
-        serviceWorkerPath: "/MGMA/OneSignalSDKWorker.js",
-        serviceWorkerUpdaterPath: "/MGMA/OneSignalSDKUpdaterWorker.js"
+      // تهيئة OneSignal عند تحميل الصفحة
+      window.OneSignalDeferred = window.OneSignalDeferred || [];
+      OneSignalDeferred.push(function(OneSignal) {
+          OneSignal.init({
+              appId: "adbcf77b-5fb0-4c24-b23c-25f052b00853",
+              serviceWorkerPath: "OneSignalSDKWorker.js",
+              serviceWorkerUpdaterPath: "OneSignalSDKUpdaterWorker.js"
+          });
       });
-    });
   </script>
 
   <style>
@@ -77,11 +77,11 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link" href="#results">المحصلات والنتائج</a></li>
-          <li class="nav-item"><a class="nav-link" href="#results">غياب الطلاب</a></li>
+          <li class="nav-item"><a class="nav-link" href="#absence">غياب الطلاب</a></li>
           <li class="nav-item"><a class="nav-link" href="#books">المناهج والكتب</a></li>
           <li class="nav-item"><a class="nav-link" href="#activities">الأنشطة الدراسية</a></li>
           <li class="nav-item"><a class="nav-link" href="#rules">الأنظمة والقوانين</a></li>
-          <li class="nav-item"><a class="nav-link" href="#activities">موقع المجمع</a></li>
+          <li class="nav-item"><a class="nav-link" href="#location">موقع المجمع</a></li>
         </ul>
       </div>
     </div>
@@ -93,7 +93,7 @@
     <img src="logo.png" alt="شعار المدرسة">
   </header>
 
-  <!-- المحتوى -->
+  <!-- صورة -->
   <section class="section-img text-center">
     <img src="school.gif" alt="صورة المدرسة المتحركة">
   </section>
@@ -101,12 +101,12 @@
   <section id="results">
     <h2>المحصلات والنتائج</h2>
     <p>يمكنك الاطلاع على نتائج الطلاب والمحصلة الدراسية من خلال هذا القسم.</p>
-    <a href="/MGMA/results_grade1.html" class="btn btn-primary">الاول الثانوي</a>
-    <a href="/MGMA/results_grade2.html" class="btn btn-primary">الثاني الثانوي</a>
+    <a href="results_grade1.html" class="btn btn-primary">الاول الثانوي</a>
+    <a href="results_grade2.html" class="btn btn-primary">الثاني الثانوي</a>
     <a href="#" class="btn btn-primary">الثالث الثانوي</a>
   </section>
 
-  <section id="results">
+  <section id="absence">
     <h2>غياب الطلاب</h2>
     <p>يمكنك الاطلاع على عدد ايام الغياب وتاريخ الغياب للطالب من خلال هذا القسم.</p>
     <a href="#" class="btn btn-primary">متابعة الغياب</a>
@@ -132,7 +132,7 @@
     <a href="#" class="btn btn-danger">قراءة اللوائح</a>
   </section>
 
-  <section id="rules">
+  <section id="location">
     <h2>موقع المجمع</h2>
     <p>في هذا القسم تحديد الموقع الجغرافي للمجمع من خلال خرائط قوقل.</p>
     <a href="#" class="btn btn-danger">عرض الخريطة</a>
@@ -140,14 +140,15 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- تفعيل نافذة إذن الإشعارات من OneSignal عند الضغط على الزر -->
+  <!-- تفعيل نافذة إذن الإشعارات -->
   <script>
     const notifyBtn = document.getElementById('notifyBtn');
     notifyBtn.addEventListener('click', () => {
       OneSignalDeferred.push(function(OneSignal) {
-        OneSignal.showSlidedownPrompt(); // عرض نافذة طلب الإذن
+        OneSignal.showSlidedownPrompt();
       });
     });
   </script>
+
 </body>
 </html>

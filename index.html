@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <title>مجمع شهداء التربية النموذجي</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- روابط الملفات داخل مجلد MGMA -->
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="favicon.ico">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
 
-  <!-- OneSignal Scripts -->
+  <!-- OneSignal SDK -->
   <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
   <script>
-      // تهيئة OneSignal عند تحميل الصفحة
       window.OneSignalDeferred = window.OneSignalDeferred || [];
       OneSignalDeferred.push(function(OneSignal) {
           OneSignal.init({
@@ -21,6 +21,9 @@
           });
       });
   </script>
+
+  <!-- تنسيق Bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
 
   <style>
     body {
@@ -64,7 +67,7 @@
 </head>
 <body>
 
-  <!-- زر تفعيل الإشعارات -->
+  <!-- زر الإشعارات -->
   <button id="notifyBtn" title="تفعيل الإشعارات">🔔</button>
 
   <!-- شريط التنقل -->
@@ -93,7 +96,7 @@
     <img src="logo.png" alt="شعار المدرسة">
   </header>
 
-  <!-- صورة -->
+  <!-- صورة المدرسة -->
   <section class="section-img text-center">
     <img src="school.gif" alt="صورة المدرسة المتحركة">
   </section>
@@ -108,14 +111,14 @@
 
   <section id="absence">
     <h2>غياب الطلاب</h2>
-    <p>يمكنك الاطلاع على عدد ايام الغياب وتاريخ الغياب للطالب من خلال هذا القسم.</p>
+    <p>يمكنك الاطلاع على عدد أيام الغياب وتاريخ الغياب للطالب من خلال هذا القسم.</p>
     <a href="#" class="btn btn-primary">متابعة الغياب</a>
   </section>
 
   <section id="books">
     <h2>المناهج والكتب الدراسية</h2>
     <p>تصفح المناهج التعليمية وتحميل الكتب الدراسية لجميع المراحل الدراسية.</p>
-    <a href="#" class="btn btn-success">منهج اول ثانوي</a>
+    <a href="#" class="btn btn-success">منهج أول ثانوي</a>
     <a href="#" class="btn btn-success">منهج ثاني ثانوي</a>
     <a href="#" class="btn btn-success">منهج ثالث ثانوي</a>
   </section>
@@ -140,7 +143,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- تفعيل نافذة إذن الإشعارات -->
   <script>
     const notifyBtn = document.getElementById('notifyBtn');
     notifyBtn.addEventListener('click', () => {

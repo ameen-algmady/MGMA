@@ -15,14 +15,14 @@
   <!-- OneSignal SDK -->
   <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
   <script>
-    window.OneSignalDeferred = window.OneSignalDeferred || [];
-    OneSignalDeferred.push(function(OneSignal) {
-      OneSignal.init({
-        appId: "adbcf77b-5fb0-4c24-b23c-25f052b00853",
-        serviceWorkerPath: "/MGMA/OneSignalSDKWorker.js",
-        serviceWorkerUpdaterPath: "/MGMA/OneSignalSDKUpdaterWorker.js"
+      window.OneSignalDeferred = window.OneSignalDeferred || [];
+      OneSignalDeferred.push(function(OneSignal) {
+          OneSignal.init({
+              appId: "adbcf77b-5fb0-4c24-b23c-25f052b00853",
+              serviceWorkerPath: "/MGMA/OneSignalSDKWorker.js",
+              serviceWorkerUpdaterPath: "/MGMA/OneSignalSDKUpdaterWorker.js"
+          });
       });
-    });
   </script>
 
   <style>

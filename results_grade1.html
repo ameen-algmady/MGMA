@@ -3,38 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="موقع مجمع شهداء التربية النموذجي - تقديم نتائج الطلاب الصف الأول الثانوي.">
   <title>مجمع شهداء التربية النموذجي - الرئيسية</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
-      padding: 0;
+      background-color: #f9f9f9;
+    }
+
+    /* ✅ إطار الصفحة */
+    .page-container {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border: 3px solid #4CAF50;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
     header {
-      background-color: #4CAF50;
+      background-color: #e8f5e9; /* لون أخضر فاتح جدًا */
       color: black;
-      padding: 10px;
+      padding: 10px 15px;
+      border-radius: 8px;
     }
 
     .header-container {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
+      text-align: center;
+      flex-wrap: nowrap;
     }
 
-    .header-left {
-      text-align: right;
-      font-size: 12px;
-      line-height: 1.4;
-      max-width: 30%;
+    .header-right img {
+      height: 60px;
     }
 
     .header-center {
-      flex-grow: 1;
-      text-align: center;
+      flex: 1;
+      padding: 0 10px;
     }
 
     .header-center h1 {
@@ -47,13 +56,16 @@
       font-size: 16px;
     }
 
-    .header-right img {
-      height: 60px;
+    .header-left {
+      text-align: right;
+      font-size: 12px;
+      line-height: 1.5;
+      max-width: 30%;
     }
 
     .home-button, .print-button {
       display: inline-block;
-      margin: 10px;
+      margin: 10px 5px;
       padding: 8px 12px;
       background-color: #4CAF50;
       color: white;
@@ -101,24 +113,16 @@
 
     @media (max-width: 600px) {
       .header-container {
-        flex-direction: column-reverse;
-        text-align: center;
-      }
-
-      .header-left,
-      .header-center,
-      .header-right {
-        max-width: 100%;
-        margin-top: 10px;
-      }
-
-      .header-left {
-        font-size: 11px;
+        flex-wrap: nowrap;
+        flex-direction: row;
       }
 
       .header-right img {
         height: 50px;
-        margin-bottom: 10px;
+      }
+
+      .header-left {
+        font-size: 11px;
       }
 
       .header-center h1 {
@@ -129,52 +133,76 @@
         font-size: 14px;
       }
     }
+
+    /* ✅ تحسين العرض عند الطباعة */
+    @media print {
+      body {
+        background: white;
+      }
+
+      .page-container {
+        box-shadow: none;
+        border: 2px solid black;
+        margin: 0;
+        padding: 10px;
+      }
+
+      .home-button,
+      .print-button {
+        display: none;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <!-- ✅ رأس الصفحة -->
-  <header>
-    <div class="header-container">
-      <!-- ✅ معلومات الدولة -->
-      <div class="header-left">
-        <p>الجمهورية اليمنية</p>
-        <p>وزارة التربية والتعليم</p>
-        <p>مكتب التربية والتعليم - محافظة عمران</p>
-        <p>مكتب التربية والتعليم - مديرية عمران</p>
-      </div>
+  <!-- ✅ إطار شامل -->
+  <div class="page-container">
 
-      <!-- ✅ العنوان -->
-      <div class="header-center">
-        <h1>مجمع شهداء التربية النموذجي</h1>
-        <h2>نتائج آخر العام للصف الأول الثانوي</h2>
-      </div>
+    <!-- ✅ رأس الصفحة -->
+    <header>
+      <div class="header-container">
+        <!-- معلومات الدولة -->
+        <div class="header-left">
+          <p>الجمهورية اليمنية</p>
+          <p>وزارة التربية والتعليم</p>
+          <p>مكتب التربية والتعليم - محافظة عمران</p>
+          <p>مكتب التربية والتعليم - مديرية عمران</p>
+        </div>
 
-      <!-- ✅ الشعار -->
-      <div class="header-right">
-        <img src="school-logo.png" alt="شعار المدرسة">
+        <!-- العنوان -->
+        <div class="header-center">
+          <h1>مجمع شهداء التربية النموذجي</h1>
+          <h2>نتائج آخر العام للصف الأول الثانوي</h2>
+        </div>
+
+        <!-- الشعار -->
+        <div class="header-right">
+          <img src="school-logo.png" alt="شعار المدرسة">
+        </div>
       </div>
+    </header>
+
+    <!-- ✅ الأزرار -->
+    <div style="text-align:center;">
+      <a href="index.html" class="home-button">🏠 الرئيسية</a>
+      <a href="#" class="print-button" onclick="window.print()">🖨️ طباعة الصفحة</a>
     </div>
-  </header>
 
-  <!-- ✅ أزرار التنقل والطباعة -->
-  <div style="text-align:center;">
-    <a href="index.html" class="home-button">🏠 الرئيسية</a>
-    <a href="#" class="print-button" onclick="window.print()">🖨️ طباعة الصفحة</a>
+    <!-- ✅ نموذج النتائج -->
+    <section id="results" style="text-align:center;">
+      <h2>نتائج الطلاب</h2>
+      <form id="resultsForm">
+        <label for="studentCode">أدخل كود الطالب:</label>
+        <input type="text" id="studentCode" name="studentCode" required>
+        <button type="submit">عرض النتائج</button>
+      </form>
+      <div id="resultsOutput"></div>
+    </section>
+
   </div>
 
-  <!-- ✅ نموذج البحث عن النتائج -->
-  <section id="results" style="text-align:center;">
-  
-    <form id="resultsForm">
-      <label for="studentCode">أدخل كود الطالب:</label>
-      <input type="text" id="studentCode" name="studentCode" required>
-      <button type="submit">عرض النتائج</button>
-    </form>
-    <div id="resultsOutput"></div>
-  </section>
-
-  <!-- ✅ السكربت لجلب البيانات -->
+  <!-- ✅ سكربت -->
   <script>
     document.getElementById('resultsForm').addEventListener('submit', function(event) {
       event.preventDefault();
@@ -224,5 +252,6 @@
         });
     });
   </script>
+
 </body>
 </html>

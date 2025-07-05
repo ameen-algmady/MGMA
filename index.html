@@ -4,21 +4,20 @@
   <meta charset="UTF-8">
   <title>مجمع شهداء التربية النموذجي</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="manifest" href="/MGMA/manifest.json">
-  <link rel="icon" href="/MGMA/favicon.ico">
+  
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="favicon.ico">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
 
-  <!-- OneSignal Scripts -->
+  <!-- OneSignal SDK -->
   <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
   <script>
-      // تهيئة OneSignal بعد تحميل الصفحة
       window.OneSignalDeferred = window.OneSignalDeferred || [];
       OneSignalDeferred.push(function(OneSignal) {
           OneSignal.init({
               appId: "adbcf77b-5fb0-4c24-b23c-25f052b00853",
               serviceWorkerPath: "/OneSignalSDKWorker.js",
               serviceWorkerUpdaterPath: "/OneSignalSDKUpdaterWorker.js"
-
           });
       });
   </script>
@@ -91,32 +90,32 @@
   <!-- رأس الصفحة -->
   <header class="bg-light text-center p-4 d-flex justify-content-between align-items-center">
     <h1 class="m-0">مجمع شهداء التربية النموذجي</h1>
-    <img src="/MGMA/logo.png" alt="شعار المدرسة">
+    <img src="logo.png" alt="شعار المدرسة">
   </header>
 
   <!-- صورة -->
   <section class="section-img text-center">
-    <img src="/MGMA/school.gif" alt="صورة المدرسة المتحركة">
+    <img src="school.gif" alt="صورة المدرسة المتحركة">
   </section>
 
   <section id="results">
     <h2>المحصلات والنتائج</h2>
     <p>يمكنك الاطلاع على نتائج الطلاب والمحصلة الدراسية من خلال هذا القسم.</p>
-    <a href="/MGMA/results_grade1.html" class="btn btn-primary">الاول الثانوي</a>
-    <a href="/MGMA/results_grade2.html" class="btn btn-primary">الثاني الثانوي</a>
+    <a href="results_grade1.html" class="btn btn-primary">الاول الثانوي</a>
+    <a href="results_grade2.html" class="btn btn-primary">الثاني الثانوي</a>
     <a href="#" class="btn btn-primary">الثالث الثانوي</a>
   </section>
 
   <section id="absence">
     <h2>غياب الطلاب</h2>
-    <p>يمكنك الاطلاع على عدد أيام الغياب وتاريخ الغياب للطالب من خلال هذا القسم.</p>
+    <p>يمكنك الاطلاع على عدد ايام الغياب وتاريخ الغياب للطالب من خلال هذا القسم.</p>
     <a href="#" class="btn btn-primary">متابعة الغياب</a>
   </section>
 
   <section id="books">
     <h2>المناهج والكتب الدراسية</h2>
     <p>تصفح المناهج التعليمية وتحميل الكتب الدراسية لجميع المراحل الدراسية.</p>
-    <a href="#" class="btn btn-success">منهج أول ثانوي</a>
+    <a href="#" class="btn btn-success">منهج اول ثانوي</a>
     <a href="#" class="btn btn-success">منهج ثاني ثانوي</a>
     <a href="#" class="btn btn-success">منهج ثالث ثانوي</a>
   </section>
@@ -135,23 +134,23 @@
 
   <section id="location">
     <h2>موقع المجمع</h2>
-    <p>في هذا القسم تحديد الموقع الجغرافي للمجمع من خلال خرائط Google.</p>
+    <p>في هذا القسم تحديد الموقع الجغرافي للمجمع من خلال خرائط قوقل.</p>
     <a href="#" class="btn btn-danger">عرض الخريطة</a>
   </section>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- زر تفعيل نافذة الإذن بالإشعارات -->
+  <!-- تفعيل زر الإشعارات بعد التحميل -->
   <script>
     const notifyBtn = document.getElementById('notifyBtn');
     notifyBtn.addEventListener('click', () => {
-      OneSignalDeferred.push(function(OneSignal) {
-        if (OneSignal.showSlidedownPrompt) {
+      if (typeof OneSignal !== 'undefined' && OneSignal.showSlidedownPrompt) {
+        OneSignalDeferred.push(function(OneSignal) {
           OneSignal.showSlidedownPrompt();
-        } else {
-          console.warn("OneSignal لم يتم تحميله بالكامل بعد.");
-        }
-      });
+        });
+      } else {
+        alert("⏳ برجاء الانتظار حتى يتم تحميل الإشعارات.");
+      }
     });
   </script>
 

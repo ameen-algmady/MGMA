@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>مجمع شهداء التربية النموذجي - الرئيسية</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Cairo', sans-serif;
       margin: 0;
       background-color: #f9f9f9;
     }
 
-    /* ✅ إطار الصفحة */
     .page-container {
       max-width: 900px;
       margin: 20px auto;
@@ -23,7 +23,7 @@
     }
 
     header {
-      background-color: #e8f5e9; /* لون أخضر فاتح جدًا */
+      background-color: #e8f5e9;
       color: black;
       padding: 10px 15px;
       border-radius: 8px;
@@ -86,6 +86,37 @@
       background-color: #1976D2;
     }
 
+    #resultsForm label {
+      font-size: 13px;
+      color: #444;
+      margin-bottom: 5px;
+      display: inline-block;
+    }
+
+    #resultsForm input[type="text"] {
+      width: 200px;
+      padding: 5px 10px;
+      font-size: 13px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin: 5px 0;
+    }
+
+    #resultsForm button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 6px 14px;
+      font-size: 14px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 5px;
+    }
+
+    #resultsForm button:hover {
+      background-color: #388e3c;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
@@ -134,7 +165,6 @@
       }
     }
 
-    /* ✅ تحسين العرض عند الطباعة */
     @media print {
       body {
         background: white;
@@ -156,40 +186,33 @@
 </head>
 <body>
 
-  <!-- ✅ إطار شامل -->
   <div class="page-container">
 
-    <!-- ✅ رأس الصفحة -->
     <header>
       <div class="header-container">
-        <!-- معلومات الدولة -->
         <div class="header-left">
           <p>الجمهورية اليمنية</p>
           <p>وزارة التربية والتعليم</p>
-          <p>مكتب التربية والتعليم - محافظة عمران</p>
-          <p>مكتب التربية والتعليم - مديرية عمران</p>
+          <p>مكتب التربية والتعليم - م/ عمران</p>
+         
         </div>
 
-        <!-- العنوان -->
         <div class="header-center">
           <h1>مجمع شهداء التربية النموذجي</h1>
           <h2>نتائج آخر العام للصف الأول الثانوي</h2>
         </div>
 
-        <!-- الشعار -->
         <div class="header-right">
           <img src="school-logo.png" alt="شعار المدرسة">
         </div>
       </div>
     </header>
 
-    <!-- ✅ الأزرار -->
     <div style="text-align:center;">
       <a href="index.html" class="home-button">🏠 الرئيسية</a>
       <a href="#" class="print-button" onclick="window.print()">🖨️ طباعة الصفحة</a>
     </div>
 
-    <!-- ✅ نموذج النتائج -->
     <section id="results" style="text-align:center;">
      
       <form id="resultsForm">
@@ -202,11 +225,20 @@
 
   </div>
 
-  <!-- ✅ سكربت -->
   <script>
+    // تحويل الأرقام الهندية إلى عربية
+    function convertToEnglishNumbers(input) {
+      return input.replace(/[\u0660-\u0669]/g, function(c) {
+        return c.charCodeAt(0) - 0x0660;
+      });
+    }
+
     document.getElementById('resultsForm').addEventListener('submit', function(event) {
       event.preventDefault();
-      const studentCode = document.getElementById('studentCode').value.trim();
+
+      let studentCode = document.getElementById('studentCode').value.trim();
+      studentCode = convertToEnglishNumbers(studentCode);
+
       const apiUrl = 'https://script.google.com/macros/s/AKfycbxgiRWbbli3VQ-9K_7Z0YSXhd09vtCsNhWNi0DgwQF5yHWc3m80rUrR92Wf85_rub2R/exec';
 
       if (!studentCode) {

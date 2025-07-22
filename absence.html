@@ -268,7 +268,7 @@ document.getElementById('resultsForm').addEventListener('submit', function(event
       }
       studentInfo += `</table>`;
 
-      let subjectsTable = `<h4>ايام الغياب</h4><table><tr><th>اليوم</th><th>السبت</th><th>الأحد</th><th>الاثنين</th><th>الثلاثا</th><th>الأربعا</th></tr>`;
+      let subjectsTable = `<h4>ايام الغياب</h4><table><tr><th>اليوم</th><th>سبت</th><th>أحد</th><th>اثنين</th><th>ثلاثاء</th><th>أربعاء</th></tr>`;
       for (const [subject, grades] of Object.entries(data.المواد_الدراسية)) {
         subjectsTable += `<tr>
           <td>${formatValue(subject)}</td>

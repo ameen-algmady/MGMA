@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مجمع شهداء التربية النموذجي - الرئيسية</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      margin: 0;
+      background-color: #f9f9f9;
+    }
+
+    .page-container {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border: 3px solid #4CAF50;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    header {
+      background-color: #e8f5e9;
+      color: black;
+      padding: 10px 15px;
+      border-radius: 8px;
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+      flex-wrap: nowrap;
+    }
+
+    .header-right img {
+      height: 60px;
+    }
+
+    .header-center {
+      flex: 1;
+      padding: 0 10px;
+    }
+
+    .header-center h1 {
+      margin: 5px 0;
+      font-size: 20px;
+    }
+
+    .header-center h2 {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .header-left {
+      text-align: right;
+      font-size: 12px;
+      line-height: 1.5;
+      max-width: 30%;
+    }
+
+    .home-button, .print-button {
+      display: inline-block;
+      margin: 10px 5px;
+      padding: 8px 12px;
+      background-color: #4CAF50;
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      border-radius: 5px;
+    }
+
+    .print-button {
+      background-color: #2196F3;
+    }
+
+    .home-button:hover {
+      background-color: #45a049;
+    }
+
+    .print-button:hover {
+      background-color: #1976D2;
+    }
+
+    #resultsForm label {
+      font-size: 13px;
+      color: #444;
+      margin-bottom: 5px;
+      display: inline-block;
+    }
+
+    #resultsForm input[type="text"] {
+      width: 200px;
+      padding: 5px 10px;
+      font-size: 13px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin: 5px 0;
+    }
+
+    #resultsForm button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 6px 14px;
+      font-size: 14px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 5px;
+    }
+
+    #resultsForm button:hover {
+      background-color: #388e3c;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 3px;
+      height: 15px;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    h4 {
+      font-size: 1px;
+      margin: 0;
+      line-height: 0.1;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+      .header-container {
+        flex-wrap: nowrap;
+        flex-direction: row;
+      }
+
+      .header-right img {
+        height: 50px;
+      }
+
+      .header-left {
+        font-size: 11px;
+      }
+
+      .header-center h1 {
+        font-size: 18px;
+      }
+
+      .header-center h2 {
+        font-size: 14px;
+      }
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+
+      .page-container {
+        box-shadow: none;
+        border: 2px solid black;
+        margin: 0;
+        padding: 10px;
+      }
+
+      .home-button,
+      .print-button {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-container">
+
+    <header>
+      <div class="header-container">
+        <div class="header-left">
+          <p>الجمهورية اليمنية</p>
+          <p>وزارة التربية والتعليم</p>
+          <p>مكتب التربية والتعليم - م/ عمران</p>
+         
+        </div>
+
+        <div class="header-center">
+          <h1>مجمع شهداء التربية النموذجي</h1>
+          <h2>نتائج آخر العام للصف الأول الثانوي</h2>
+        </div>
+
+        <div class="header-right">
+          <img src="school-logo.png" alt="شعار المدرسة">
+        </div>
+      </div>
+    </header>
+
+    <div style="text-align:center;">
+      <a href="index.html" class="home-button">🏠 الرئيسية</a>
+      <a href="#" class="print-button" onclick="window.print()">🖨️ طباعة الصفحة</a>
+    </div>
+
+    <section id="results" style="text-align:center;">
+     
+      <form id="resultsForm">
+        <label for="studentCode">أدخل كود الطالب:</label>
+        <input type="text" id="studentCode" name="studentCode" required>
+        <button type="submit">عرض النتائج</button>
+      </form>
+      <div id="resultsOutput"></div>
+    </section>
+
+  </div>
+
+  <script>
+    // تحويل الأرقام الهندية إلى عربية
+    function convertToEnglishNumbers(input) {
+      return input.replace(/[\u0660-\u0669]/g, function(c) {
+        return c.charCodeAt(0) - 0x0660;
+      });
+    }
+
+    document.getElementById('resultsForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      let studentCode = document.getElementById('studentCode').value.trim();
+      studentCode = convertToEnglishNumbers(studentCode);
+
+      const apiUrl = 'https://script.google.com/macros/s/AKfycbxgiRWbbli3VQ-9K_7Z0YSXhd09vtCsNhWNi0DgwQF5yHWc3m80rUrR92Wf85_rub2R/exec';
+
+      if (!studentCode) {
+        alert("يرجى إدخال كود الطالب!");
+        return;
+      }
+
+      fetch(`${apiUrl}?code=${studentCode}`)
+        .then(response => response.json())
+        .then(data => {
+          const output = document.getElementById('resultsOutput');
+          output.innerHTML = "";
+
+          if (data.status !== "نجاح") {
+            output.innerHTML = `<p style="color: red;">${data.message}</p>`;
+            return;
+          }
+
+          let studentInfo = `<h4></h4><table><tr><th>المجال</th><th>القيمة</th></tr>`;
+          for (const [key, value] of Object.entries(data.بيانات_الطالب)) {
+            studentInfo += `<tr><td><strong>${key}</strong></td><td>${value || 'غير متوفر'}</td></tr>`;
+          }
+          studentInfo += `</table>`;
+
+          let subjectsTable = `<h4></h4><table><tr><th>المادة</th><th>محصلة أولى</th><th>نصف العام</th><th>محصلة ثانية</th><th>آخر العام</th><th>المجموع</th></tr>`;
+          for (const [subject, grades] of Object.entries(data.المواد_الدراسية)) {
+            subjectsTable += `<tr><td>${subject}</td><td>${grades.محصلة_أولى}</td><td>${grades.نصف_العام}</td><td>${grades.محصلة_ثانية}</td><td>${grades.آخر_العام}</td><td>${grades.المجموع}</td></tr>`;
+          }
+          subjectsTable += `</table>`;
+
+          let finalResults = `<h4></h4><table><tr><th>المجال</th><th>القيمة</th></tr>`;
+          finalResults += `<tr><td>المجموع الكلي</td><td>${data.النتيجة_النهائية?.المجموع_الكلي || 'غير متوفر'}</td></tr>`;
+          finalResults += `<tr><td>النتيجة</td><td>${data.النتيجة_النهائية?.النتيجة || 'غير متوفر'}</td></tr>`;
+          finalResults += `<tr><td>النسبة</td><td>${data.النتيجة_النهائية?.النسبة || 'غير متوفر'}%</td></tr>`;
+          finalResults += `<tr><td>الترتيب</td><td>${data.النتيجة_النهائية?.الترتيب || 'غير متوفر'}</td></tr>`;
+          finalResults += `</table>`;
+
+          output.innerHTML = studentInfo + subjectsTable + finalResults;
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert("حدث خطأ أثناء جلب البيانات.");
+        });
+    });
+  </script>
+
+</body>
+</html>

@@ -103,11 +103,11 @@
   <h2>المحصلات والنتائج</h2>
   <p>يمكنك الاطلاع على نتائج الطلاب والمحصلة الدراسية من خلال هذا القسم.</p>
   <div class="row row-cols-2 g-2">
-    <div class="col"><a href="results_grade1.html" class="btn btn-primary w-100">السابع الاساسي</a></div>
+    <div class="col"><a href="‏‏results_grade4.html" class="btn btn-primary w-100">السابع الاساسي</a></div>
     <div class="col"><a href="results_grade1.html" class="btn btn-primary w-100">الثامن الاساسي</a></div>
     <div class="col"><a href="results_grade1.html" class="btn btn-primary w-100">التاسع الاساسي</a></div>
     <div class="col"><a href="results_grade1.html" class="btn btn-primary w-100">الاول الثانوي</a></div>
-    <div class="col"><a href="results_grade2.html" class="btn btn-primary w-100">الثاني الثانوي</a></div>
+    <div class="col"><a href="‏‏results_grade2 .html" class="btn btn-primary w-100">الثاني الثانوي</a></div>
     <div class="col"><a href="#" class="btn btn-primary w-100">الثالث الثانوي</a></div>
   </div>
 </section>
@@ -139,17 +139,55 @@
     <a href="#" class="btn btn-warning">عرض الأنشطة</a>
   </section>
 
-  <section id="rules">
-    <h2>الأنظمة والقوانين</h2>
-    <p>راجع لوائح المدرسة والقوانين التنظيمية التي تضمن بيئة تعليمية سليمة.</p>
-    <a href="#" class="btn btn-danger">قراءة اللوائح</a>
-  </section>
+ <section id="rules">
+  <h2>الأنظمة والقوانين</h2>
+  <p>راجع لوائح المدرسة والقوانين التنظيمية التي تضمن بيئة تعليمية سليمة.</p>
+  <a href="#" class="btn btn-danger" id="showRulesBtn">قراءة اللوائح</a>
 
-  <section id="location">
-    <h2>موقع المجمع</h2>
-    <p>في هذا القسم تحديد الموقع الجغرافي للمجمع من خلال خرائط قوقل.</p>
-    <a href="#" class="btn btn-danger">عرض الخريطة</a>
-  </section>
+  <div id="rulesContent" style="display: none; margin-top: 20px;">
+    <ul>
+      <li>❖ الالتزام بالحضور اليومي وعدم التأخير عن الحصص الدراسية.</li>
+      <li>❖ احترام المعلمين والإداريين والزملاء في جميع الأوقات.</li>
+      <li>❖ الحفاظ على نظافة الصف والمرافق العامة داخل المجمع.</li>
+      <li>❖ يمنع استخدام الهاتف المحمول أثناء الدوام الدراسي.</li>
+      <li>❖ الالتزام بالزي المدرسي الرسمي وعدم التعديل عليه.</li>
+      <li>❖ يمنع الغش في الاختبارات ويعرض الطالب للمساءلة.</li>
+      <li>❖ المحافظة على الكتب والوسائل التعليمية من التلف أو الضياع.</li>
+      <li>❖ يمنع مغادرة المدرسة أثناء الدوام إلا بإذن خطي من الإدارة.</li>
+      <li>❖ المشاركة الإيجابية في الأنشطة المدرسية والفعاليات التربوية.</li>
+    </ul>
+  </div>
+</section>
+
+<script>
+  const showRulesBtn = document.getElementById("showRulesBtn");
+  const rulesContent = document.getElementById("rulesContent");
+
+  showRulesBtn.addEventListener("click", function(e) {
+    e.preventDefault(); // منع الانتقال للرابط #
+    rulesContent.style.display = rulesContent.style.display === "none" ? "block" : "none";
+  });
+</script>
+
+
+
+  
+   <section id="location">
+  <h2>موقع المجمع</h2>
+  <p>في هذا القسم يتم تحديد الموقع الجغرافي للمجمع من خلال خرائط قوقل.</p>
+  <div class="ratio ratio-16x9">
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3841.6503134635336!2d43.9391179!3d15.663598799999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1601514cc4cb74b7%3A0x536417049c60c3ca!2z2YXYrNmF2Lkg2LTZh9iv2KfYoSDYp9mE2KrYsdio2YrYqSDYp9mE2YbZhdmI2LDYrNmK!5e0!3m2!1sar!2s!4v1739222376794!5m2!1sar!2s" 
+      width="100%" 
+      height="450" 
+      style="border:0;" 
+      allowfullscreen="" 
+      loading="lazy" 
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</section>
+
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 

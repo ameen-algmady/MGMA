@@ -231,7 +231,7 @@
       // روابط API حسب الورقة
       const apiMap = {
         API_محرم: "https://script.google.com/macros/s/AKfycbz0JL38s3ZwemmbG8Q6tpWHwnQbDgtckGXKwWpDmIC8IlwJ6AOIxUqR0u37XOi2IumPlA/exec",
-        API_صفر: "https://script.google.com/macros/s/AKfycby6_FPcnPKl0nZ07e-GQkubQwF-AsXM611Ira1Fk4zvDnI87cptwIkFxwcGL4wSxhlKSQ/exec",
+        API_صفر: "https://script.google.com/macros/s/AKfycbyNHF-f81uaBHK-W8PhgIh1Iuyu2mPvBGR6YSmYT6YKQqZIQ0EKPu7V1rb1oPeNl3VT/exec",
         API_ربيع_اول: "https://script.google.com/macros/s/yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy/exec",
         API_جماد_اول: "https://script.google.com/macros/s/zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz/exec",
         API_جماد_ثاني: "https://script.google.com/macros/s/wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww/exec",
@@ -279,14 +279,14 @@
         studentInfo += `</table>`;
 
         // جدول المواد
-        let subjectsTable = `<h4></h4><table border="1"><tr><th>المادة</th><th>مواظبة</th><th>واجبات</th><th>شفهي</th><th>تحريري</th><th>المجموع</th><th>المحصلة</th></tr>`;
+        let subjectsTable = `<h5></h5><table border="1"><tr><th>المادة</th><th>مواظبة</th><th>واجب</th><th>شفهي</th><th>تحريري</th><th>مجموع</th><th>محصلة</th></tr>`;
         for (const [subject, grades] of Object.entries(data.المواد_الدراسية)) {
           subjectsTable += `<tr>
             <td>${subject}</td>
-            <td>${grades.مواظبة || ""}</td>
-            <td>${grades.الواجبات || ""}</td>
-            <td>${grades.شفهي || ""}</td>
-            <td>${grades.تحريري || ""}</td>
+            <td>${grades.مواظبة || "غير متوفر"}</td>
+            <td>${grades.الواجبات || "غير متوفر"}</td>
+            <td>${grades.شفهي || "غير متوفر"}</td>
+            <td>${grades.تحريري || "غير متوفر"}</td>
             <td>${grades.المجموع || ""}</td>
             <td>${grades.المحصلة || ""}</td>
           </tr>`;

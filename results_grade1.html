@@ -279,7 +279,7 @@
         studentInfo += `</table>`;
 
         // جدول المواد
-        let subjectsTable = `<h5></h5><table border="1"><tr><th>المادة</th><th>مواظبة</th><th>واجبات</th><th>شفهي</th><th>تحريري</th><th>المجموع</th><th>المحصلة</th></tr>`;
+        let subjectsTable = `<h5></h5><table border="1"><tr><th>المادة</th><th>مواظبة</th><th>شفهي</th><th>واجب</th><th>تحريري</th><th>المجموع</th><th>المحصلة</th></tr>`;
         for (const [subject, grades] of Object.entries(data.المواد_الدراسية)) {
           subjectsTable += `<tr>
             <td>${subject}</td>

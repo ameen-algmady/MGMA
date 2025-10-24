@@ -116,37 +116,14 @@
     }
     th, td {
       border: 1px solid black;
-      padding: 3px;
-      height: 15px;
+      padding: 5px;
       text-align: center;
       vertical-align: middle;
-    }
-    h4 {
-      font-size: 1px;
-      margin: 0;
-      line-height: 0.1;
+      font-size: 14px;
     }
     th {
       background-color: #f2f2f2;
       font-weight: bold;
-    }
-    @media (max-width: 600px) {
-      .header-container {
-        flex-wrap: nowrap;
-        flex-direction: row;
-      }
-      .header-right img {
-        height: 50px;
-      }
-      .header-left {
-        font-size: 11px;
-      }
-      .header-center h1 {
-        font-size: 18px;
-      }
-      .header-center h2 {
-        font-size: 14px;
-      }
     }
     @media print {
       body {
@@ -176,7 +153,7 @@
       </div>
       <div class="header-center">
         <h1>مجمع شهداء التربية النموذجي</h1>
-        <h2>نتائج الصف الأول الثانوي</h2>
+        <h2 id="headerTitle">نتائج الصف الثاني الثانوي</h2>
       </div>
       <div class="header-right">
         <img src="school-logo.png" alt="شعار المدرسة" />
@@ -209,7 +186,6 @@
     </form>
     <div id="resultsOutput"></div>
   </section>
-
 </div>
 
 <script>
@@ -230,21 +206,33 @@
 
       // روابط API حسب الورقة
       const apiMap = {
-        API_محرم: "https://script.google.com/macros/s/AKfycbxz408ZPKuTfayV5SOan6o1-MOI-1VCBlhWjXN_aWRGKbKkzw2C0dVpRs6wQP4BV-tUtQ/exec",
+       API_محرم: "https://script.google.com/macros/s/AKfycbxz408ZPKuTfayV5SOan6o1-MOI-1VCBlhWjXN_aWRGKbKkzw2C0dVpRs6wQP4BV-tUtQ/exec",
         API_صفر: "https://script.google.com/macros/s/AKfycbx49Rk5WxSJy7SuAOQXcUCY1Q7qMVy7630IPwQleReG8tY8AQwPwj4yBYqHCO1Fx1w6/exec",
         API_ربيع_اول: "https://script.google.com/macros/s/AKfycbxHeqro1-h0UWK6SkM9lkMOsiyAGoHrieJW7uC_gqEmyt2JySJSCUPlFCf8NM-Q9mV9-A/exec",
+         API_نصف_العام: "https://script.google.com/macros/s/AKfycbyLb2y_BUvd6W2No9C5550TG4D6elb_Hm3Ci2TcSVSvL-fXV8Zyd6ordld5KTO9Mthn/exec",
         API_جماد_اول: "https://script.google.com/macros/s/zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz/exec",
         API_جماد_ثاني: "https://script.google.com/macros/s/wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww/exec",
         API_رجب: "https://script.google.com/macros/s/vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv/exec",
         API_نتيجة_آخر_العام: "https://script.google.com/macros/s/AKfycbxgiRWbbli3VQ-9K_7Z0YSXhd09vtCsNhWNi0DgwQF5yHWc3m80rUrR92Wf85_rub2R/exec",
       };
 
+
       currentApiUrl = apiMap[apiKey];
       currentApiKey = apiKey;
 
+      // تغيير العنوان حسب النتيجة
+      const headerTitle = document.getElementById("headerTitle");
+      if (apiKey === "API_نصف_العام") {
+        headerTitle.textContent = "نتائج نصف العام";
+      } else if (apiKey === "API_آخر_العام") {
+        headerTitle.textContent = "نتائج آخر العام";
+      } else {
+        headerTitle.textContent = "نتائج شهرية";
+      }
+
       document.getElementById("choiceSection").style.display = "none";
       document.getElementById("results").style.display = "block";
-      document.getElementById("resultsOutput").innerHTML = ""; // تفريغ النتائج
+      document.getElementById("resultsOutput").innerHTML = "";
     });
   });
 
@@ -272,33 +260,49 @@
         }
 
         // بيانات الطالب
-        let studentInfo = `<h5></h5><table border="1"><tr><th>بيانات الطالب</th><th>الاسم والصف</th></tr>`;
+        let studentInfo = `<h3>بيانات الطالب</h3><table><tr><th>المجال</th><th>القيمة</th></tr>`;
         for (const [key, value] of Object.entries(data.بيانات_الطالب)) {
-          studentInfo += `<tr><td><strong>${key}</strong></td><td>${value || "غير متوفر"}</td></tr>`;
+          studentInfo += `<tr><td>${key}</td><td>${value || "غير متوفر"}</td></tr>`;
         }
         studentInfo += `</table>`;
 
-        // جدول المواد
-        let subjectsTable = `<h5></h5><table border="1"><tr><th>المادة</th><th>مواظبة</th><th>شفهي</th><th>واجب</th><th>تحريري</th><th>المجموع</th><th>المحصلة</th></tr>`;
-        for (const [subject, grades] of Object.entries(data.المواد_الدراسية)) {
-          subjectsTable += `<tr>
-            <td>${subject}</td>
-            <td>${grades.مواظبة || ""}</td>
-            <td>${grades.الواجبات || ""}</td>
-            <td>${grades.شفهي || ""}</td>
-            <td>${grades.تحريري || ""}</td>
-            <td>${grades.المجموع || ""}</td>
-            <td>${grades.المحصلة || ""}</td>
-          </tr>`;
+        // جدول المواد الدراسية
+        let subjectsTable = "<h3>المواد الدراسية</h3><table><tr>";
+        if (currentApiKey === "API_نصف_العام" || currentApiKey === "API_آخر_العام") {
+          subjectsTable += "<th>المادة</th><th>المحصلة النهائية</th><th>نصف العام</th><th>المجموع</th></tr>";
+          for (const [subject, grades] of Object.entries(data.المواد_الدراسية)) {
+            subjectsTable += `<tr>
+              <td>${subject}</td>
+              <td>${grades["المحصلة النهائية"] || "غير متوفر"}</td>
+              <td>${grades["نصف العام"] || "غير متوفر"}</td>
+              <td>${grades["المجموع"] || ""}</td>
+            </tr>`;
+          }
+        } else {
+          subjectsTable += "<th>المادة</th><th>مواظبة</th><th>شفهي</th><th>واجب</th><th>تحريري</th><th>مجموع</th><th>محصلة</th></tr>";
+          for (const [subject, grades] of Object.entries(data.المواد_الدراسية)) {
+            subjectsTable += `<tr>
+              <td>${subject}</td>
+              <td>${grades["مواظبة"] || "غير متوفر"}</td>
+              <td>${grades["شفهي"] || "غير متوفر"}</td>
+              <td>${grades["الواجبات"] || "غير متوفر"}</td>
+              <td>${grades["تحريري"] || "غير متوفر"}</td>
+              <td>${grades["المجموع"] || ""}</td>
+              <td>${grades["المحصلة"] || ""}</td>
+            </tr>`;
+          }
         }
-        subjectsTable += `</table>`;
+        subjectsTable += "</table>";
 
-        // جدول النتيجة النهائية
-        let finalResults = `<h3>النتيجة النهائية</h3><table border="1"><tr><th>المجال</th><th>القيمة</th></tr>`;
-        finalResults += `<tr><td>المجموع الكلي</td><td>${data.النتيجة_النهائية?.المجموع_الكلي || "غير متوفر"}</td></tr>`;
-        finalResults += `<tr><td>التقدير العام</td><td>${data.النتيجة_النهائية?.النتيجة || "غير متوفر"}</td></tr>`;
+        // النتيجة النهائية
+        let finalResults = `<table><tr><th>المجال</th><th>القيمة</th></tr>`;
+       finalResults += `<tr><td>المجموع الكلي</td><td>${data.النتيجة_النهائية?.["المجموع الكلي"] || "غير متوفر"}</td></tr>`;
         finalResults += `<tr><td>النسبة</td><td>${data.النتيجة_النهائية?.النسبة || "غير متوفر"}%</td></tr>`;
+        finalResults += `<tr><td>التقدير العام</td><td>${data.النتيجة_النهائية?.النتيجة || "غير متوفر"}</td></tr>`;
+       
+         finalResults += `<tr><td>الترتيب</td><td>${data.النتيجة_النهائية?.الترتيب || ""}</td></tr>`;
         finalResults += `</table>`;
+
 
         output.innerHTML = studentInfo + subjectsTable + finalResults;
       })
@@ -308,5 +312,5 @@
       });
   });
 </script>
-
 </html>
+س

@@ -139,7 +139,50 @@
       .print-button {
         display: none;
       }
+    /* 📄 إعدادات ورقة الطباعة */
+@page {
+  size: A5 portrait; /* حجم A5 عمودي */
+  margin: 5mm;
+}
+
+/* 🖨️ عند الطباعة */
+@media print {
+  body {
+    background: white;
+    display: flex;
+    justify-content: center; /* توسيط أفقي */
+    align-items: flex-start;  /* إبقاء المحتوى في الأعلى (يمكن تغييره إلى center لتوسيط عموديًا أيضًا) */
+  }
+
+  .page-container {
+    width: 95%;
+    max-width: 480px; /* عرض مناسب لورقة A5 */
+    margin: 0 auto; /* توسيط إضافي احتياطي */
+    box-shadow: none;
+    border: 2px solid black;
+    padding: 10px;
+    page-break-inside: avoid;
+  }
+
+  /* إخفاء العناصر غير المطلوبة أثناء الطباعة */
+  .home-button,
+  .print-button,
+  #choiceSection,
+  #resultsForm {
+    display: none !important;
+  }
+}
+
+/* 🔴 تلوين الخلايا التي مجموعها أقل من 50 */
+.low-score {
+  background-color: #ffb3b3 !important;
+  color: #b30000;
+  font-weight: bold;
+}
+
+
     }
+    
   </style>
 </head>
 <body>
@@ -160,12 +203,10 @@
       </div>
     </div>
   </header>
-
   <div style="text-align:center;">
     <a href="index.html" class="home-button">🏠 الرئيسية</a>
     <a href="#" class="print-button" onclick="window.print()">🖨️ طباعة الصفحة</a>
   </div>
-
   <section id="choiceSection" style="text-align: center; margin-top: 30px;">
     <h3>اختر نوع النتيجة:</h3>
     <button class="btn-choice" data-api="API_محرم">📘 محصلة شهر محرم</button>
@@ -206,7 +247,7 @@
 
       // روابط API حسب الورقة
       const apiMap = {
-       API_محرم: "https://script.google.com/macros/s/AKfycbxz408ZPKuTfayV5SOan6o1-MOI-1VCBlhWjXN_aWRGKbKkzw2C0dVpRs6wQP4BV-tUtQ/exec",
+        API_محرم: "https://script.google.com/macros/s/AKfycbxz408ZPKuTfayV5SOan6o1-MOI-1VCBlhWjXN_aWRGKbKkzw2C0dVpRs6wQP4BV-tUtQ/exec",
         API_صفر: "https://script.google.com/macros/s/AKfycbx49Rk5WxSJy7SuAOQXcUCY1Q7qMVy7630IPwQleReG8tY8AQwPwj4yBYqHCO1Fx1w6/exec",
         API_ربيع_اول: "https://script.google.com/macros/s/AKfycbxHeqro1-h0UWK6SkM9lkMOsiyAGoHrieJW7uC_gqEmyt2JySJSCUPlFCf8NM-Q9mV9-A/exec",
          API_نصف_العام: "https://script.google.com/macros/s/AKfycbyLb2y_BUvd6W2No9C5550TG4D6elb_Hm3Ci2TcSVSvL-fXV8Zyd6ordld5KTO9Mthn/exec",
@@ -216,14 +257,13 @@
         API_نتيجة_آخر_العام: "https://script.google.com/macros/s/AKfycbxgiRWbbli3VQ-9K_7Z0YSXhd09vtCsNhWNi0DgwQF5yHWc3m80rUrR92Wf85_rub2R/exec",
       };
 
-
       currentApiUrl = apiMap[apiKey];
       currentApiKey = apiKey;
 
       // تغيير العنوان حسب النتيجة
       const headerTitle = document.getElementById("headerTitle");
       if (apiKey === "API_نصف_العام") {
-        headerTitle.textContent = "نتائج نصف العام";
+        headerTitle.textContent = "نتائج نصف العام 1447هـ";
       } else if (apiKey === "API_آخر_العام") {
         headerTitle.textContent = "نتائج آخر العام";
       } else {
@@ -260,14 +300,14 @@
         }
 
         // بيانات الطالب
-        let studentInfo = `<h3>بيانات الطالب</h3><table><tr><th>المجال</th><th>القيمة</th></tr>`;
+        let studentInfo = `<table><tr><th>المجال</th><th>القيمة</th></tr>`;
         for (const [key, value] of Object.entries(data.بيانات_الطالب)) {
           studentInfo += `<tr><td>${key}</td><td>${value || "غير متوفر"}</td></tr>`;
         }
         studentInfo += `</table>`;
 
         // جدول المواد الدراسية
-        let subjectsTable = "<h3>المواد الدراسية</h3><table><tr>";
+        let subjectsTable = "<table><tr>";
         if (currentApiKey === "API_نصف_العام" || currentApiKey === "API_آخر_العام") {
           subjectsTable += "<th>المادة</th><th>المحصلة النهائية</th><th>نصف العام</th><th>المجموع</th></tr>";
           for (const [subject, grades] of Object.entries(data.المواد_الدراسية)) {
@@ -297,12 +337,10 @@
         // النتيجة النهائية
         let finalResults = `<table><tr><th>المجال</th><th>القيمة</th></tr>`;
        finalResults += `<tr><td>المجموع الكلي</td><td>${data.النتيجة_النهائية?.["المجموع الكلي"] || "غير متوفر"}</td></tr>`;
-        finalResults += `<tr><td>النسبة</td><td>${data.النتيجة_النهائية?.النسبة || "غير متوفر"}%</td></tr>`;
         finalResults += `<tr><td>التقدير العام</td><td>${data.النتيجة_النهائية?.النتيجة || "غير متوفر"}</td></tr>`;
-       
-         finalResults += `<tr><td>الترتيب</td><td>${data.النتيجة_النهائية?.الترتيب || ""}</td></tr>`;
+        finalResults += `<tr><td>النسبة</td><td>${data.النتيجة_النهائية?.النسبة || "غير متوفر"}%</td></tr>`;
+         finalResults += `<tr><td>الترتيب</td><td>${data.النتيجة_النهائية?.الترتيب || "غير متوفر"}</td></tr>`;
         finalResults += `</table>`;
-
 
         output.innerHTML = studentInfo + subjectsTable + finalResults;
       })
@@ -313,4 +351,3 @@
   });
 </script>
 </html>
-س

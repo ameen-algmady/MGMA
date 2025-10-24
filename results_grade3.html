@@ -139,10 +139,12 @@
         display: none;
       }
 
-      @page {
-        size: A5 landscape;
-        margin: 10mm;
-      }
+     @page {
+  size: A5 portrait;
+  margin: 10mm;
+}
+
+ 
     }
   </style>
 </head>
@@ -202,7 +204,7 @@
         return;
       }
 
-      const apiUrl = "https://script.google.com/macros/s/AKfycbwcBdZ8iJd0Sm3KQzYtSes9QV9hux1_9lCP1A5Il0PvXjagKUI_BvOm-kTISFSlsOK8Bg/exec";
+      const apiUrl = "https://script.google.com/macros/s/AKfycbyYvJsxSHjW4mlhEsG7nf9OhAxKg-9mPSYgDHrZBsvFgvz-w8LU-F-1uqjXDMLpsIFrSw/exec";
       const output = document.getElementById("resultsOutput");
       output.innerHTML = "<p>⏳ جاري جلب البيانات...</p>";
 

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>متابعة غياب الطالب</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: #f5f6fa;
+      margin: 0;
+      padding: 0;
+    }
+    .page-container {
+      max-width: 900px;
+      margin: 20px auto;
+      background: white;
+      border: 2px solid #4CAF50;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      padding: 20px;
+    }
+    h1, h2 {
+      text-align: center;
+      margin: 5px;
+    }
+    input, button {
+      font-size: 16px;
+      padding: 8px 10px;
+      margin: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #388e3c;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    th, td {
+      border: 1px solid #555;
+      padding: 5px;
+      text-align: center;
+    }
+    th {
+      background: #e0f2f1;
+    }
+    .month-title {
+      background-color: #4CAF50;
+      color: white;
+      padding: 5px;
+      border-radius: 5px;
+      text-align: center;
+      margin-top: 15px;
+    }
+    @media print {
+      button, form {
+        display: none;
+      }
+      .page-container {
+        border: 1px solid black;
+        box-shadow: none;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <h1>مجمع شهداء التربية النموذجي</h1>
+    <h2>متابعة غياب الطالب 1447هـ</h2>
+
+    <form id="resultsForm" style="text-align:center;">
+      <input type="text" id="studentCode" placeholder="أدخل كود الطالب" required>
+      <button type="submit">عرض النتائج</button>
+      <button type="button" onclick="window.print()">🖨️ طباعة</button>
+    </form>
+
+    <div id="resultsOutput"></div>
+  </div>
+
+  <script>
+  const apiUrl = "https://script.google.com/macros/s/AKfycbxPA5TH1FXZKDIQRLGZzi4zk7k2HBKrj9LQ2nSE2nZXyIcMm7omtd693sVt9QwEbOjl/exec";
+
+  function safe(v){ return v ?? ""; }
+
+  document.getElementById('resultsForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const code = document.getElementById('studentCode').value.trim();
+    const output = document.getElementById('resultsOutput');
+    if(!code){ alert("يرجى إدخال كود الطالب"); return; }
+
+    output.innerHTML = "<p>⏳ جاري البحث...</p>";
+
+    fetch(`${apiUrl}?code=${encodeURIComponent(code)}`)
+      .then(res => res.json())
+      .then(data => {
+        if(data.status !== "نجاح") {
+          output.innerHTML = `<p style="color:red;">${data.message}</p>`;
+          return;
+        }
+
+        const s = data.بيانات_الطالب;
+        let html = `
+        <h3>بيانات الطالب</h3>
+        <table>
+          <tr><th>الاسم</th><td>${safe(s.الاسم)}</td></tr>
+          <tr><th>الصف</th><td>${safe(s.الصف)}</td></tr>
+          <tr><th>الشعبة</th><td>${safe(s.الشعبة)}</td></tr>
+          <tr><th>رقم ولي الأمر</th><td>${safe(s.رقم_ولي_الامر)}</td></tr>
+        </table>`;
+
+        // عرض الغياب حسب الشهور
+        html += renderMonth("📘 الشهر الأول", data.المواد_الدراسية.الشهر_الاول);
+        html += renderMonth("📗 الشهر الثاني", data.المواد_الدراسية.الشهر_الثاني);
+        html += renderMonth("📙 الشهر الثالث", data.المواد_الدراسية.الشهر_الثالث);
+
+        output.innerHTML = html;
+      })
+      .catch(err => {
+        console.error(err);
+        output.innerHTML = "<p style='color:red;'>حدث خطأ أثناء الاتصال بالخادم</p>";
+      });
+  });
+
+  function renderMonth(title, monthData){
+    let html = `<div class="month-title">${title}</div>`;
+    for(const [period, days] of Object.entries(monthData)){
+      if(period === "المجاميع") continue;
+      html += `<h4>${period.replace(/_/g,' ')}</h4>`;
+      html += `
+      <table>
+        <tr><th>اليوم</th><th>السبت</th><th>الأحد</th><th>الاثنين</th><th>الثلاثاء</th><th>الأربعاء</th></tr>
+        <tr>
+          <td></td>
+          <td>${safe(days.السبت)}</td>
+          <td>${safe(days.الاحد)}</td>
+          <td>${safe(days.الاثنين)}</td>
+          <td>${safe(days.الثلاثاء)}</td>
+          <td>${safe(days.الاربعاء)}</td>
+        </tr>
+      </table>`;
+    }
+
+    // إضافة المجاميع
+    const m = monthData.المجاميع;
+    html += `
+      <table>
+        <tr><th>هـ</th><th>غ</th><th>م</th></tr>
+        <tr><td>${safe(m.هـ)}</td><td>${safe(m.غ)}</td><td>${safe(m.م)}</td></tr>
+      </table>
+    `;
+    return html;
+  }
+  </script>
+</body>
+</html>

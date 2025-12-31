@@ -252,7 +252,7 @@
         API_ربيع_اول: "https://script.google.com/macros/s/AKfycbxHeqro1-h0UWK6SkM9lkMOsiyAGoHrieJW7uC_gqEmyt2JySJSCUPlFCf8NM-Q9mV9-A/exec",
          API_نصف_العام: "https://script.google.com/macros/s/AKfycbyLb2y_BUvd6W2No9C5550TG4D6elb_Hm3Ci2TcSVSvL-fXV8Zyd6ordld5KTO9Mthn/exec",
         API_جماد_اول: "https://script.google.com/macros/s/AKfycbyOyoLyWEsbRrZbSPif6Sz6HC6wMDNip0T1PujKuTa8Yl4di_31ugagq5DJNGn_7NXT/exec",
-        API_جماد_ثاني: "https://script.google.com/macros/s/wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww/exec",
+        API_جماد_ثاني: "https://script.google.com/macros/s/AKfycbySKvC5heOSK91dfOZ2XETIAM7Oj6FubMsQfttOhoI_X4_ZugXFi5OsQogaJdwkcEVMJA/exec",
         API_رجب: "https://script.google.com/macros/s/vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv/exec",
         API_نتيجة_آخر_العام: "https://script.google.com/macros/s/AKfycbxgiRWbbli3VQ-9K_7Z0YSXhd09vtCsNhWNi0DgwQF5yHWc3m80rUrR92Wf85_rub2R/exec",
       };
@@ -319,14 +319,14 @@
             </tr>`;
           }
         } else {
-          subjectsTable += "<th>المادة</th><th>مواظبة</th><th>شفهي</th><th>واجب</th><th>تحريري</th><th>مجموع</th><th>محصلة</th></tr>";
+          subjectsTable += "<th>المادة</th><th>مواظبة</th><th>شفهي</th><th>واجبات</th><th>تحريري</th><th>مجموع</th><th>محصلة</th></tr>";
           for (const [subject, grades] of Object.entries(data.المواد_الدراسية)) {
             subjectsTable += `<tr>
               <td>${subject}</td>
-              <td>${grades["مواظبة"] || "غير متوفر"}</td>
+              <td>${grades["مواظبة"] || ""}</td>
               <td>${grades["شفهي"] || "غير متوفر"}</td>
-              <td>${grades["الواجبات"] || "غير متوفر"}</td>
-              <td>${grades["تحريري"] || "غير متوفر"}</td>
+              <td>${grades["واجبات"] || ""}</td>
+              <td>${grades["تحريري"] || ""}</td>
               <td>${grades["المجموع"] || ""}</td>
               <td>${grades["المحصلة"] || ""}</td>
             </tr>`;

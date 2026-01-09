@@ -8,6 +8,7 @@
   <link rel="manifest" href="/MGMA/manifest.json">
   <link rel="icon" href="favicon.ico">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <!-- OneSignal SDK -->
   <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
@@ -23,231 +24,686 @@
   </script>
 
   <style>
+    :root {
+      --primary-color: #004080;
+      --secondary-color: #ffc107;
+      --accent-color: #28a745;
+      --danger-color: #dc3545;
+      --light-color: #f8f9fa;
+      --dark-color: #343a40;
+      --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      --card-hover-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+    }
+    
     body {
-      font-family: 'Tahoma', sans-serif;
-      background-color: #f9f9f9;
+      font-family: 'Tahoma', 'Segoe UI', sans-serif;
+      background-color: #f5f7fa;
+      color: #333;
+      line-height: 1.6;
     }
-    header img {
-      height: 60px;
+    
+    .school-header {
+      background: linear-gradient(135deg, var(--primary-color), #0066cc);
+      color: white;
+      padding: 1.5rem 0;
+      box-shadow: 0 4px 12px rgba(0, 64, 128, 0.15);
     }
-    section {
-      padding: 40px 20px;
-      border-bottom: 1px solid #ccc;
+    
+    .school-header h1 {
+      font-weight: 700;
+      font-size: 1.8rem;
+      margin-bottom: 0;
     }
-    h2 {
-      color: #004080;
+    
+    .school-logo {
+      height: 70px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
+    
+    .section-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: var(--card-shadow);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      transition: all 0.3s ease;
+      border-top: 4px solid var(--primary-color);
+    }
+    
+    .section-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--card-hover-shadow);
+    }
+    
+    .section-title {
+      color: var(--primary-color);
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid #f0f0f0;
+      position: relative;
+    }
+    
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      right: 0;
+      width: 80px;
+      height: 2px;
+      background: var(--secondary-color);
+    }
+    
     .section-img img {
       max-width: 100%;
       height: auto;
-      border: 2px solid #004080;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      border: 3px solid var(--primary-color);
     }
+    
+    .btn-custom {
+      padding: 0.75rem 1.5rem;
+      font-weight: 600;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    .btn-custom i {
+      font-size: 1.1rem;
+    }
+    
+    .btn-primary-custom {
+      background: var(--primary-color);
+      border-color: var(--primary-color);
+    }
+    
+    .btn-primary-custom:hover {
+      background: #003366;
+      border-color: #003366;
+      transform: translateY(-2px);
+    }
+    
+    .btn-success-custom {
+      background: var(--accent-color);
+      border-color: var(--accent-color);
+    }
+    
+    .btn-success-custom:hover {
+      background: #218838;
+      border-color: #218838;
+      transform: translateY(-2px);
+    }
+    
+    .btn-warning-custom {
+      background: var(--secondary-color);
+      border-color: var(--secondary-color);
+      color: #212529;
+    }
+    
+    .btn-warning-custom:hover {
+      background: #e0a800;
+      border-color: #e0a800;
+      color: #212529;
+      transform: translateY(-2px);
+    }
+    
+    .btn-danger-custom {
+      background: var(--danger-color);
+      border-color: var(--danger-color);
+    }
+    
+    .btn-danger-custom:hover {
+      background: #c82333;
+      border-color: #c82333;
+      transform: translateY(-2px);
+    }
+    
+    .grade-btn {
+      height: 100%;
+      padding: 1rem 0.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-weight: 600;
+      border-radius: 10px;
+    }
+    
+    .grade-btn i {
+      font-size: 1.5rem;
+    }
+    
     #notifyBtn {
       position: fixed;
       top: 15px;
       left: 70px;
       z-index: 9999;
-      background-color: #ffc107;
+      background-color: var(--secondary-color);
       color: black;
       border: none;
       border-radius: 50%;
-      width: 50px;
-      height: 50px;
+      width: 60px;
+      height: 60px;
       font-size: 24px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
       cursor: pointer;
+      transition: all 0.3s ease;
     }
+    
     #notifyBtn:hover {
       background-color: #e0a800;
+      transform: scale(1.1);
+    }
+    
+    #installBtn {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 9999;
+      background: linear-gradient(135deg, #6f42c1, #8a63d2);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 1rem 1.5rem;
+      font-weight: 700;
+      font-size: 1rem;
+      box-shadow: 0 6px 20px rgba(111, 66, 193, 0.4);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    #installBtn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(111, 66, 193, 0.6);
+      background: linear-gradient(135deg, #5a3796, #7a52c4);
+    }
+    
+    #installBtn.hidden {
+      display: none !important;
+    }
+    
+    .rules-list {
+      background: #f8f9fa;
+      padding: 1.5rem;
+      border-radius: 10px;
+      border-right: 4px solid var(--secondary-color);
+    }
+    
+    .rules-list li {
+      margin-bottom: 0.75rem;
+      padding-right: 0.5rem;
+    }
+    
+    .map-container {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    footer {
+      background: var(--dark-color);
+      color: white;
+      padding: 2rem 0;
+      margin-top: 3rem;
+    }
+    
+    @media (max-width: 768px) {
+      .school-header h1 {
+        font-size: 1.4rem;
+      }
+      
+      .school-logo {
+        height: 50px;
+      }
+      
+      .section-card {
+        padding: 1.5rem;
+      }
+      
+      #notifyBtn {
+        width: 50px;
+        height: 50px;
+        left: 15px;
+        top: 10px;
+      }
+      
+      #installBtn {
+        bottom: 15px;
+        left: 15px;
+        padding: 0.75rem 1.25rem;
+        font-size: 0.9rem;
+      }
     }
   </style>
 </head>
 <body>
 
   <!-- زر تفعيل الإشعارات -->
-  <button id="notifyBtn" title="تفعيل الإشعارات">🔔</button>
-<button id="installBtn" hidden>📲 تثبيت التطبيق</button>
+  <button id="notifyBtn" title="تفعيل الإشعارات">
+    <i class="fas fa-bell"></i>
+  </button>
+  
+  <!-- زر تثبيت التطبيق -->
+  <button id="installBtn" class="hidden">
+    <i class="fas fa-download"></i>
+    <span>تثبيت التطبيق</span>
+  </button>
 
   <!-- شريط التنقل -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">مجمع شهداء التربية النموذجي</a>
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background: var(--primary-color);">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">
+        <i class="fas fa-school me-2"></i>مجمع شهداء التربية النموذجي
+      </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="#results">المحصلات والنتائج</a></li>
-          <li class="nav-item"><a class="nav-link" href="#absence">غياب الطلاب</a></li>
-          <li class="nav-item"><a class="nav-link" href="#books">المناهج والكتب</a></li>
-          <li class="nav-item"><a class="nav-link" href="#activities">الأنشطة الدراسية</a></li>
-          <li class="nav-item"><a class="nav-link" href="#rules">الأنظمة والقوانين</a></li>
-          <li class="nav-item"><a class="nav-link" href="#location">موقع المجمع</a></li>
+          <li class="nav-item"><a class="nav-link" href="#results"><i class="fas fa-chart-line me-1"></i> المحصلات والنتائج</a></li>
+          <li class="nav-item"><a class="nav-link" href="#absence"><i class="fas fa-user-clock me-1"></i> غياب الطلاب</a></li>
+          <li class="nav-item"><a class="nav-link" href="#books"><i class="fas fa-book me-1"></i> المناهج والكتب</a></li>
+          <li class="nav-item"><a class="nav-link" href="#activities"><i class="fas fa-running me-1"></i> الأنشطة الدراسية</a></li>
+          <li class="nav-item"><a class="nav-link" href="#rules"><i class="fas fa-gavel me-1"></i> الأنظمة والقوانين</a></li>
+          <li class="nav-item"><a class="nav-link" href="#location"><i class="fas fa-map-marker-alt me-1"></i> موقع المجمع</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
   <!-- رأس الصفحة -->
-  <header class="bg-light text-center p-4 d-flex justify-content-between align-items-center">
-    <h1 class="m-0">مجمع شهداء التربية النموذجي</h1>
-    <img src="logo.png" alt="شعار المدرسة">
+  <header class="school-header">
+    <div class="container d-flex justify-content-between align-items-center">
+      <h1 class="text-end">
+        <i class="fas fa-graduation-cap me-2"></i>
+        مجمع شهداء التربية النموذجي
+        <br>
+        <small class="fs-6 fw-normal">نحو تعليم متميز وبيئة تعليمية متكاملة</small>
+      </h1>
+      <img src="logo.png" alt="شعار المدرسة" class="school-logo">
+    </div>
   </header>
 
-  <!-- صورة -->
-  <section class="section-img text-center">
-    <img src="school.gif" alt="صورة المدرسة المتحركة">
+  <!-- الصورة الرئيسية -->
+  <section class="container my-5">
+    <div class="section-card text-center">
+      <div class="section-img">
+        <img src="school.gif" alt="صورة المدرسة المتحركة" class="img-fluid">
+      </div>
+    </div>
   </section>
 
-  <section id="results">
-  <h2>المحصلات والنتائج</h2>
-  <p>يمكنك الاطلاع على نتائج الطلاب والمحصلة الدراسية من خلال هذا القسم.</p>
-  <div class="row row-cols-2 g-2">
-    <div class="col"><a href="‏‏results_grade4.html" class="btn btn-primary w-100">السابع الاساسي</a></div>
-    <div class="col"><a href="‏‏results_grade4.html" class="btn btn-primary w-100">الثامن الاساسي</a></div>
-    <div class="col"><a href="‏‏results_grade4.html" class="btn btn-primary w-100">التاسع الاساسي</a></div>
-    <div class="col"><a href="results_grade1.html" class="btn btn-primary w-100">الاول الثانوي</a></div>
-    <div class="col"><a href="‏‏results_grade2 .html" class="btn btn-primary w-100">الثاني الثانوي</a></div>
-    <div class="col"><a href="results_grade3.html" class="btn btn-primary w-100">الثالث الثانوي</a></div>
-  </div>
-</section>
-
-
-  <section id="absence">
-    <h2>غياب الطلاب</h2>
-    <p>يمكنك الاطلاع على عدد ايام الغياب وتاريخ الغياب للطالب من خلال هذا القسم.</p>
-    <a href="absence.html" class="btn btn-primary">متابعة غياب النصف الاول</a>
-    <a href="‏‏absence - 1.html" class="btn btn-primary">متابعة الغياب النصف الثاني</a>
+  <!-- قسم المحصلات والنتائج -->
+  <section id="results" class="container">
+    <div class="section-card">
+      <h2 class="section-title"><i class="fas fa-chart-bar me-2"></i> المحصلات والنتائج</h2>
+      <p class="mb-4">يمكنك الاطلاع على نتائج الطلاب والمحصلة الدراسية لجميع المراحل التعليمية من خلال هذا القسم.</p>
+      <div class="row row-cols-2 row-cols-md-3 g-3">
+        <div class="col">
+          <a href="‏‏results_grade4.html" class="btn btn-primary-custom grade-btn w-100">
+            <i class="fas fa-user-graduate"></i>
+            <span>السابع الأساسي</span>
+          </a>
+        </div>
+        <div class="col">
+          <a href="‏‏results_grade4.html" class="btn btn-primary-custom grade-btn w-100">
+            <i class="fas fa-user-graduate"></i>
+            <span>الثامن الأساسي</span>
+          </a>
+        </div>
+        <div class="col">
+          <a href="‏‏results_grade4.html" class="btn btn-primary-custom grade-btn w-100">
+            <i class="fas fa-user-graduate"></i>
+            <span>التاسع الأساسي</span>
+          </a>
+        </div>
+        <div class="col">
+          <a href="results_grade1.html" class="btn btn-primary-custom grade-btn w-100">
+            <i class="fas fa-university"></i>
+            <span>الأول الثانوي</span>
+          </a>
+        </div>
+        <div class="col">
+          <a href="‏‏results_grade2.html" class="btn btn-primary-custom grade-btn w-100">
+            <i class="fas fa-university"></i>
+            <span>الثاني الثانوي</span>
+          </a>
+        </div>
+        <div class="col">
+          <a href="results_grade3.html" class="btn btn-primary-custom grade-btn w-100">
+            <i class="fas fa-university"></i>
+            <span>الثالث الثانوي</span>
+          </a>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <section id="books">
-  <h2>المناهج والكتب الدراسية</h2>
-  <p>تصفح المناهج التعليمية وتحميل الكتب الدراسية لجميع المراحل الدراسية.</p>
-  <div class="row row-cols-2 g-2">
-    <div class="col"><a href="https://www.al-amgaad.com/2021/07/seventh-grade-yemen-books-pdf.html" class="btn btn-success w-100">منهج الصف السابع</a></div>
-    <div class="col"><a href="https://www.al-amgaad.com/2021/07/eighth-grade-yemen-books-pdf.html" class="btn btn-success w-100">منهج الصف الثامن</a></div>
-    <div class="col"><a href="https://www.al-amgaad.com/2021/07/ninth-grade-yemen-books-pdf.html" class="btn btn-success w-100">منهج الصف التاسع</a></div>
-    <div class="col"><a href="https://www.al-amgaad.com/2021/07/tenth-grade-yemen-books-pdf.html" class="btn btn-success w-100">منهج اول ثانوي</a></div>
-    <div class="col"><a href="https://www.al-amgaad.com/2021/07/eleventh-grade-yemen-books-pdf.html" class="btn btn-success w-100">منهج ثاني ثانوي</a></div>
-    <div class="col"><a href="https://www.al-amgaad.com/2021/07/third-secondary-yemen-books-pdf" class="btn btn-success w-100">منهج ثالث ثانوي</a></div>
-  </div>
-</section>
-
-
-  <section id="activities">
-    <h2>الأنشطة الدراسية</h2>
-    <p>تعرف على الأنشطة والمسابقات التي تقيمها المدرسة لتعزيز مهارات الطلاب.</p>
-    <a href="#" class="btn btn-warning">عرض الأنشطة</a>
+  <!-- قسم غياب الطلاب -->
+  <section id="absence" class="container">
+    <div class="section-card">
+      <h2 class="section-title"><i class="fas fa-user-clock me-2"></i> غياب الطلاب</h2>
+      <p class="mb-4">يمكنك الاطلاع على عدد أيام الغياب وتاريخ الغياب للطالب من خلال هذا القسم.</p>
+      <div class="d-flex flex-column flex-md-row gap-3">
+        <a href="absence.html" class="btn btn-primary-custom btn-custom">
+          <i class="fas fa-calendar-alt"></i>
+          متابعة غياب النصف الأول
+        </a>
+        <a href="‏‏absence-1.html" class="btn btn-primary-custom btn-custom">
+          <i class="fas fa-calendar-check"></i>
+          متابعة الغياب النصف الثاني
+        </a>
+      </div>
+    </div>
+  </section>
+   <!-- قسم الأنشطة الدراسية -->
+  <section id="activities" class="container">
+    <div class="section-card">
+      <h2 class="section-title"><i class="fas fa-running me-2"></i> الأنشطة الدراسية</h2>
+      <p class="mb-4">تعرف على الأنشطة والمسابقات التي تقيمها المدرسة لتعزيز مهارات الطلاب.</p>
+      <a href="activities.html" class="btn btn-warning-custom btn-custom">
+        <i class="fas fa-trophy"></i>
+        عرض الأنشطة والمسابقات
+      </a>
+    </div>
   </section>
 
- <section id="rules">
-  <h2>الأنظمة والقوانين</h2>
-  <p>راجع لوائح المدرسة والقوانين التنظيمية التي تضمن بيئة تعليمية سليمة.</p>
-  <a href="#" class="btn btn-danger" id="showRulesBtn">قراءة اللوائح</a>
+  <!-- قسم المناهج والكتب الدراسية -->
+  <section id="books" class="container">
+    <div class="section-card">
+      <h2 class="section-title"><i class="fas fa-book me-2"></i> المناهج والكتب الدراسية</h2>
+      <p class="mb-4">تصفح المناهج التعليمية وتحميل الكتب الدراسية لجميع المراحل الدراسية.</p>
+      <div class="row row-cols-2 row-cols-md-3 g-3">
+        <div class="col">
+          <a href="https://www.al-amgaad.com/2021/07/seventh-grade-yemen-books-pdf.html" target="_blank" class="btn btn-success-custom grade-btn w-100">
+            <i class="fas fa-book-open"></i>
+            <span>منهج الصف السابع</span>
+          </a>
+        </div>
+        <div class="col">
+          <a href="https://www.al-amgaad.com/2021/07/eighth-grade-yemen-books-pdf.html" target="_blank" class="btn btn-success-custom grade-btn w-100">
+            <i class="fas fa-book-open"></i>
+            <span>منهج الصف الثامن</span>
+          </a>
+        </div>
+        <div class="col">
+          <a href="https://www.al-amgaad.com/2021/07/ninth-grade-yemen-books-pdf.html" target="_blank" class="btn btn-success-custom grade-btn w-100">
+            <i class="fas fa-book-open"></i>
+            <span>منهج الصف التاسع</span>
+          </a>
+        </div>
+        <div class="col">
+          <a href="https://www.al-amgaad.com/2021/07/tenth-grade-yemen-books-pdf.html" target="_blank" class="btn btn-success-custom grade-btn w-100">
+            <i class="fas fa-graduation-cap"></i>
+            <span>منهج أول ثانوي</span>
+          </a>
+        </div>
+        <div class="col">
+          <a href="https://www.al-amgaad.com/2021/07/eleventh-grade-yemen-books-pdf.html" target="_blank" class="btn btn-success-custom grade-btn w-100">
+            <i class="fas fa-graduation-cap"></i>
+            <span>منهج ثاني ثانوي</span>
+          </a>
+        </div>
+        <div class="col">
+          <a href="https://www.al-amgaad.com/2021/07/third-secondary-yemen-books-pdf" target="_blank" class="btn btn-success-custom grade-btn w-100">
+            <i class="fas fa-graduation-cap"></i>
+            <span>منهج ثالث ثانوي</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <div id="rulesContent" style="display: none; margin-top: 20px;">
-    <ul>
-      <li>❖ الالتزام بالحضور اليومي وعدم التأخير عن الحصص الدراسية.</li>
-      <li>❖ احترام المعلمين والإداريين والزملاء في جميع الأوقات.</li>
-      <li>❖ الحفاظ على نظافة الصف والمرافق العامة داخل المجمع.</li>
-      <li>❖ يمنع استخدام الهاتف المحمول أثناء الدوام الدراسي.</li>
-      <li>❖ الالتزام بالزي المدرسي الرسمي وعدم التعديل عليه.</li>
-      <li>❖ يمنع الغش في الاختبارات ويعرض الطالب للمساءلة.</li>
-      <li>❖ المحافظة على الكتب والوسائل التعليمية من التلف أو الضياع.</li>
-      <li>❖ يمنع مغادرة المدرسة أثناء الدوام إلا بإذن خطي من الإدارة.</li>
-      <li>❖ المشاركة الإيجابية في الأنشطة المدرسية والفعاليات التربوية.</li>
-    </ul>
-  </div>
-</section>
+ 
 
-<script>
-  const showRulesBtn = document.getElementById("showRulesBtn");
-  const rulesContent = document.getElementById("rulesContent");
+  <!-- قسم الأنظمة والقوانين -->
+  <section id="rules" class="container">
+    <div class="section-card">
+      <h2 class="section-title"><i class="fas fa-gavel me-2"></i> الأنظمة والقوانين</h2>
+      <p class="mb-4">راجع لوائح المدرسة والقوانين التنظيمية التي تضمن بيئة تعليمية سليمة.</p>
+      
+      <button class="btn btn-danger-custom btn-custom mb-4" id="showRulesBtn">
+        <i class="fas fa-scroll"></i>
+        <span id="rulesBtnText">قراءة اللوائح والقوانين</span>
+      </button>
 
-  showRulesBtn.addEventListener("click", function(e) {
-    e.preventDefault(); // منع الانتقال للرابط #
-    rulesContent.style.display = rulesContent.style.display === "none" ? "block" : "none";
-  });
-</script>
+      <div id="rulesContent" class="rules-list" style="display: none;">
+        <ul class="mb-0">
+          <li><i class="fas fa-check-circle text-success me-2"></i> الالتزام بالحضور اليومي وعدم التأخير عن الحصص الدراسية.</li>
+          <li><i class="fas fa-check-circle text-success me-2"></i> احترام المعلمين والإداريين والزملاء في جميع الأوقات.</li>
+          <li><i class="fas fa-check-circle text-success me-2"></i> الحفاظ على نظافة الصف والمرافق العامة داخل المجمع.</li>
+          <li><i class="fas fa-check-circle text-success me-2"></i> يمنع استخدام الهاتف المحمول أثناء الدوام الدراسي.</li>
+          <li><i class="fas fa-check-circle text-success me-2"></i> الالتزام بالزي المدرسي الرسمي وعدم التعديل عليه.</li>
+          <li><i class="fas fa-check-circle text-success me-2"></i> يمنع الغش في الاختبارات ويعرض الطالب للمساءلة.</li>
+          <li><i class="fas fa-check-circle text-success me-2"></i> المحافظة على الكتب والوسائل التعليمية من التلف أو الضياع.</li>
+          <li><i class="fas fa-check-circle text-success me-2"></i> يمنع مغادرة المدرسة أثناء الدوام إلا بإذن خطي من الإدارة.</li>
+          <li><i class="fas fa-check-circle text-success me-2"></i> المشاركة الإيجابية في الأنشطة المدرسية والفعاليات التربوية.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
+  <!-- قسم موقع المجمع -->
+  <section id="location" class="container">
+    <div class="section-card">
+      <h2 class="section-title"><i class="fas fa-map-marker-alt me-2"></i> موقع المجمع</h2>
+      <p class="mb-4">في هذا القسم يتم تحديد الموقع الجغرافي للمجمع من خلال خرائط قوقل.</p>
+      
+      <div class="map-container ratio ratio-16x9">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3841.6503134635336!2d43.9391179!3d15.663598799999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1601514cc4cb74b7%3A0x536417049c60c3ca!2z2YXYrNmF2Lkg2LTZh9iv2KfYoSDYp9mE2KrYsdio2YrYqSDYp9mE2YbZhdmI2LDYrNmK!5e0!3m2!1sar!2s!4v1739222376794!5m2!1sar!2s" 
+          style="border:0;" 
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </section>
 
-
-  
-   <section id="location">
-  <h2>موقع المجمع</h2>
-  <p>في هذا القسم يتم تحديد الموقع الجغرافي للمجمع من خلال خرائط قوقل.</p>
-  <div class="ratio ratio-16x9">
-    <iframe 
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3841.6503134635336!2d43.9391179!3d15.663598799999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1601514cc4cb74b7%3A0x536417049c60c3ca!2z2YXYrNmF2Lkg2LTZh9iv2KfYoSDYp9mE2KrYsdio2YrYqSDYp9mE2YbZhdmI2LDYrNmK!5e0!3m2!1sar!2s!4v1739222376794!5m2!1sar!2s" 
-      width="100%" 
-      height="450" 
-      style="border:0;" 
-      allowfullscreen="" 
-      loading="lazy" 
-      referrerpolicy="no-referrer-when-downgrade">
-    </iframe>
-  </div>
-</section>
-
+  <!-- تذييل الصفحة -->
+  <footer>
+    <div class="container text-center">
+      <p class="mb-2">جميع الحقوق محفوظة © 2023 مجمع شهداء التربية النموذجي</p>
+      <p class="mb-0">تصميم وتطوير: إدارة المجمع</p>
+    </div>
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
   <!-- تفعيل زر الإشعارات بعد التحميل -->
- <script>
-  const notifyBtn = document.getElementById('notifyBtn');
-  notifyBtn.style.display = 'none'; // إخفاء الزر افتراضيًا
+  <script>
+    const notifyBtn = document.getElementById('notifyBtn');
+    notifyBtn.style.display = 'none'; // إخفاء الزر افتراضيًا
 
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(function(OneSignal) {
+    window.OneSignalDeferred = window.OneSignalDeferred || [];
+    OneSignalDeferred.push(function(OneSignal) {
 
-    // التحقق من حالة الاشتراك
-    OneSignal.isPushNotificationsEnabled().then(function(isEnabled) {
-      if (!isEnabled) {
-        notifyBtn.style.display = 'block'; // إظهار الزر إذا لم يكن مشترك
-      }
-    });
+      // التحقق من حالة الاشتراك
+      OneSignal.isPushNotificationsEnabled().then(function(isEnabled) {
+        if (!isEnabled) {
+          notifyBtn.style.display = 'block'; // إظهار الزر إذا لم يكن مشترك
+        }
+      });
 
-    // عند الضغط على الزر، طلب الاشتراك مرة أخرى
-    notifyBtn.addEventListener('click', function () {
-      OneSignal.showSlidedownPrompt().catch(function (error) {
-        alert("حدث خطأ أثناء محاولة تفعيل الإشعارات.");
-        console.error(error);
+      // عند الضغط على الزر، طلب الاشتراك مرة أخرى
+      notifyBtn.addEventListener('click', function () {
+        OneSignal.showSlidedownPrompt().catch(function (error) {
+          alert("حدث خطأ أثناء محاولة تفعيل الإشعارات.");
+          console.error(error);
+        });
       });
     });
-  });
-</script>
+  </script>
 
+  <!-- تحسين وتطوير زر تثبيت التطبيق -->
+  <script>
+    let deferredPrompt;
+    const installBtn = document.getElementById('installBtn');
+    let isAppInstalled = false;
 
-<script>
-  let deferredPrompt;
-  const installBtn = document.getElementById('installBtn');
+    // التحقق من أن المستخدم يستخدم متصفح يدعم PWA
+    const isPwaSupported = () => {
+      return 'BeforeInstallPromptEvent' in window;
+    };
 
-  window.addEventListener('beforeinstallprompt', (e) => {
-    // منع المتصفح من إظهار التثبيت التلقائي
-    e.preventDefault();
-    deferredPrompt = e;
-    installBtn.hidden = false; // إظهار الزر
-
-    installBtn.addEventListener('click', async () => {
-      installBtn.hidden = true;
-      deferredPrompt.prompt(); // عرض نافذة التثبيت
-
-      const { outcome } = await deferredPrompt.userChoice;
-      if (outcome === 'accepted') {
-        console.log('تم تثبيت التطبيق ✅');
-      } else {
-        console.log('تم إلغاء التثبيت ❌');
+    // التحقق مما إذا كان التطبيق مثبتًا بالفعل
+    const checkIfAppInstalled = () => {
+      // طريقة 1: التحقق من display-mode
+      if (window.matchMedia('(display-mode: standalone)').matches) {
+        return true;
       }
-      deferredPrompt = null;
+      
+      // طريقة 2: التحقق من التطبيقات المثبتة (متصفحات محدودة الدعم)
+      if (window.navigator.getInstalledRelatedApps) {
+        window.navigator.getInstalledRelatedApps().then(apps => {
+          if (apps.length > 0) {
+            return true;
+          }
+        });
+      }
+      
+      // طريقة 3: استخدام localStorage لتذكر حالة التثبيت
+      if (localStorage.getItem('appInstalled') === 'true') {
+        return true;
+      }
+      
+      return false;
+    };
+
+    // تحديث حالة زر التثبيت
+    const updateInstallButton = () => {
+      isAppInstalled = checkIfAppInstalled();
+      
+      if (isAppInstalled) {
+        installBtn.classList.add('hidden');
+        console.log('التطبيق مثبت بالفعل');
+      } else if (deferredPrompt && isPwaSupported()) {
+        installBtn.classList.remove('hidden');
+        console.log('يمكن تثبيت التطبيق');
+      } else {
+        installBtn.classList.add('hidden');
+        console.log('المتصفح لا يدعم تثبيت التطبيق');
+      }
+    };
+
+    // حدث beforeinstallprompt
+    window.addEventListener('beforeinstallprompt', (e) => {
+      // منع المتصفح من إظهار التثبيت التلقائي
+      e.preventDefault();
+      deferredPrompt = e;
+      
+      // تحديث الزر بعد 2 ثانية للتأكد من تحميل كل شيء
+      setTimeout(updateInstallButton, 2000);
+      
+      // إضافة حدث النقر على زر التثبيت
+      installBtn.addEventListener('click', async () => {
+        if (!deferredPrompt) return;
+        
+        // إظهار نافذة التثبيت
+        deferredPrompt.prompt();
+        
+        // انتظار اختيار المستخدم
+        const { outcome } = await deferredPrompt.userChoice;
+        
+        if (outcome === 'accepted') {
+          console.log('تم تثبيت التطبيق ✅');
+          localStorage.setItem('appInstalled', 'true');
+          installBtn.innerHTML = '<i class="fas fa-check-circle"></i><span>تم التثبيت بنجاح!</span>';
+          installBtn.style.background = 'linear-gradient(135deg, #28a745, #34ce57)';
+          
+          // إخفاء الزر بعد 3 ثوان
+          setTimeout(() => {
+            installBtn.classList.add('hidden');
+          }, 3000);
+        } else {
+          console.log('تم إلغاء التثبيت ❌');
+          installBtn.innerHTML = '<i class="fas fa-times-circle"></i><span>تم إلغاء التثبيت</span>';
+          installBtn.style.background = 'linear-gradient(135deg, #dc3545, #e4606d)';
+          
+          // إعادة الزر إلى حالته الأصلية بعد 3 ثوان
+          setTimeout(() => {
+            installBtn.innerHTML = '<i class="fas fa-download"></i><span>تثبيت التطبيق</span>';
+            installBtn.style.background = 'linear-gradient(135deg, #6f42c1, #8a63d2)';
+          }, 3000);
+        }
+        
+        deferredPrompt = null;
+      });
     });
-  });
 
-  // إخفاء الزر بعد التثبيت
-  window.addEventListener('appinstalled', () => {
-    console.log('تم التثبيت بالفعل');
-    installBtn.hidden = true;
-  });
-</script>
+    // حدث appinstalled
+    window.addEventListener('appinstalled', () => {
+      console.log('تم تثبيت التطبيق بنجاح');
+      localStorage.setItem('appInstalled', 'true');
+      isAppInstalled = true;
+      installBtn.classList.add('hidden');
+    });
 
+    // تحديث حالة الزر عند تحميل الصفحة
+    document.addEventListener('DOMContentLoaded', updateInstallButton);
+    
+    // تحديث حالة الزر أيضًا عندما تصبح الصفحة مرئية
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) {
+        updateInstallButton();
+      }
+    });
+
+    // تحديث حالة الزر كل 10 ثوان (للتأكد من أن الحالة محدثة)
+    setInterval(updateInstallButton, 10000);
+  </script>
+
+  <!-- النص للقوانين -->
+  <script>
+    const showRulesBtn = document.getElementById("showRulesBtn");
+    const rulesContent = document.getElementById("rulesContent");
+    const rulesBtnText = document.getElementById("rulesBtnText");
+
+    showRulesBtn.addEventListener("click", function(e) {
+      e.preventDefault();
+      const isHidden = rulesContent.style.display === "none";
+      
+      if (isHidden) {
+        rulesContent.style.display = "block";
+        rulesBtnText.textContent = "إخفاء اللوائح والقوانين";
+        showRulesBtn.innerHTML = '<i class="fas fa-eye-slash"></i><span>إخفاء اللوائح والقوانين</span>';
+      } else {
+        rulesContent.style.display = "none";
+        rulesBtnText.textContent = "قراءة اللوائح والقوانين";
+        showRulesBtn.innerHTML = '<i class="fas fa-scroll"></i><span>قراءة اللوائح والقوانين</span>';
+      }
+    });
+  </script>
+
+  <!-- تحسين التنقل السلس بين الأقسام -->
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
 </body>
 </html>

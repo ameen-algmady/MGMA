@@ -88,7 +88,7 @@
   </div>
 
   <script>
-  const apiUrl = "https://script.google.com/macros/s/AKfycbxPA5TH1FXZKDIQRLGZzi4zk7k2HBKrj9LQ2nSE2nZXyIcMm7omtd693sVt9QwEbOjl/exec";
+  const apiUrl = "https://script.google.com/macros/s/AKfycbwCvHmqI8WI5n-oftZbr22Hi4XQRNEY11LH8jhO26fXbHlyK2ySZtJFlWwGt9Hsxd44/exec";
 
   function safe(v){ return v ?? ""; }
 
@@ -154,8 +154,8 @@
     const m = monthData.المجاميع;
     html += `
       <table>
-        <tr><th>هـ</th><th>غ</th><th>م</th></tr>
-        <tr><td>${safe(m.هـ)}</td><td>${safe(m.غ)}</td><td>${safe(m.م)}</td></tr>
+        <tr><th>تاخر</th><th>غياب</th><th>مستاذن</th></tr>
+        <tr><td>${safe(m.تاخر)}</td><td>${safe(m.غياب)}</td><td>${safe(m.مستاذن)}</td></tr>
       </table>
     `;
     return html;

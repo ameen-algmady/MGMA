@@ -3,184 +3,1006 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>مجمع شهداء التربية النموذجي - الرئيسية</title>
+  <title>مجمع شهداء التربية النموذجي- الرئيسية</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet" />
+  <!-- Font Awesome للأيقونات -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- مكتبة html2pdf.js لتحويل HTML إلى PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <style>
+    :root {
+      --primary-color: #004080;
+      --secondary-color: #4CAF50;
+      --accent-blue: #2196F3;
+      --accent-orange: #FF9800;
+      --danger-color: #f44336;
+      --warning-color: #FF9800;
+      --success-color: #4CAF50;
+      --light-bg: #f9f9f9;
+    }
+    
     body {
       font-family: 'Cairo', sans-serif;
       margin: 0;
+      padding: 0;
       background-color: #f9f9f9;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
     }
+    
     .page-container {
-      max-width: 900px;
-      margin: 20px auto;
-      padding: 20px;
+      max-width: 850px;
+      width: 100%;
+      margin: 10px auto;
+      padding: 15px;
       background: white;
-      border: 3px solid #4CAF50;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border: 2px solid var(--secondary-color);
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.05);
+      position: relative;
     }
+    
+    /* تحسين الرأس للعرض الأفقي */
     header {
       background-color: #e8f5e9;
       color: black;
-      padding: 10px 15px;
-      border-radius: 8px;
+      padding: 5px 10px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
     }
+    
     .header-container {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      text-align: center;
       flex-wrap: nowrap;
+      gap: 10px;
     }
+    
+    .header-right {
+      flex: 0 0 auto;
+    }
+    
     .header-right img {
-      height: 60px;
+      height: 50px;
+      max-height: 50px;
     }
+    
     .header-center {
       flex: 1;
-      padding: 0 10px;
+      text-align: center;
+      padding: 0 5px;
     }
+    
     .header-center h1 {
-      margin: 5px 0;
-      font-size: 20px;
+      margin: 2px 0;
+      font-size: 18px;
+      line-height: 1.2;
     }
+    
     .header-center h2 {
       margin: 0;
-      font-size: 16px;
+      font-size: 14px;
+      line-height: 1.2;
     }
+    
     .header-left {
-      text-align: right;
-      font-size: 12px;
-      line-height: 1.5;
-      max-width: 30%;
+      flex: 0 0 auto;
+      text-align: center;
+      font-size: 11px;
+      line-height: 1.3;
+      min-width: 150px;
     }
-    .home-button, .print-button {
-      display: inline-block;
-      margin: 10px 5px;
-      padding: 8px 12px;
-      background-color: #4CAF50;
+    
+    .header-left p {
+      margin: 2px 0;
+    }
+    
+    /* تحسين الأزرار */
+    .action-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin: 15px 0;
+    }
+    
+    .home-button, .print-button, .pdf-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin: 0;
+      padding: 8px 16px;
+      background-color: var(--primary-color);
       color: white;
       text-decoration: none;
-      font-size: 16px;
-      border-radius: 5px;
+      font-size: 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      border: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
     }
+    
     .print-button {
-      background-color: #2196F3;
+      background-color: var(--accent-blue);
     }
+    
+    .pdf-button {
+      background-color: var(--danger-color);
+    }
+    
     .home-button:hover {
-      background-color: #45a049;
+      background-color: #003366;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
     }
+    
     .print-button:hover {
       background-color: #1976D2;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);
     }
-    .btn-choice {
-      margin: 5px;
-      padding: 10px 20px;
-      font-size: 15px;
-      border-radius: 6px;
-      border: none;
-      cursor: pointer;
-      background-color: #e0f7fa;
+    
+    .pdf-button:hover {
+      background-color: #d32f2f;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(244, 67, 54, 0.3);
     }
-    #resultsForm label {
-      font-size: 13px;
-      color: #444;
-      margin-bottom: 5px;
-      display: inline-block;
+    
+    /* بطاقات الاختيار الجديدة */
+    .choice-cards-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      margin: 20px 0;
     }
-    #resultsForm input[type="text"] {
-      width: 200px;
-      padding: 5px 10px;
-      font-size: 13px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      margin: 5px 0;
+    
+    .choice-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      width: 300px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border: 2px solid #e0e0e0;
+      transition: all 0.3s ease;
     }
-    #resultsForm button {
-      background-color: #4CAF50;
+    
+    .choice-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    }
+    
+    .choice-card-header {
+      text-align: center;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--secondary-color);
+    }
+    
+    .choice-card-header h3 {
+      margin: 0;
+      color: #2c3e50;
+      font-size: 1.2em;
+    }
+    
+    .choice-card-buttons {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    
+    .choice-card-btn {
+      background: linear-gradient(135deg, var(--secondary-color) 0%, #2E7D32 100%);
       color: white;
       border: none;
-      padding: 6px 14px;
+      border-radius: 8px;
+      padding: 12px 8px;
       font-size: 14px;
-      border-radius: 5px;
+      font-weight: 600;
       cursor: pointer;
-      margin-right: 5px;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      height: 70px;
     }
-    #resultsForm button:hover {
-      background-color: #388e3c;
+    
+    .choice-card-btn:hover {
+      background: linear-gradient(135deg, #43A047 0%, #1B5E20 100%);
+      transform: scale(1.05);
     }
-    table {
+    
+    .choice-card-btn i {
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+    
+    /* ألوان مميزة للبطاقتين */
+    .first-half-card {
+      border-color: var(--accent-blue);
+    }
+    
+    .first-half-card .choice-card-header {
+      border-bottom-color: var(--accent-blue);
+    }
+    
+    .first-half-card .choice-card-btn {
+      background: linear-gradient(135deg, var(--accent-blue) 0%, #0D47A1 100%);
+    }
+    
+    .first-half-card .choice-card-btn:hover {
+      background: linear-gradient(135deg, #1976D2 0%, #0A2E5C 100%);
+    }
+    
+    .second-half-card {
+      border-color: var(--accent-orange);
+    }
+    
+    .second-half-card .choice-card-header {
+      border-bottom-color: var(--accent-orange);
+    }
+    
+    .second-half-card .choice-card-btn {
+      background: linear-gradient(135deg, var(--accent-orange) 0%, #E65100 100%);
+    }
+    
+    .second-half-card .choice-card-btn:hover {
+      background: linear-gradient(135deg, #F57C00 0%, #BF360C 100%);
+    }
+    
+    /* زر طباعة النتيجة - مخفي بالبداية */
+    .print-result-button {
+      display: none;
+      margin: 10px auto;
+      padding: 10px 20px;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    .print-result-button:hover {
+      background-color: #003366;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    
+    /* نموذج البحث */
+    #resultsForm {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin: 20px 0;
+      text-align: center;
+    }
+    
+    #resultsForm label {
+      font-size: 14px;
+      color: #444;
+      margin-bottom: 8px;
+      display: block;
+      font-weight: 600;
+    }
+    
+    #resultsForm input[type="text"] {
+      width: 250px;
+      padding: 10px 15px;
+      font-size: 14px;
+      border: 2px solid #ddd;
+      border-radius: 6px;
+      margin: 8px 0 15px 0;
+      transition: all 0.3s ease;
+    }
+    
+    #resultsForm input[type="text"]:focus {
+      border-color: var(--primary-color);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(0, 64, 128, 0.1);
+    }
+    
+    #resultsForm button[type="submit"] {
+      background: linear-gradient(135deg, var(--primary-color) 0%, #0066cc 100%);
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      font-size: 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    #resultsForm button[type="submit"]:hover {
+      background: linear-gradient(135deg, #003366 0%, #004080 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    
+    /* تحسينات جديدة للنتائج */
+    .results-container {
+      margin-top: 20px;
+      padding: 15px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .student-info {
+      background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+      padding: 10px 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      border-right: 4px solid var(--primary-color);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    
+    .student-info h3 {
+      color: #2c3e50;
+      margin-top: 0;
+      margin-bottom: 10px;
+      padding-bottom: 5px;
+      border-bottom: 2px solid var(--primary-color);
+      text-align: center;
+      font-size: 1.2em;
+    }
+    
+    /* بيانات الطالب في صف أفقي */
+    .info-grid {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+    
+    .info-item {
+      background: white;
+      padding: 5px 8px;
+      border-radius: 6px;
+      border-right: 2px solid var(--accent-blue);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      flex: 1;
+      text-align: center;
+      min-width: 0;
+      overflow: hidden;
+    }
+    
+    .info-label {
+      color: #7f8c8d;
+      font-size: 0.8em;
+      margin-bottom: 3px;
+      display: block;
+      white-space: nowrap;
+    }
+    
+    .info-value {
+      color: #2c3e50;
+      font-size: 0.95em;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .subjects-table-container {
+      overflow-x: auto;
+      margin: 15px 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    
+    .subjects-table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 20px;
+      margin: 0;
+      font-size: 12px;
+      border-radius: 8px;
+      overflow: hidden;
     }
-    th, td {
-      border: 1px solid black;
-      padding: 5px;
+    
+    .subjects-table th {
+      background: linear-gradient(135deg, var(--primary-color) 0%, #0066cc 100%);
+      color: white;
+      padding: 8px 5px;
       text-align: center;
-      vertical-align: middle;
-      font-size: 14px;
+      font-weight: 600;
+      border: none;
+      font-size: 11px;
+      height: 30px;
     }
-    th {
-      background-color: #f2f2f2;
+    
+    .subjects-table td {
+      padding: 6px 5px;
+      text-align: center;
+      border: none;
+      border-bottom: 1px solid #e0e0e0;
+      height: 25px;
+    }
+    
+    .subjects-table tr:nth-child(even) {
+      background-color: #f8f9fa;
+    }
+    
+    .subjects-table tr:hover {
+      background-color: #e8f5e9;
+    }
+    
+    .subjects-table tr:last-child td {
+      border-bottom: none;
+    }
+    
+    .subjects-table .subject-name {
+      text-align: right;
+      font-weight: 600;
+      color: #2c3e50;
+      background-color: #f1f8e9;
+      padding-right: 8px;
+      max-width: 150px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    
+    /* النتائج النهائية في صف واحد */
+    .final-results {
+      background: linear-gradient(135deg, var(--primary-color) 0%, #0066cc 100%);
+      color: white;
+      padding: 12px;
+      border-radius: 10px;
+      margin-top: 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    
+    .final-results h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 1.2em;
+      color: white;
+    }
+    
+    /* تغيير إلى flex في صف واحد */
+    .final-results-grid {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-around;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .final-result-item {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      flex: 1;
+      min-width: 100px;
+    }
+    
+    .final-result-label {
+      font-size: 0.85em;
+      margin-bottom: 4px;
+      color: #e0e0e0;
+      display: block;
+    }
+    
+    .final-result-value {
+      font-size: 1.3em;
+      font-weight: 700;
+      color: white;
+    }
+    
+    /* ألوان مختلفة للحالات */
+    .result-status-excellent {
+      background-color: #27ae60;
+      color: white;
+    }
+    
+    .result-status-very-good {
+      background-color: #2ecc71;
+      color: white;
+    }
+    
+    .result-status-good {
+      background-color: #3498db;
+      color: white;
+    }
+    
+    .result-status-average {
+      background-color: #f39c12;
+      color: white;
+    }
+    
+    .result-status-weak {
+      background-color: #e74c3c;
+      color: white;
+    }
+    
+    .result-status-fail {
+      background-color: #c0392b;
+      color: white;
+    }
+    
+    .result-status {
+      font-size: 1em;
+      padding: 6px 12px;
+      border-radius: 20px;
+      display: inline-block;
+      margin-top: 10px;
+      font-weight: 700;
+    }
+    
+    .section-title {
+      color: #2c3e50;
+      margin: 15px 0 10px 0;
+      padding-right: 10px;
+      border-right: 2px solid var(--primary-color);
+      font-size: 1.1em;
+    }
+    
+    .grade-high {
+      color: #27ae60;
       font-weight: bold;
     }
-    @media print {
+    
+    .grade-medium {
+      color: #f39c12;
+      font-weight: bold;
+    }
+    
+    .grade-low {
+      color: #e74c3c;
+      font-weight: bold;
+    }
+    
+    .alert-message {
+      padding: 12px;
+      background-color: #ffebee;
+      color: #c62828;
+      border-radius: 8px;
+      border-right: 3px solid #c62828;
+      margin: 12px 0;
+      text-align: center;
+      font-size: 0.95em;
+      font-weight: 600;
+    }
+    
+    .success-message {
+      padding: 12px;
+      background-color: #e8f5e9;
+      color: #2e7d32;
+      border-radius: 8px;
+      border-right: 3px solid var(--success-color);
+      margin: 12px 0;
+      text-align: center;
+      font-size: 0.95em;
+      font-weight: 600;
+    }
+    
+    /* تحسينات للطباعة */
+    @media (max-width: 768px) {
       body {
-        background: white;
+        padding: 5px;
       }
+      
       .page-container {
-        box-shadow: none;
-        border: 2px solid black;
-        margin: 0;
         padding: 10px;
+        margin: 5px;
+        max-width: 100%;
       }
+      
+      .header-container {
+        flex-wrap: wrap;
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+      }
+      
+      .header-left, .header-center, .header-right {
+        width: 100%;
+        max-width: 100%;
+      }
+      
+      .header-right img {
+        height: 40px;
+      }
+      
+      .header-left {
+        font-size: 10px;
+        text-align: center;
+      }
+      
+      .header-center h1 {
+        font-size: 15px;
+      }
+      
+      .header-center h2 {
+        font-size: 12px;
+      }
+      
+      .choice-cards-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .choice-card {
+        width: 100%;
+        max-width: 350px;
+      }
+      
+      #resultsForm input[type="text"] {
+        width: 100%;
+        max-width: 300px;
+      }
+      
+      .info-grid {
+        flex-wrap: wrap;
+      }
+      
+      .final-results-grid {
+        flex-wrap: wrap;
+      }
+      
+      .subjects-table {
+        font-size: 10px;
+      }
+      
+      .subjects-table th,
+      .subjects-table td {
+        padding: 5px 3px;
+      }
+      
+      .action-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .home-button, .print-button, .pdf-button, .print-result-button {
+        width: 100%;
+        max-width: 250px;
+        margin: 3px 0;
+      }
+      
+      .info-item {
+        min-width: 120px;
+      }
+      
+      .final-result-item {
+        min-width: 120px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .choice-card {
+        padding: 15px;
+      }
+      
+      .choice-card-buttons {
+        grid-template-columns: 1fr;
+      }
+      
+      .choice-card-btn {
+        height: 60px;
+      }
+      
+      .subjects-table {
+        font-size: 9px;
+      }
+      
+      .subjects-table th,
+      .subjects-table td {
+        padding: 4px 2px;
+      }
+      
+      .info-grid {
+        flex-direction: column;
+      }
+      
+      .final-results-grid {
+        flex-direction: column;
+        gap: 5px;
+      }
+      
+      .info-item, .final-result-item {
+        width: 100%;
+        min-width: 100%;
+      }
+    }
+    
+    /* تنسيق الطباعة المنفصل عن PDF */
+    @media print {
+      @page {
+        margin: 5mm;
+        size: A4 portrait;
+      }
+      
+      body {
+        background: white !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+        font-size: 10px !important;
+        width: 100% !important;
+        min-height: auto !important;
+        justify-content: flex-start !important;
+        align-items: flex-start !important;
+      }
+      
+      .page-container {
+        box-shadow: none !important;
+        border: 1px solid #000 !important;
+        margin: 0 !important;
+        padding: 5mm !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        page-break-inside: avoid !important;
+        page-break-after: avoid !important;
+        border-radius: 0 !important;
+      }
+      
+      /* تحسين الرأس للطباعة - أفقي بقوة */
+      header {
+        border: 1px solid #000 !important;
+        background: #f0f0f0 !important;
+        padding: 2mm 3mm !important;
+        margin-bottom: 3mm !important;
+        -webkit-print-color-adjust: exact !important;
+        page-break-after: avoid !important;
+        display: block !important;
+      }
+      
+      .header-container {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        width: 100% !important;
+        flex-wrap: nowrap !important;
+        gap: 3mm !important;
+      }
+      
+      .header-left, .header-center, .header-right {
+        display: block !important;
+        flex: 1 !important;
+        text-align: center !important;
+        page-break-inside: avoid !important;
+        min-height: auto !important;
+      }
+      
+      .header-left {
+        min-width: 40mm !important;
+        font-size: 8px !important;
+        line-height: 1.1 !important;
+        white-space: nowrap !important;
+      }
+      
+      .header-left p {
+        margin: 1px 0 !important;
+        padding: 0 !important;
+      }
+      
+      .header-center {
+        padding: 0 2mm !important;
+        white-space: nowrap !important;
+      }
+      
+      .header-center h1 {
+        margin: 0 0 1mm 0 !important;
+        font-size: 11px !important;
+        line-height: 1.1 !important;
+      }
+      
+      .header-center h2 {
+        margin: 0 !important;
+        font-size: 9px !important;
+        line-height: 1.1 !important;
+      }
+      
+      .header-right {
+        min-width: 30mm !important;
+      }
+      
+      .header-right img {
+        height: 20px !important;
+        max-height: 20px !important;
+        width: auto !important;
+      }
+      
+      /* إخفاء الأزرار */
       .home-button,
-      .print-button {
-        display: none;
+      .print-button,
+      .pdf-button,
+      .print-result-button,
+      #choiceSection,
+      #resultsForm,
+      .action-buttons {
+        display: none !important;
       }
-    /* 📄 إعدادات ورقة الطباعة */
-@page {
-  size: A5 portrait; /* حجم A5 عمودي */
-  margin: 10mm;
-}
-
-/* 🖨️ عند الطباعة */
-@media print {
-  body {
-    background: white;
-    display: flex;
-    justify-content: center; /* توسيط أفقي */
-    align-items: flex-start;  /* إبقاء المحتوى في الأعلى (يمكن تغييره إلى center لتوسيط عموديًا أيضًا) */
-  }
-
-  .page-container {
-    width: 95%;
-    max-width: 480px; /* عرض مناسب لورقة A5 */
-    margin: 0 auto; /* توسيط إضافي احتياطي */
-    box-shadow: none;
-    border: 2px solid black;
-    padding: 10px;
-    page-break-inside: avoid;
-  }
-
-  /* إخفاء العناصر غير المطلوبة أثناء الطباعة */
-  .home-button,
-  .print-button,
-  #choiceSection,
-  #resultsForm {
-    display: none !important;
-  }
-}
-
-/* 🔴 تلوين الخلايا التي مجموعها أقل من 50 */
-.low-score {
-  background-color: #ffb3b3 !important;
-  color: #b30000;
-  font-weight: bold;
-}
-
-
+      
+      #results {
+        display: block !important;
+        margin-top: 0 !important;
+        page-break-inside: avoid !important;
+      }
+      
+      /* بيانات الطالب في صف أفقي للطباعة */
+      .student-info {
+        border: 1px solid #000 !important;
+        box-shadow: none !important;
+        padding: 3mm !important;
+        margin-bottom: 3mm !important;
+        background: #f0f0f0 !important;
+        -webkit-print-color-adjust: exact !important;
+        page-break-inside: avoid !important;
+      }
+      
+      .student-info h3 {
+        font-size: 10px !important;
+        margin-bottom: 2mm !important;
+        padding-bottom: 1mm !important;
+        text-align: center !important;
+      }
+      
+      .info-grid {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        justify-content: space-between !important;
+        gap: 2mm !important;
+        align-items: center !important;
+      }
+      
+      .info-item {
+        border: 0.5px solid #999 !important;
+        padding: 1mm 2mm !important;
+        min-width: 0 !important;
+        flex: 1 !important;
+        text-align: center !important;
+        background: white !important;
+        -webkit-print-color-adjust: exact !important;
+        page-break-inside: avoid !important;
+      }
+      
+      .info-label {
+        font-size: 7px !important;
+        margin-bottom: 1mm !important;
+        white-space: nowrap !important;
+      }
+      
+      .info-value {
+        font-size: 8px !important;
+        font-weight: bold !important;
+        white-space: nowrap !important;
+      }
+      
+      /* تحسين الجدول للطباعة */
+      .subjects-table-container {
+        margin: 3mm 0 !important;
+        page-break-inside: avoid !important;
+        overflow: visible !important;
+      }
+      
+      .subjects-table {
+        box-shadow: none !important;
+        border: 1px solid #000 !important;
+        font-size: 7px !important;
+        width: 100% !important;
+        page-break-inside: avoid !important;
+      }
+      
+      .subjects-table th {
+        background: #d0d0d0 !important;
+        color: black !important;
+        -webkit-print-color-adjust: exact !important;
+        padding: 1mm !important;
+        border: 0.5px solid #000 !important;
+        font-size: 7px !important;
+        height: auto !important;
+      }
+      
+      .subjects-table td {
+        padding: 1mm !important;
+        border: 0.5px solid #ccc !important;
+        font-size: 7px !important;
+        height: auto !important;
+      }
+      
+      .subjects-table tr:nth-child(even) {
+        background-color: #f5f5f5 !important;
+        -webkit-print-color-adjust: exact !important;
+      }
+      
+      .subjects-table .subject-name {
+        max-width: 40mm !important;
+        font-size: 7px !important;
+        padding-right: 1mm !important;
+      }
+      
+      /* النتائج النهائية في صف أفقي للطباعة */
+      .final-results {
+        background: #d0d0d0 !important;
+        color: black !important;
+        border: 1px solid #000 !important;
+        -webkit-print-color-adjust: exact !important;
+        padding: 3mm !important;
+        margin-top: 3mm !important;
+        page-break-inside: avoid !important;
+      }
+      
+      .final-results h3 {
+        font-size: 10px !important;
+        margin-bottom: 2mm !important;
+        color: black !important;
+      }
+      
+      .final-results-grid {
+        display: flex !important;
+        justify-content: space-around !important;
+        flex-wrap: nowrap !important;
+        gap: 2mm !important;
+      }
+      
+      .final-result-item {
+        background: rgba(255, 255, 255, 0.9) !important;
+        border: 0.5px solid #666 !important;
+        padding: 1mm 2mm !important;
+        min-width: 20mm !important;
+        -webkit-print-color-adjust: exact !important;
+      }
+      
+      .final-result-label {
+        font-size: 7px !important;
+        color: #333 !important;
+      }
+      
+      .final-result-value {
+        font-size: 9px !important;
+        color: black !important;
+        font-weight: bold !important;
+      }
+      
+      .result-status {
+        background-color: #d0d0d0 !important;
+        color: black !important;
+        border: 0.5px solid #000 !important;
+        font-size: 8px !important;
+        padding: 1mm 2mm !important;
+        margin-top: 2mm !important;
+      }
+      
+      /* منع تقسيم العناصر بين الصفحات */
+      .results-container,
+      .student-info,
+      .subjects-table-container,
+      .final-results {
+        page-break-inside: avoid !important;
+        page-break-after: avoid !important;
+      }
+      
+      /* إخفاء العناصر غير المرغوبة */
+      .no-print {
+        display: none !important;
+      }
     }
     
   </style>
@@ -196,54 +1018,198 @@
       </div>
       <div class="header-center">
         <h1>مجمع شهداء التربية النموذجي</h1>
-        <h2 id="headerTitle">نتائج الصف الثاني الثانوي</h2>
+        <h2 id="pageTitle">نتائج الصفوف الاساسية</h2>
       </div>
       <div class="header-right">
-        <img src="school-logo.png" alt="شعار المدرسة" />
+        <img src="logo.png" alt="شعار المدرسة" onerror="this.style.display='none'" />
       </div>
     </div>
   </header>
-  <div style="text-align:center;">
-    <a href="index.html" class="home-button">🏠 الرئيسية</a>
-    <a href="#" class="print-button" onclick="window.print()">🖨️ طباعة الصفحة</a>
+
+  <div class="action-buttons">
+    <a href="index.html" class="home-button"><i class="fas fa-home"></i> الرئيسية</a>
   </div>
-  <section id="choiceSection" style="text-align: center; margin-top: 30px;">
-    <h3>اختر نوع النتيجة:</h3>
-    <button class="btn-choice" data-api="API_محرم">📘 محصلة شهر محرم</button>
-    <button class="btn-choice" data-api="API_صفر">📘 محصلة شهر صفر</button>
-    <button class="btn-choice" data-api="API_ربيع_اول">📘 محصلة شهر ربيع أول</button>
-    <button class="btn-choice" data-api="API_نصف_العام">📗 نتيجة نصف العام</button>
-    <button class="btn-choice" data-api="API_جماد_اول">📙 محصلة شهر جماد أول</button>
-    <button class="btn-choice" data-api="API_جماد_ثاني">📙 محصلة شهر جماد ثاني</button>
-    <button class="btn-choice" data-api="API_رجب">📙 محصلة شهر رجب</button>
-    <button class="btn-choice" data-api="API_آخر_العام">📕 نتيجة آخر العام</button>
+
+  <!-- زر طباعة النتيجة - يظهر فقط بعد عرض النتائج -->
+  <div class="action-buttons" id="resultActions" style="display: none;">
+    <button id="printResultButton" class="print-result-button">
+      <i class="fas fa-print"></i> طباعة النتيجة
+    </button>
+    <button id="savePdfButton" class="pdf-button">
+      <i class="fas fa-file-pdf"></i> حفظ كـ PDF
+    </button>
+  </div>
+
+  <section id="choiceSection" style="margin-top: 20px;">
+    <h3 style="text-align:center; color: #2c3e50; margin-bottom: 20px;">اختر نوع النتيجة:</h3>
+    
+    <div class="choice-cards-container">
+      <!-- البطاقة الأولى: نتائج النصف الأول -->
+      <div class="choice-card first-half-card">
+        <div class="choice-card-header">
+          <h3><i class="fas fa-book-open me-2"></i> نتائج النصف الأول</h3>
+        </div>
+        <div class="choice-card-buttons">
+          <button class="choice-card-btn" data-api="API_محرم" data-title="نتائج الصفوف الاساسية شهر محرم">
+            <i class="fas fa-calendar-alt"></i>
+            محرم
+          </button>
+          <button class="choice-card-btn" data-api="API_صفر" data-title="نتائج الصفوف الاساسية شهر صفر">
+            <i class="fas fa-calendar-alt"></i>
+            صفر
+          </button>
+          <button class="choice-card-btn" data-api="API_ربيع_اول" data-title="نتائج الصفوف الاساسية شهر ربيع أول">
+            <i class="fas fa-calendar-alt"></i>
+            ربيع أول
+          </button>
+          <button class="choice-card-btn" data-api="API_نصف_العام" data-title="نتائج الصفوف الاساسية نصف العام">
+            <i class="fas fa-graduation-cap"></i>
+            نصف العام
+          </button>
+        </div>
+      </div>
+      
+      <!-- البطاقة الثانية: نتائج النصف الثاني -->
+      <div class="choice-card second-half-card">
+        <div class="choice-card-header">
+          <h3><i class="fas fa-book-reader me-2"></i> نتائج النصف الثاني</h3>
+        </div>
+        <div class="choice-card-buttons">
+          <button class="choice-card-btn" data-api="API_جماد_اول" data-title="نتائج الصفوف الاساسية شهر جماد أول">
+            <i class="fas fa-calendar-alt"></i>
+            جماد أول
+          </button>
+          <button class="choice-card-btn" data-api="API_جماد_ثاني" data-title="نتائج الصفوف الاساسية شهر جماد ثاني">
+            <i class="fas fa-calendar-alt"></i>
+            جماد ثاني
+          </button>
+          <button class="choice-card-btn" data-api="API_رجب" data-title="نتائج الصفوف الاساسية شهر رجب">
+            <i class="fas fa-calendar-alt"></i>
+            رجب
+          </button>
+          <button class="choice-card-btn" data-api="API_آخر_العام" data-title="نتائج الصفوف الاساسية آخر العام">
+            <i class="fas fa-award"></i>
+            آخر العام
+          </button>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <section id="results" style="display: none; text-align:center; margin-top: 30px;">
+  <section id="results" style="display: none; margin-top: 20px;">
     <form id="resultsForm">
-      <label for="studentCode">أدخل كود الطالب:</label>
-      <input type="text" id="studentCode" name="studentCode" required />
-      <button type="submit">عرض النتائج</button>
+      <label for="studentCode"><i class="fas fa-user-graduate me-2"></i>أدخل كود الطالب:</label>
+      <input type="text" id="studentCode" name="studentCode" placeholder="أدخل الكود هنا" required />
+      <button type="submit"><i class="fas fa-search me-2"></i>عرض النتائج</button>
     </form>
-    <div id="resultsOutput"></div>
+    <div id="resultsOutput" class="results-container"></div>
   </section>
+
 </div>
 
 <script>
-  // تحويل الأرقام الهندية إلى عربية
+  // إزالة دوال التحويل الهندي واستخدام الأرقام العربية مباشرة
   function convertToEnglishNumbers(input) {
-    return input.replace(/[\u0660-\u0669]/g, function (c) {
+    if (typeof input !== 'string') return input;
+    return input.replace(/[\u0660-\u0669]/g, function(c) {
       return c.charCodeAt(0) - 0x0660;
+    }).replace(/[\u06f0-\u06f9]/g, function(c) {
+      return c.charCodeAt(0) - 0x06f0;
     });
+  }
+
+  // استخدام الأرقام العربية مباشرة (لا تحويل)
+  function convertToArabicNumbers(input) {
+    if (typeof input !== 'string') return input;
+    // تحويل الأرقام الإنجليزية إلى عربية
+    return input.replace(/\d/g, function(d) {
+      return String.fromCharCode(0x0660 + parseInt(d, 10));
+    });
+  }
+
+  // دالة لتحديد حالة النتيجة بناءً على التقدير
+  function getResultStatus(result, percentage) {
+    if (!result) return "result-status-average";
+    
+    const resultLower = result.toLowerCase().trim();
+    
+    // التحقق من الكلمات المختلفة للنتائج
+    if (resultLower.includes("ممتاز") || resultLower.includes("امتياز")) {
+      return "result-status-excellent";
+    } else if (resultLower.includes("جيد جدا") || resultLower.includes("جيدجدا")) {
+      return "result-status-very-good";
+    } else if (resultLower.includes("جيد")) {
+      return "result-status-good";
+    } else if (resultLower.includes("مقبول") || resultLower.includes("متوسط")) {
+      return "result-status-average";
+    } else if (resultLower.includes("ضعيف")) {
+      return "result-status-weak";
+    } else if (resultLower.includes("راسب") || resultLower.includes("فاشل") || resultLower.includes("رسوب")) {
+      return "result-status-fail";
+    }
+    
+    // إذا لم يتطابق مع أي من الحالات أعلاه، نستخدم النسبة المئوية
+    if (percentage) {
+      const percentNum = parseFloat(percentage);
+      if (!isNaN(percentNum)) {
+        if (percentNum >= 90) return "result-status-excellent";
+        if (percentNum >= 80) return "result-status-very-good";
+        if (percentNum >= 70) return "result-status-good";
+        if (percentNum >= 60) return "result-status-average";
+        if (percentNum >= 50) return "result-status-weak";
+        return "result-status-fail";
+      }
+    }
+    
+    return "result-status-average";
+  }
+
+  // دالة للحصول على نص الحالة بناءً على التقدير
+  function getStatusText(result, percentage) {
+    if (!result) return "نتيجة عادية";
+    
+    const resultLower = result.toLowerCase().trim();
+    
+    // التحقق من الكلمات المختلفة للنتائج
+    if (resultLower.includes("ممتاز") || resultLower.includes("امتياز")) {
+      return "متفوق ومتميز";
+    } else if (resultLower.includes("جيد جدا") || resultLower.includes("جيدجدا")) {
+      return "أداء جيد جداً";
+    } else if (resultLower.includes("جيد")) {
+      return "أداء جيد";
+    } else if (resultLower.includes("مقبول") || resultLower.includes("متوسط")) {
+      return "أداء مقبول";
+    } else if (resultLower.includes("ضعيف")) {
+      return "يحتاج إلى تحسين";
+    } else if (resultLower.includes("راسب") || resultLower.includes("فاشل") || resultLower.includes("رسوب")) {
+      return "نحتاج إلى مزيد من الجهد";
+    }
+    
+    // إذا لم يتطابق مع أي من الحالات أعلاه، نستخدم النسبة المئوية
+    if (percentage) {
+      const percentNum = parseFloat(percentage);
+      if (!isNaN(percentNum)) {
+        if (percentNum >= 90) return "متفوق ومتميز";
+        if (percentNum >= 80) return "أداء جيد جداً";
+        if (percentNum >= 70) return "أداء جيد";
+        if (percentNum >= 60) return "أداء مقبول";
+        if (percentNum >= 50) return "يحتاج إلى تحسين";
+        return "نحتاج إلى مزيد من الجهد";
+      }
+    }
+    
+    return "أداء مقبول";
   }
 
   let currentApiUrl = "";
   let currentApiKey = "";
+  let currentStudentData = null;
 
-  // التعامل مع أزرار الاختيار
-  document.querySelectorAll(".btn-choice").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const apiKey = btn.dataset.api;
+  // التعامل مع أزرار الاختيار (البطاقات الجديدة)
+  document.querySelectorAll(".choice-card-btn").forEach((btn) => {
+    btn.addEventListener("click", function() {
+      const apiKey = this.dataset.api;
+      const pageTitle = this.dataset.title;
 
       // روابط API حسب الورقة
       const apiMap = {
@@ -252,7 +1218,7 @@
         API_ربيع_اول: "https://script.google.com/macros/s/AKfycbyrV2eBs4CTQ7IvqATX7nrLOLUFyaJAfVPTYMZsVUokW1o7SikBV4mO4nOkTGUAFQt81w/exec",
         API_نصف_العام: "https://script.google.com/macros/s/AKfycbxQm8SSqcOgt3IVsUL9d4sN_tcV_NvfrYrWRe13Vil8JxlKmIncuKE93za5JAJ1rDDrkg/exec",
         API_جماد_اول: "https://script.google.com/macros/s/AKfycbyOyoLyWEsbRrZbSPif6Sz6HC6wMDNip0T1PujKuTa8Yl4di_31ugagq5DJNGn_7NXT/exec",
-        API_جماد_ثاني: "https://script.google.com/macros/s/wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww/exec",
+        API_جماد_ثاني: "https://script.google.com/macros/s/AKfycbxZTOAmEKdt45Q-iPaw96yRkqE39ty5u7QNt7TNmp7XBmgMW6HmHKfWSJgpFcoRMRDLBQ/exec",
         API_رجب: "https://script.google.com/macros/s/vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv/exec",
         API_آخر_العام: "https://script.google.com/macros/s/AKfycbxgiRWbbli3VQ-9K_7Z0YSXhd09vtCsNhWNi0DgwQF5yHWc3m80rUrR92Wf85_rub2R/exec",
       };
@@ -260,19 +1226,27 @@
       currentApiUrl = apiMap[apiKey];
       currentApiKey = apiKey;
 
-      // تغيير العنوان حسب النتيجة
-      const headerTitle = document.getElementById("headerTitle");
+      // تغيير عنوان الصفحة
+      const pageTitleElement = document.getElementById("pageTitle");
       if (apiKey === "API_نصف_العام") {
-        headerTitle.textContent = "نتائج نصف العام 1447هـ";
+        pageTitleElement.textContent = "نتائج نصف العام 1447هـ";
       } else if (apiKey === "API_آخر_العام") {
-        headerTitle.textContent = "نتائج آخر العام";
+        pageTitleElement.textContent = "نتائج آخر العام";
       } else {
-        headerTitle.textContent = "نتائج شهرية";
+        pageTitleElement.textContent = pageTitle;
       }
 
+      // إخفاء قسم الاختيار وإظهار قسم النتائج
       document.getElementById("choiceSection").style.display = "none";
       document.getElementById("results").style.display = "block";
       document.getElementById("resultsOutput").innerHTML = "";
+      
+      // إخفاء أزرار الإجراءات مؤقتاً
+      document.getElementById("resultActions").style.display = "none";
+      
+      // إعادة ضبط نموذج البحث
+      document.getElementById("studentCode").value = "";
+      document.getElementById("studentCode").focus();
     });
   });
 
@@ -284,70 +1258,470 @@
     studentCode = convertToEnglishNumbers(studentCode);
 
     if (!studentCode) {
-      alert("يرجى إدخال كود الطالب!");
+      showAlertMessage("يرجى إدخال كود الطالب!");
       return;
     }
 
+    // إظهار رسالة تحميل
+    document.getElementById("resultsOutput").innerHTML = `
+      <div style="text-align: center; padding: 40px;">
+        <i class="fas fa-spinner fa-spin fa-3x" style="color: #004080;"></i>
+        <p style="margin-top: 20px; font-size: 16px; color: #555;">جاري جلب بيانات الطالب...</p>
+      </div>
+    `;
+
     fetch(`${currentApiUrl}?code=${studentCode}`)
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
       .then((data) => {
         const output = document.getElementById("resultsOutput");
-        output.innerHTML = "";
-
+        
         if (data.status !== "نجاح") {
-          output.innerHTML = `<p style="color: red;">${data.message}</p>`;
+          output.innerHTML = `
+            <div class="alert-message">
+              <i class="fas fa-exclamation-triangle me-2"></i>
+              ${data.message || "لم يتم العثور على بيانات الطالب"}
+            </div>
+          `;
+          document.getElementById("resultActions").style.display = "none";
           return;
         }
 
-        // بيانات الطالب
-        let studentInfo = `<table><tr><th>المجال</th><th>القيمة</th></tr>`;
-        for (const [key, value] of Object.entries(data.بيانات_الطالب)) {
-          studentInfo += `<tr><td>${key}</td><td>${value || "غير متوفر"}</td></tr>`;
-        }
-        studentInfo += `</table>`;
+        currentStudentData = data; // حفظ البيانات لاستخدامها في الطباعة
 
-        // جدول المواد الدراسية
-        let subjectsTable = "<table><tr>";
-        if (currentApiKey === "API_نصف_العام" || currentApiKey === "API_آخر_العام") {
-          subjectsTable += "<th>المادة</th><th>المحصلة النهائية</th><th>نصف العام</th><th>المجموع</th></tr>";
-          for (const [subject, grades] of Object.entries(data.المواد_الدراسية)) {
-            subjectsTable += `<tr>
-              <td>${subject}</td>
-              <td>${grades["المحصلة النهائية"] || "غير متوفر"}</td>
-              <td>${grades["نصف العام"] || "غير متوفر"}</td>
-              <td>${grades["المجموع"] || ""}</td>
-            </tr>`;
-          }
-        } else {
-          subjectsTable += "<th>المادة</th><th>مواظبة</th><th>شفهي</th><th>واجب</th><th>تحريري</th><th>مجموع</th><th>محصلة</th></tr>";
-          for (const [subject, grades] of Object.entries(data.المواد_الدراسية)) {
-            subjectsTable += `<tr>
-              <td>${subject}</td>
-              <td>${grades["مواظبة"] || "غير متوفر"}</td>
-              <td>${grades["شفهي"] || "غير متوفر"}</td>
-              <td>${grades["الواجبات"] || "غير متوفر"}</td>
-              <td>${grades["تحريري"] || "غير متوفر"}</td>
-              <td>${grades["المجموع"] || ""}</td>
-              <td>${grades["المحصلة"] || ""}</td>
-            </tr>`;
-          }
-        }
-        subjectsTable += "</table>";
-
-        // النتيجة النهائية
-        let finalResults = `<table><tr><th>المجال</th><th>القيمة</th></tr>`;
-       finalResults += `<tr><td>المجموع الكلي</td><td>${data.النتيجة_النهائية?.["المجموع الكلي"] || "غير متوفر"}</td></tr>`;
-        finalResults += `<tr><td>التقدير العام</td><td>${data.النتيجة_النهائية?.النتيجة || "غير متوفر"}</td></tr>`;
-        finalResults += `<tr><td>النسبة</td><td>${data.النتيجة_النهائية?.النسبة || "غير متوفر"}%</td></tr>`;
-         finalResults += `<tr><td>الترتيب</td><td>${data.النتيجة_النهائية?.الترتيب || "غير متوفر"}</td></tr>`;
-        finalResults += `</table>`;
-
-        output.innerHTML = studentInfo + subjectsTable + finalResults;
+        // عرض البيانات في تنسيق محسّن
+        displayResultsInCardFormat(data);
+        
+        // إظهار أزرار الإجراءات بعد عرض النتائج
+        document.getElementById("resultActions").style.display = "flex";
+        
+        // التمرير إلى قسم النتائج
+        document.getElementById('resultsOutput').scrollIntoView({ behavior: 'smooth' });
       })
       .catch((error) => {
         console.error("Error:", error);
-        alert("حدث خطأ أثناء جلب البيانات.");
+        document.getElementById("resultsOutput").innerHTML = `
+          <div class="alert-message">
+            <i class="fas fa-exclamation-circle me-2"></i>
+            حدث خطأ أثناء جلب البيانات. يرجى التحقق من اتصال الإنترنت والمحاولة مرة أخرى.
+          </div>
+        `;
+        document.getElementById("resultActions").style.display = "none";
       });
   });
+
+  // دالة لعرض النتائج بتنسيق البطاقات المحسّن
+  function displayResultsInCardFormat(data) {
+    const output = document.getElementById("resultsOutput");
+    
+    // بيانات الطالب في صف أفقي
+    let studentInfoHTML = `
+      <div class="student-info">
+        <h3><i class="fas fa-user-graduate me-2"></i>بيانات الطالب</h3>
+        <div class="info-grid">
+    `;
+    
+    const studentData = data.بيانات_الطالب || {};
+    const importantFields = ['الاسم', 'الصف', 'الشعبة', 'الرقم'];
+    
+    importantFields.forEach(field => {
+      if (studentData[field]) {
+        const formattedValue = studentData[field] ? studentData[field] : "غير متوفر";
+        studentInfoHTML += `
+          <div class="info-item">
+            <span class="info-label">${field}:</span>
+            <span class="info-value">${formattedValue}</span>
+          </div>
+        `;
+      }
+    });
+    
+    // إضافة الحقول الأخرى إذا وجدت
+    for (const [key, value] of Object.entries(studentData)) {
+      if (!importantFields.includes(key)) {
+        const formattedValue = value ? value : "غير متوفر";
+        studentInfoHTML += `
+          <div class="info-item">
+            <span class="info-label">${key}:</span>
+            <span class="info-value">${formattedValue}</span>
+          </div>
+        `;
+      }
+    }
+    
+    studentInfoHTML += `
+        </div>
+      </div>
+    `;
+
+    // جدول المواد الدراسية
+    let subjectsHTML = `
+      <h3 class="section-title"><i class="fas fa-book me-2"></i>المواد الدراسية</h3>
+      <div class="subjects-table-container">
+        <table class="subjects-table">
+    `;
+    
+    if (currentApiKey === "API_نصف_العام" || currentApiKey === "API_آخر_العام") {
+      subjectsHTML += `
+        <thead>
+          <tr>
+            <th>المادة</th>
+            <th>المحصلة النهائية</th>
+            <th>نصف العام</th>
+            <th>المجموع</th>
+          </tr>
+        </thead>
+        <tbody>
+      `;
+      
+      for (const [subject, grades] of Object.entries(data.المواد_الدراسية || {})) {
+        const total = grades["المجموع"] ? grades["المجموع"] : "";
+        const final = grades["المحصلة النهائية"] ? grades["المحصلة النهائية"] : "غير متوفر";
+        const midterm = grades["نصف العام"] ? grades["نصف العام"] : "غير متوفر";
+        
+        subjectsHTML += `
+          <tr>
+            <td class="subject-name">${subject}</td>
+            <td>${final}</td>
+            <td>${midterm}</td>
+            <td><strong>${total}</strong></td>
+          </tr>
+        `;
+      }
+    } else {
+      subjectsHTML += `
+        <thead>
+          <tr>
+            <th>المادة</th>
+            <th>مواظبة</th>
+            <th>شفهي</th>
+            <th>واجبات</th>
+            <th>تحريري</th>
+            <th>مجموع</th>
+            <th>محصلة</th>
+          </tr>
+        </thead>
+        <tbody>
+      `;
+      
+      for (const [subject, grades] of Object.entries(data.المواد_الدراسية || {})) {
+        const attendance = grades["مواظبة"] ? grades["مواظبة"] : "";
+        const oral = grades["شفهي"] ? grades["شفهي"] : "غير متوفر";
+        const homework = grades["واجبات"] ? grades["واجبات"] : "";
+        const written = grades["تحريري"] ? grades["تحريري"] : "";
+        const total = grades["المجموع"] ? grades["المجموع"] : "";
+        const grade = grades["المحصلة"] ? grades["المحصلة"] : "";
+        
+        subjectsHTML += `
+          <tr>
+            <td class="subject-name">${subject}</td>
+            <td>${attendance}</td>
+            <td>${oral}</td>
+            <td>${homework}</td>
+            <td>${written}</td>
+            <td><strong>${total}</strong></td>
+            <td><strong>${grade}</strong></td>
+          </tr>
+        `;
+      }
+    }
+    
+    subjectsHTML += `
+        </tbody>
+      </table>
+    </div>
+    `;
+
+    // النتيجة النهائية - في صف واحد
+    let finalResultsHTML = `
+      <div class="final-results">
+        <h3><i class="fas fa-chart-line me-2"></i>النتيجة النهائية</h3>
+        <div class="final-results-grid">
+    `;
+    
+    const totalScore = data.النتيجة_النهائية?.["المجموع"] ? data.النتيجة_النهائية["المجموع"] : "غير متوفر";
+    const result = data.النتيجة_النهائية?.النتيجة || "غير متوفر";
+    const percentage = data.النتيجة_النهائية?.النسبة ? data.النتيجة_النهائية.النسبة : "0";
+    const rank = data.النتيجة_النهائية?.الترتيب ? data.النتيجة_النهائية.الترتيب : "غير متوفر";
+    
+    // تنظيف النسبة المئوية من أي رموز زائدة
+    const cleanPercentage = percentage.toString().replace(/[^0-9.]/g, '');
+    const percentageDisplay = cleanPercentage ? `${cleanPercentage}%` : "غير متوفر";
+    
+    // تحديد حالة النتيجة
+    const statusClass = getResultStatus(result, cleanPercentage);
+    const statusText = getStatusText(result, cleanPercentage);
+    
+    finalResultsHTML += `
+          <div class="final-result-item">
+            <span class="final-result-label">المجموع الكلي</span>
+            <span class="final-result-value">${totalScore}</span>
+          </div>
+          <div class="final-result-item">
+            <span class="final-result-label">التقدير العام</span>
+            <span class="final-result-value">${result}</span>
+          </div>
+          <div class="final-result-item">
+            <span class="final-result-label">النسبة المئوية</span>
+            <span class="final-result-value">${percentageDisplay}</span>
+          </div>
+          <div class="final-result-item">
+            <span class="final-result-label">الترتيب</span>
+            <span class="final-result-value">${rank}</span>
+          </div>
+    `;
+    
+    finalResultsHTML += `
+        </div>
+        <div class="result-status ${statusClass}">
+          <i class="fas ${statusClass.includes('excellent') || statusClass.includes('very-good') || statusClass.includes('good') ? 'fa-check-circle' : 'fa-exclamation-triangle'} me-2"></i>
+          ${statusText}
+        </div>
+      </div>
+    `;
+
+    // عرض كل شيء معاً
+    output.innerHTML = studentInfoHTML + subjectsHTML + finalResultsHTML;
+  }
+
+  // دالة لعرض رسالة تنبيه
+  function showAlertMessage(message) {
+    const alertDiv = document.createElement('div');
+    alertDiv.className = 'alert-message';
+    alertDiv.innerHTML = `<i class="fas fa-exclamation-triangle me-2"></i>${message}`;
+    
+    // إزالة أي رسائل سابقة
+    const existingAlert = document.querySelector('.alert-message');
+    if (existingAlert) existingAlert.remove();
+    
+    // إدراج الرسالة قبل نموذج البحث
+    const resultsForm = document.getElementById('resultsForm');
+    resultsForm.parentNode.insertBefore(alertDiv, resultsForm.nextSibling);
+    
+    // إخفاء الرسالة بعد 5 ثوان
+    setTimeout(() => {
+      alertDiv.style.transition = 'opacity 0.5s';
+      alertDiv.style.opacity = '0';
+      setTimeout(() => {
+        if (alertDiv.parentNode) alertDiv.parentNode.removeChild(alertDiv);
+      }, 500);
+    }, 5000);
+  }
+
+  // زر طباعة النتيجة
+  document.getElementById('printResultButton').addEventListener('click', function() {
+    window.print();
+  });
+
+  // زر حفظ كـ PDF - محلول تماماً
+  document.getElementById('savePdfButton').addEventListener('click', function() {
+    const button = this;
+    const originalText = button.innerHTML;
+    const originalState = button.disabled;
+    
+    // تغيير نص الزر أثناء التحميل
+    button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري التحميل...';
+    button.disabled = true;
+    
+    // إنشاء نسخة من المحتوى لـ PDF مع تنسيق الطباعة
+    const originalContainer = document.querySelector('.page-container');
+    const printContainer = originalContainer.cloneNode(true);
+    
+    // إضافة تنسيق الطباعة للنسخة
+    printContainer.style.width = '210mm';
+    printContainer.style.padding = '10mm';
+    printContainer.style.margin = '0';
+    printContainer.style.boxShadow = 'none';
+    printContainer.style.border = '1px solid #000';
+    
+    // إخفاء العناصر غير المرغوبة
+    const elementsToHide = printContainer.querySelectorAll(
+      '.home-button, .print-button, .pdf-button, .print-result-button, #choiceSection, #resultsForm, .action-buttons'
+    );
+    elementsToHide.forEach(el => el.style.display = 'none');
+    
+    // إضافة فئة الطباعة للعناصر
+    printContainer.querySelectorAll('*').forEach(el => {
+      el.classList.add('print-version');
+    });
+    
+    // إضافة تنسيقات إضافية للرأس في PDF
+    const header = printContainer.querySelector('header');
+    if (header) {
+      header.style.display = 'block';
+      header.style.padding = '2mm';
+      header.style.marginBottom = '3mm';
+    }
+    
+    const headerContainer = printContainer.querySelector('.header-container');
+    if (headerContainer) {
+      headerContainer.style.display = 'flex';
+      headerContainer.style.justifyContent = 'space-between';
+      headerContainer.style.alignItems = 'center';
+      headerContainer.style.flexWrap = 'nowrap';
+      headerContainer.style.gap = '3mm';
+    }
+    
+    // ضبط حجم الصورة في PDF
+    const headerImage = printContainer.querySelector('.header-right img');
+    if (headerImage) {
+      headerImage.style.height = '20px';
+      headerImage.style.maxHeight = '20px';
+    }
+    
+    // إضافة النسخة إلى body مؤقتاً
+    printContainer.style.position = 'absolute';
+    printContainer.style.left = '-9999px';
+    printContainer.style.top = '0';
+    document.body.appendChild(printContainer);
+    
+    // خيارات PDF محسنة
+    const options = {
+      margin: [5, 5, 5, 5],
+      filename: `نتيجة_طالب_${Date.now()}.pdf`,
+      image: { 
+        type: 'jpeg', 
+        quality: 0.95 
+      },
+      html2canvas: { 
+        scale: 2,
+        useCORS: true,
+        logging: false,
+        backgroundColor: '#FFFFFF',
+        width: 800,
+        height: printContainer.scrollHeight,
+        windowWidth: 800,
+        onclone: function(clonedDoc) {
+          // تطبيق تنسيقات الطباعة على النسخة المستنسخة
+          const clonedContainer = clonedDoc.querySelector('.page-container');
+          if (clonedContainer) {
+            clonedContainer.style.width = '210mm';
+            clonedContainer.style.padding = '10mm';
+            clonedContainer.style.boxShadow = 'none';
+            clonedContainer.style.border = '1px solid #000';
+          }
+          
+          // إخفاء العناصر غير المرغوبة في النسخة
+          const clonedElementsToHide = clonedDoc.querySelectorAll(
+            '.home-button, .print-button, .pdf-button, .print-result-button, #choiceSection, #resultsForm, .action-buttons'
+          );
+          clonedElementsToHide.forEach(el => el.style.display = 'none');
+          
+          // ضبط الرأس في النسخة
+          const clonedHeader = clonedDoc.querySelector('header');
+          if (clonedHeader) {
+            clonedHeader.style.display = 'block';
+            clonedHeader.style.padding = '2mm';
+            clonedHeader.style.marginBottom = '3mm';
+          }
+          
+          const clonedHeaderContainer = clonedDoc.querySelector('.header-container');
+          if (clonedHeaderContainer) {
+            clonedHeaderContainer.style.display = 'flex';
+            clonedHeaderContainer.style.justifyContent = 'space-between';
+            clonedHeaderContainer.style.alignItems = 'center';
+            clonedHeaderContainer.style.flexWrap = 'nowrap';
+          }
+        }
+      },
+      jsPDF: { 
+        unit: 'mm', 
+        format: 'a4', 
+        orientation: 'portrait',
+        compress: true
+      }
+    };
+    
+    try {
+      // إنشاء PDF من النسخة المعدلة
+      html2pdf().set(options).from(printContainer).save().then(() => {
+        // استعادة حالة الزر بعد الانتهاء
+        button.innerHTML = originalText;
+        button.disabled = originalState;
+        
+        // إزالة النسخة المؤقتة
+        document.body.removeChild(printContainer);
+        
+        // إظهار رسالة نجاح
+        showSuccessMessage("تم حفظ ملف PDF بنجاح!");
+      }).catch(error => {
+        console.error('PDF generation error:', error);
+        button.innerHTML = originalText;
+        button.disabled = originalState;
+        
+        // إزالة النسخة المؤقتة في حالة الخطأ
+        if (printContainer.parentNode) {
+          document.body.removeChild(printContainer);
+        }
+        
+        showAlertMessage("حدث خطأ أثناء حفظ الملف. حاول مرة أخرى.");
+      });
+    } catch (error) {
+      console.error('PDF generation error:', error);
+      button.innerHTML = originalText;
+      button.disabled = originalState;
+      
+      // إزالة النسخة المؤقتة في حالة الخطأ
+      if (printContainer.parentNode) {
+        document.body.removeChild(printContainer);
+      }
+      
+      showAlertMessage("حدث خطأ غير متوقع. حاول مرة أخرى.");
+    }
+  });
+
+  // دالة لعرض رسالة نجاح
+  function showSuccessMessage(message) {
+    const successDiv = document.createElement('div');
+    successDiv.className = 'success-message';
+    successDiv.innerHTML = `<i class="fas fa-check-circle me-2"></i>${message}`;
+    
+    // إدراج الرسالة
+    const resultsOutput = document.getElementById('resultsOutput');
+    if (resultsOutput) {
+      resultsOutput.parentNode.insertBefore(successDiv, resultsOutput);
+    }
+    
+    // إخفاء الرسالة بعد 3 ثوان
+    setTimeout(() => {
+      successDiv.style.transition = 'opacity 0.5s';
+      successDiv.style.opacity = '0';
+      setTimeout(() => {
+        if (successDiv.parentNode) successDiv.parentNode.removeChild(successDiv);
+      }, 500);
+    }, 3000);
+  }
+
+  // إضافة تأثير عند تحميل الصفحة
+  document.addEventListener('DOMContentLoaded', function() {
+    // إضافة تأثير ظهور للبطاقات
+    const cards = document.querySelectorAll('.choice-card');
+    cards.forEach((card, index) => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(20px)';
+      
+      setTimeout(() => {
+        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+      }, 100 + (index * 200));
+    });
+    
+    // إضافة تأثير للرأس
+    const header = document.querySelector('header');
+    header.style.opacity = '0';
+    header.style.transform = 'translateY(-10px)';
+    
+    setTimeout(() => {
+      header.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      header.style.opacity = '1';
+      header.style.transform = 'translateY(0)';
+    }, 100);
+  });
 </script>
+</body>
 </html>

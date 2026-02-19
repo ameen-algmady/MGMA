@@ -1108,6 +1108,36 @@
 </div>
 
 <script>
+  // دالة لتسجيل عملية العرض في جدول جوجل شيت
+  function logViewToGoogleSheet(studentCode, studentName, resultType) {
+    // رابط API لتسجيل العرض
+    const logApiUrl = "https://script.google.com/macros/s/AKfycbwqISFLyDo6NqU3wkInLQdJrYMjwGD59uJHtDPqYr_bkAvo8VRHifTRkH7zFQQzwgGHXg/exec";
+    
+    const logData = {
+      studentCode: studentCode,
+      studentName: studentName,
+      resultType: resultType,
+      viewDate: new Date().toISOString(),
+      action: "تم الاطلاع على النتيجة"
+    };
+
+    // إرسال البيانات لتسجيلها
+    fetch(logApiUrl, {
+      method: "POST",
+      mode: "no-cors", // إضافة mode: no-cors لتجنب مشاكل CORS
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(logData)
+    })
+    .then(() => {
+      console.log("تم تسجيل العرض بنجاح");
+    })
+    .catch(error => {
+      console.error("خطأ في تسجيل العرض:", error);
+    });
+  }
+
   // إزالة دوال التحويل الهندي واستخدام الأرقام العربية مباشرة
   function convertToEnglishNumbers(input) {
     if (typeof input !== 'string') return input;
@@ -1204,6 +1234,7 @@
   let currentApiUrl = "";
   let currentApiKey = "";
   let currentStudentData = null;
+  let currentResultType = ""; // متغير لتخزين نوع النتيجة الحالي
 
   // التعامل مع أزرار الاختيار (البطاقات الجديدة)
   document.querySelectorAll(".choice-card-btn").forEach((btn) => {
@@ -1220,11 +1251,24 @@
         API_جماد_اول: "https://script.google.com/macros/s/AKfycbyOyoLyWEsbRrZbSPif6Sz6HC6wMDNip0T1PujKuTa8Yl4di_31ugagq5DJNGn_7NXT/exec",
         API_جماد_ثاني: "https://script.google.com/macros/s/AKfycbxZTOAmEKdt45Q-iPaw96yRkqE39ty5u7QNt7TNmp7XBmgMW6HmHKfWSJgpFcoRMRDLBQ/exec",
         API_رجب: "https://script.google.com/macros/s/vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv/exec",
-        API_آخر_العام: "https://script.google.com/macros/s/AKfycbxgiRWbbli3VQ-9K_7Z0YSXhd09vtCsNhWNi0DgwQF5yHWc3m80rUrR92Wf85_rub2R/exec",
+        API_آخر_العام: "https://script.google.com/macros/s/AKfycbwqISFLyDo6NqU3wkInLQdJrYMjwGD59uJHtDPqYr_bkAvo8VRHifTRkH7zFQQzwgGHXg/exec",
       };
 
       currentApiUrl = apiMap[apiKey];
       currentApiKey = apiKey;
+      
+      // تخزين نوع النتيجة بناءً على المفتاح
+      const resultTypeMap = {
+        API_محرم: "شهر محرم",
+        API_صفر: "شهر صفر",
+        API_ربيع_اول: "شهر ربيع أول",
+        API_نصف_العام: "نصف العام",
+        API_جماد_اول: "شهر جماد أول",
+        API_جماد_ثاني: "شهر جماد ثاني",
+        API_رجب: "شهر رجب",
+        API_آخر_العام: "آخر العام"
+      };
+      currentResultType = resultTypeMap[apiKey] || pageTitle;
 
       // تغيير عنوان الصفحة
       const pageTitleElement = document.getElementById("pageTitle");
@@ -1299,6 +1343,10 @@
         // إظهار أزرار الإجراءات بعد عرض النتائج
         document.getElementById("resultActions").style.display = "flex";
         
+        // تسجيل عملية العرض في جوجل شيت
+        const studentName = data.بيانات_الطالب?.['الاسم'] || "غير معروف";
+        logViewToGoogleSheet(studentCode, studentName, currentResultType);
+        
         // التمرير إلى قسم النتائج
         document.getElementById('resultsOutput').scrollIntoView({ behavior: 'smooth' });
       })
@@ -1326,7 +1374,7 @@
     `;
     
     const studentData = data.بيانات_الطالب || {};
-    const importantFields = ['الاسم', 'الصف', 'الشعبة', 'الرقم'];
+    const importantFields = ['الاسم', 'الصف'];
     
     importantFields.forEach(field => {
       if (studentData[field]) {
@@ -1365,7 +1413,7 @@
         <table class="subjects-table">
     `;
     
-    if (currentApiKey === "API_نصف_العام" || currentApiKey === "API_آخر_العام") {
+    if (currentApiKey === "API_نصف_العام") {
       subjectsHTML += `
         <thead>
           <tr>
@@ -1388,6 +1436,40 @@
             <td class="subject-name">${subject}</td>
             <td>${final}</td>
             <td>${midterm}</td>
+            <td><strong>${total}</strong></td>
+          </tr>
+        `;
+      }
+    } else if (currentApiKey === "API_آخر_العام") {
+      // عرض خاص لآخر العام: المحصلة1 + نصف العام + المحصلة2 + آخر العام + المجموع
+      subjectsHTML += `
+        <thead>
+          <tr>
+            <th>المادة</th>
+            <th>المحصلة1</th>
+            <th>نصف العام</th>
+            <th>المحصلة2</th>
+            <th>آخر العام</th>
+            <th>المجموع</th>
+          </tr>
+        </thead>
+        <tbody>
+      `;
+      
+      for (const [subject, grades] of Object.entries(data.المواد_الدراسية || {})) {
+        const total = grades["المجموع"] ? grades["المجموع"] : "";
+        const result1 = grades["المحصلة1"] ? grades["المحصلة1"] : "غير متوفر";
+        const midterm = grades["نصف العام"] ? grades["نصف العام"] : "غير متوفر";
+        const result2 = grades["المحصلة2"] ? grades["المحصلة2"] : "غير متوفر";
+        const final = grades["آخر العام"] ? grades["آخر العام"] : "غير متوفر";
+        
+        subjectsHTML += `
+          <tr>
+            <td class="subject-name">${subject}</td>
+            <td>${result1}</td>
+            <td>${midterm}</td>
+            <td>${result2}</td>
+            <td>${final}</td>
             <td><strong>${total}</strong></td>
           </tr>
         `;
@@ -1446,7 +1528,7 @@
     const totalScore = data.النتيجة_النهائية?.["المجموع"] ? data.النتيجة_النهائية["المجموع"] : "غير متوفر";
     const result = data.النتيجة_النهائية?.النتيجة || "غير متوفر";
     const percentage = data.النتيجة_النهائية?.النسبة ? data.النتيجة_النهائية.النسبة : "0";
-    const rank = data.النتيجة_النهائية?.الترتيب ? data.النتيجة_النهائية.الترتيب : "غير متوفر";
+    const rank = data.النتيجة_النهائية?.الترتيب ? data.النتيجة_النهائية.الترتيب : "";
     
     // تنظيف النسبة المئوية من أي رموز زائدة
     const cleanPercentage = percentage.toString().replace(/[^0-9.]/g, '');

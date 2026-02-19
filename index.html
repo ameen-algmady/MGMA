@@ -23,7 +23,7 @@
       });
   </script>
 
-  <style>
+ <style>
     :root {
       --primary-color: #004080;
       --secondary-color: #ffc107;
@@ -112,6 +112,7 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
+      color: white; /* إضافة لون الخط الأبيض */
     }
     
     .btn-custom i {
@@ -121,47 +122,53 @@
     .btn-primary-custom {
       background: var(--primary-color);
       border-color: var(--primary-color);
+      color: white; /* إضافة لون الخط الأبيض */
     }
     
     .btn-primary-custom:hover {
       background: #003366;
       border-color: #003366;
       transform: translateY(-2px);
+      color: white; /* الحفاظ على اللون الأبيض عند التحويم */
     }
     
     .btn-success-custom {
       background: var(--accent-color);
       border-color: var(--accent-color);
+      color: white; /* إضافة لون الخط الأبيض */
     }
     
     .btn-success-custom:hover {
       background: #218838;
       border-color: #218838;
       transform: translateY(-2px);
+      color: white; /* الحفاظ على اللون الأبيض عند التحويم */
     }
     
     .btn-warning-custom {
       background: var(--secondary-color);
       border-color: var(--secondary-color);
-      color: #212529;
+      color: white; /* تغيير لون الخط إلى الأبيض بدلاً من #212529 */
     }
     
     .btn-warning-custom:hover {
       background: #e0a800;
       border-color: #e0a800;
-      color: #212529;
+      color: white; /* الحفاظ على اللون الأبيض عند التحويم */
       transform: translateY(-2px);
     }
     
     .btn-danger-custom {
       background: var(--danger-color);
       border-color: var(--danger-color);
+      color: white; /* إضافة لون الخط الأبيض */
     }
     
     .btn-danger-custom:hover {
       background: #c82333;
       border-color: #c82333;
       transform: translateY(-2px);
+      color: white; /* الحفاظ على اللون الأبيض عند التحويم */
     }
     
     .grade-btn {
@@ -174,6 +181,13 @@
       gap: 6px;
       font-weight: 600;
       border-radius: 10px;
+      color: white; /* إضافة لون الخط الأبيض */
+      text-decoration: none; /* إزالة خط التسطير من الروابط */
+    }
+    
+    .grade-btn:hover {
+      color: white; /* الحفاظ على اللون الأبيض عند التحويم */
+      text-decoration: none; /* إزالة خط التسطير من الروابط عند التحويم */
     }
     
     .grade-btn i {
@@ -186,7 +200,7 @@
       left: 70px;
       z-index: 9999;
       background-color: var(--secondary-color);
-      color: black;
+      color: white; /* تغيير لون النص إلى الأبيض */
       border: none;
       border-radius: 50%;
       width: 60px;
@@ -200,6 +214,7 @@
     #notifyBtn:hover {
       background-color: #e0a800;
       transform: scale(1.1);
+      color: white; /* الحفاظ على اللون الأبيض عند التحويم */
     }
     
     #installBtn {
@@ -208,7 +223,7 @@
       left: 20px;
       z-index: 9999;
       background: linear-gradient(135deg, #6f42c1, #8a63d2);
-      color: white;
+      color: white; /* الحفاظ على اللون الأبيض */
       border: none;
       border-radius: 50px;
       padding: 1rem 1.5rem;
@@ -226,6 +241,7 @@
       transform: translateY(-3px);
       box-shadow: 0 8px 25px rgba(111, 66, 193, 0.6);
       background: linear-gradient(135deg, #5a3796, #7a52c4);
+      color: white; /* الحفاظ على اللون الأبيض عند التحويم */
     }
     
     #installBtn.hidden {
@@ -350,19 +366,19 @@
       <p class="mb-4">يمكنك الاطلاع على نتائج الطلاب والمحصلة الدراسية لجميع المراحل التعليمية من خلال هذا القسم.</p>
       <div class="row row-cols-2 row-cols-md-3 g-3">
         <div class="col">
-          <a href="‏‏results_grade4.html" class="btn btn-primary-custom grade-btn w-100">
+          <a href="results_grade1.html" class="btn btn-primary-custom grade-btn w-100">
             <i class="fas fa-user-graduate"></i>
             <span>السابع الأساسي</span>
           </a>
         </div>
         <div class="col">
-          <a href="‏‏results_grade4.html" class="btn btn-primary-custom grade-btn w-100">
+          <a href="results_grade1.html" class="btn btn-primary-custom grade-btn w-100">
             <i class="fas fa-user-graduate"></i>
             <span>الثامن الأساسي</span>
           </a>
         </div>
         <div class="col">
-          <a href="‏‏results_grade4.html" class="btn btn-primary-custom grade-btn w-100">
+          <a href="results_grade1.html" class="btn btn-primary-custom grade-btn w-100">
             <i class="fas fa-user-graduate"></i>
             <span>التاسع الأساسي</span>
           </a>
@@ -374,7 +390,7 @@
           </a>
         </div>
         <div class="col">
-          <a href="‏‏results_grade2 .html" class="btn btn-primary-custom grade-btn w-100">
+          <a href="results_grade1.html" class="btn btn-primary-custom grade-btn w-100">
             <i class="fas fa-university"></i>
             <span>الثاني الثانوي</span>
           </a>

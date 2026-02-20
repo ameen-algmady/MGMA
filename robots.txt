@@ -1,3 +1,2 @@
 User-agent: *
-Allow: /
-Sitemap: https://ameen-algmady.github.io/MGMA/sitemap.xml
+Disallow: /
